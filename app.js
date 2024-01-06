@@ -1,16 +1,16 @@
 const { app, BrowserWindow } = require('electron')
 
-let appWindow
+let win
 
 function CreateWindow() {
-    appWindow = new BrowserWindow({
-        width: 300,
-        height: 300
-    })
-    appWindow.loadFile('dist/dental-office-fe/browser/index.html');
+    win = new BrowserWindow({show: false})
+    win.maximize();
+    win.show();
 
-    appWindow.on('closed', function () {
-        appWindow = null
+    win.loadFile('dist/dental-office-fe/browser/index.html');
+
+    win.on('closed', function () {
+        win = null
     })
 }
 
