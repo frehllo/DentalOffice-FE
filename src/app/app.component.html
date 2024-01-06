@@ -1,4 +1,6 @@
-<app-header></app-header>
+<ng-container *ngIf="showHeader">
+    <app-header></app-header>
+</ng-container>
 
 <div style="width: 100%; height: auto;">
     <router-outlet></router-outlet>

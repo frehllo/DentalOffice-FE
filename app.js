@@ -1,9 +1,9 @@
 const { app, BrowserWindow } = require('electron')
 
-let win
+let win;
 
 function CreateWindow() {
-    win = new BrowserWindow({show: false})
+    win = new BrowserWindow({show: false});
     win.maximize();
     win.show();
 
