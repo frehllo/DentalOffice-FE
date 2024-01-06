@@ -1,0 +1,28 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --bg-color: #DCF2F1;
+    --table-data-bg-color: rgba(255,255,255,0.4)
+    --primary: #0F1035;
+    --secondary: #365486;
+    --text-color-white : #FFF;
+    --text-color-black : #000;
+}
+
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.text-white {
+    color: var(--text-color-white);
+}
+
+.text-black {
+    color: var(--text-color-black);
+}
