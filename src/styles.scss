@@ -26,3 +26,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-black {
     color: var(--text-color-black);
 }
+
+/*----POSITIONING----*/
+
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
