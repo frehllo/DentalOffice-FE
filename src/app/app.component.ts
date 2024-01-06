@@ -13,6 +13,7 @@ import { HeaderComponent } from './core/components/standalones/header/header.com
 export class AppComponent {
 
   showHeader: boolean = true;
+  showHeaderBack: boolean = true;
 
   constructor(private router:Router) {
     router.events.subscribe(
@@ -20,6 +21,9 @@ export class AppComponent {
         if(val instanceof NavigationEnd) {
           if(val.url=="/") {
             this.showHeader = true;
+          }
+          if(val.url=="/home"){
+            this.showHeaderBack = false;
           }
           //aggiungere il resto delle route per definire se mostrare o meno l'header
         }
