@@ -1,2 +1,10 @@
 @import url('../../../../styles.scss');
 
+.home-container {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

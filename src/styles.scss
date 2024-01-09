@@ -9,6 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --table-data-bg-color: rgba(255,255,255,0.4)
     --primary: #0F1035;
     --secondary: #365486;
+    --tertialy: #7FC7D9
     --text-color-white : #FFF;
     --text-color-black : #000;
 }
@@ -19,6 +20,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-secondary {
     background-color: var(--secondary);
+}
+
+.bh-tertiary {
+    background-color: var(--tertialy);
 }
 
 .text-white {
@@ -41,4 +46,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .justify-content-center {
     justify-content: center;
+}
+
+/* ----DIMENSIONS----- */
+.full-height-no-overflow {
+    height: calc(100vh - 80px)
 }

@@ -1,16 +1,16 @@
 import { Component, Input } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home-section-card',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatIconModule],
   templateUrl: './home-section-card.component.html',
   styleUrl: './home-section-card.component.scss'
 })
 export class HomeSectionCardComponent {
-  @Input() imageName: string = "";
+  @Input() iconName: string = "";
+  @Input() colorClass: string = "";
   @Input('title') sectionTitle: string = "Section";
-
-  public imageUrl = "../../../assets/images/bg.jpg" + this.imageName
 }
