@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HomeSectionCardComponent {
   @Input() iconName: string = "";
+  @Input() iconSize: string = "";
   @Input() colorClass: string = "";
   @Input('title') sectionTitle: string = "Section";
 }

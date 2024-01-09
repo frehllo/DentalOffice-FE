@@ -1,5 +1,5 @@
 <mat-card class="{{colorClass}}">
-    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+    <mat-icon [class.font-size]="{iconSize}" aria-hidden="false" aria-label="Example home icon" fontIcon="{{iconName}}"></mat-icon>
     <mat-card-content>
         {{sectionTitle}}
     </mat-card-content>
