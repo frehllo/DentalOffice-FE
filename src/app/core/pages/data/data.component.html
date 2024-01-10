@@ -1,0 +1,32 @@
+<mat-drawer-container class="full-height-no-overflow">
+    <mat-drawer style="width: 15%;" class="bg-tertiary d-flex flex-column" #drawer [mode]="'side'" opened>
+        <div class="d-flex flex-column">
+            <div style="height: 50px;" class="full-width d-flex justify-content-center my-5" style="height: 40px;">
+                <mat-icon [style.font-size.px]="50" [style.height.px]="50" [style.width.px]="50" class="text-white"
+                    fontIcon="folder_open" />
+            </div>
+            <div class="d-flex flex-column px-2">
+                @for (s of sections; track s) {
+                <button class="mt-2 text-white d-flex justify-content-center"
+                    [ngClass]="{'bg-secondary': activeLink != s.route, 'bg-primary' : activeLink == s.route}"
+                    mat-raised-button (click)="routeToSection(s.route)">
+                    <div class="row align-items-center justify-content-between  d-flex ">
+                        <div class="col-4"><mat-icon [style.font-size.px]="12" [style.height.px]="12"
+                                [style.width.px]="12" class="text-white" fontIcon="folder_open" /></div>
+                        <div class="col-8">
+                            <p>{{s.title | uppercase}}</p>
+                        </div>
+                    </div>
+
+
+                </button>
+                }
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class="bg-color">
+        @switch (activeLink) {
+        @case ("/studi-dentistici") {}
+        }
+    </mat-drawer-content>
+</mat-drawer-container>

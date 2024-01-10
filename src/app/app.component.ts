@@ -24,6 +24,8 @@ export class AppComponent {
           }
           if(val.url=="/home"){
             this.showHeaderBack = false;
+          }else{
+            this.showHeaderBack = false;
           }
           //aggiungere il resto delle route per definire se mostrare o meno l'header
         }

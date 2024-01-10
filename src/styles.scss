@@ -21,6 +21,10 @@ body {
   --text-color-black: #000 !important;
 }
 
+.bg-color {
+  background-color: var(--bg-color) !important;
+}
+
 .bg-primary {
   background-color: var(--primary) !important;
 }
@@ -73,3 +77,9 @@ body {
 .no-decoration {
   text-decoration: none;
 }
+
+/*----HOVER ANGULAR MATERIAL----*/
+/* .mat-mdc-tab-links 
+{
+    flex-direction: column !important;
+} */

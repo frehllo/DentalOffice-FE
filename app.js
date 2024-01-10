@@ -3,7 +3,7 @@ const { app, BrowserWindow } = require('electron')
 let win;
 
 function CreateWindow() {
-    win = new BrowserWindow({show: false});
+    win = new BrowserWindow({show: false, autoHideMenuBar: true});
     win.maximize();
     win.show();
 
