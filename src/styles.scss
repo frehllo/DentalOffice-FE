@@ -1,54 +1,75 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "material-icons/iconfont/material-icons.css";
 
-@import 'material-icons/iconfont/material-icons.css';
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 :root {
-    --bg-color: #DCF2F1;
-    --table-data-bg-color: rgba(255,255,255,0.4)
-    --primary: #0F1035;
-    --secondary: #365486;
-    --tertialy: #7FC7D9
-    --text-color-white : #FFF;
-    --text-color-black : #000;
+  --bg-color: #dcf2f1 !important;
+  --table-data-bg-color: rgba(255, 255, 255, 0.4) !important;
+  --primary: #0f1035 !important;
+  --secondary: #365486 !important;
+  --tertialy: #7fc7d9 !important;
+  --text-color-white: #fff !important;
+  --text-color-black: #000 !important;
 }
 
 .bg-primary {
-    background-color: var(--primary) !important;
+  background-color: var(--primary) !important;
 }
 
 .bg-secondary {
-    background-color: var(--secondary) !important;
+  background-color: var(--secondary) !important;
 }
 
 .bg-tertiary {
-    background-color: var(--tertialy) !important;
+  background-color: var(--tertialy) !important;
 }
 
 .text-white {
-    color: var(--text-color-white) !important;
+  color: var(--text-color-white) !important;
 }
 
 .text-black {
-    color: var(--text-color-black) !important;
+  color: var(--text-color-black) !important;
 }
 
 /*----POSITIONING----*/
 
 .d-flex {
-    display: flex !important;
+  display: flex !important;
 }
 
 .align-items-center {
-    align-items: center !important;
+  align-items: center !important;
 }
 
 .justify-content-center {
-    justify-content: center !important;
+  justify-content: center !important;
 }
 
 /* ----DIMENSIONS----- */
+.full-width {
+  width: 100% !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
 .full-height-no-overflow {
-    height: calc(100vh - 80px) !important;
+  height: calc(100vh - 80px) !important;
+}
+
+/* ----TEXT---- */
+
+.no-decoration {
+  text-decoration: none;
 }

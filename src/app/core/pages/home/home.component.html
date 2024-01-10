@@ -1,11 +1,28 @@
-<div class="full-width home-container full-height-no-overflow"
-    style="min-width: 100%;background-image: url('../../../../assets/images/bg.jpg');">
-    <div class="full-width row d-flex justify-content-between">
-        <div class="col p-5">
-            <app-home-section-card title="Dati" iconSize="display-2" colorClass="bg-secondary" iconName="folder_open"></app-home-section-card>
-        </div>
-        <div class="col p-5">
-            <app-home-section-card title="Moduli" iconSize="display-2" colorClass="bg-tertiary" iconName="insert_drive_file"></app-home-section-card>
-        </div>
+<div
+  class="full-width home-container full-height-no-overflow"
+  style="
+    min-width: 100%;
+    background-image: url('../../../../assets/images/bg.jpg');
+  "
+>
+  <div class="row d-flex justify-content-between">
+    <div class="col p-5">
+      <app-home-section-card
+        colorClass="bg-secondary"
+        title="Dati"
+        [titleSize]="20"
+        [iconSize]="100"
+        iconName="folder_open"
+      ></app-home-section-card>
     </div>
+    <div class="col p-5">
+      <app-home-section-card
+        title="Moduli"
+        [titleSize]="20"
+        [iconSize]="100"
+        colorClass="bg-tertiary"
+        iconName="insert_drive_file"
+      ></app-home-section-card>
+    </div>
+  </div>
 </div>

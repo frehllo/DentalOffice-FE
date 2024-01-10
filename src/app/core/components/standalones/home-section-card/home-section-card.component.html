@@ -1,8 +1,23 @@
-<mat-card class="{{colorClass}} section-content text-white">
-    <mat-card-content class="justify-content-center d-flex align-self-center pt-2 {{iconSize}}">
-        <mat-icon class="text-white" fontIcon="{{iconName}}"/>
+<a class="no-decoration" href="https://www.google.com/" mat-raised-button>
+  <mat-card
+    class="{{
+      colorClass
+    }} section-content text-white hover-overlay ripple shadow-1-strong"
+  >
+    <mat-card-content
+      class="justify-content-center d-flex align-self-center pt-2 mt-2"
+    >
+      <mat-icon
+        [style.font-size.px]="iconSize"
+        class="text-white full-width full-height"
+        fontIcon="{{ iconName }}"
+      />
     </mat-card-content>
-    <mat-card-content class="align-self-center pt-2">
-        {{sectionTitle}}
+    <mat-card-content
+      [style.font-size.px]="titleSize"
+      class="align-self-center pt-2 mb-2"
+    >
+      {{ title | uppercase }}
     </mat-card-content>
-</mat-card>
+  </mat-card>
+</a>

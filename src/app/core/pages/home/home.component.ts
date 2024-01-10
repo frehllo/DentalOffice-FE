@@ -6,8 +6,6 @@ import { HomeSectionCardComponent } from '../../components/standalones/home-sect
   standalone: true,
   imports: [HomeSectionCardComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

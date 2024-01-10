@@ -1,10 +1,15 @@
-<div class="full-width bg-primary">
-    <mat-toolbar class="h-80">
-        <div *NgIf="showHeaderBack"> class="d-flex justify-content-center align-item-center" style="width: 2%;">
-            <span (click)="back()" class="material-icons">keyboard_arrow_left</span>
-        </div>
-        <div style="width: 98%;" class="d-flex justify-content-center align-item-center">
-            <img height="80px" src="assets/images/logo.png" alt="logo">
-        </div>
-    </mat-toolbar>
+<div class="full-width">
+  <mat-toolbar class="h-80 bg-primary">
+    <div *NgIf="showHeaderBack">
+      class="d-flex justify-content-center align-item-center" style="width:
+      2%;">
+      <span (click)="back()" class="material-icons">keyboard_arrow_left</span>
+    </div>
+    <div
+      style="width: 98%"
+      class="d-flex justify-content-center align-item-center"
+    >
+      <img height="80px" src="assets/images/logo.png" alt="logo" />
+    </div>
+  </mat-toolbar>
 </div>
