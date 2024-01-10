@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-home-section-card',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule],
+  imports: [MatCardModule, MatIconModule, CommonModule, MatButtonModule],
   templateUrl: './home-section-card.component.html',
   styleUrl: './home-section-card.component.scss',
 })
@@ -16,4 +17,5 @@ export class HomeSectionCardComponent {
   @Input() colorClass: string = '';
   @Input() title: string = 'Section';
   @Input() titleSize: number = 12;
+  @Input() route: string = "/home"
 }
