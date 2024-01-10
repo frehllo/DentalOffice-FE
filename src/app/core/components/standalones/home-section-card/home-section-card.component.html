@@ -1,6 +1,8 @@
-<mat-card class="{{colorClass}}">
-    <mat-icon [class.font-size]="{iconSize}" aria-hidden="false" aria-label="Example home icon" fontIcon="{{iconName}}"></mat-icon>
-    <mat-card-content>
+<mat-card class="{{colorClass}} section-content text-white">
+    <mat-card-content class="justify-content-center d-flex align-self-center pt-2 {{iconSize}}">
+        <mat-icon class="text-white" fontIcon="{{iconName}}"/>
+    </mat-card-content>
+    <mat-card-content class="align-self-center pt-2">
         {{sectionTitle}}
     </mat-card-content>
 </mat-card>
