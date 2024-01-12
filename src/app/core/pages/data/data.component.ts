@@ -63,7 +63,7 @@ export class DataComponent {
       route: '/lots',
     },
   ];
-  activeLink = this.sections[0].route;
+  activeLink = this.dataSections[0].route;
 
   routeToSection(route: string): void {
     this.activeLink = route;

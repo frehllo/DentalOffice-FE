@@ -1,0 +1,15 @@
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-colored-circle',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './colored-circle.component.html',
+  styleUrl: './colored-circle.component.scss'
+})
+export class ColoredCircleComponent {
+  @Input() color: string = '';
+  @Input() height: number = 10;
+  width: number = this.height;
+}

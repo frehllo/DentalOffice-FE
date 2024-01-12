@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AgGridModule } from 'ag-grid-angular'; // Angular Grid Logic
-import { ColDef } from 'ag-grid-community'; // Column Definitions Interface
+import { AgGridModule } from 'ag-grid-angular';
+import { ColDef } from 'ag-grid-community';
+import { ColoredCircleComponent } from '../../../../components/standalones/colored-circle/colored-circle.component';
 
 @Component({
   selector: 'app-dental-studios',
   standalone: true,
-  imports: [AgGridModule],
+  imports: [ AgGridModule, ColoredCircleComponent],
   templateUrl: './dental-studios.component.html',
   styleUrl: './dental-studios.component.scss',
 })
@@ -45,19 +46,18 @@ export class DentalStudiosComponent implements OnInit {
 
   ngOnInit() {
     //GET DATA FROM SERVICE
-
-    if()
+    this.colDefs = [
+      { field: 'mission' },
+      { field: 'company' },
+      { field: 'location' },
+      { field: 'date' },
+      { field: 'price' },
+      { field: 'successful' },
+      { field: 'rocket' },
+    ]; 
   }
 
   
 
-  colDefs: ColDef[] = [
-    { field: 'mission' },
-    { field: 'company' },
-    { field: 'location' },
-    { field: 'date' },
-    { field: 'price' },
-    { field: 'successful' },
-    { field: 'rocket' },
-  ];
+  
 }
