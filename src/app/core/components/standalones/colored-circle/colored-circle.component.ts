@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-colored-circle',
@@ -8,8 +8,13 @@ import { Component, Input } from '@angular/core';
   templateUrl: './colored-circle.component.html',
   styleUrl: './colored-circle.component.scss'
 })
-export class ColoredCircleComponent {
+export class ColoredCircleComponent implements OnInit{
+  
   @Input() color: string = '';
   @Input() height: number = 10;
-  width: number = this.height;
+  width : number = 0;
+
+  ngOnInit(): void {
+    this.width = this.height;
+  }
 }
