@@ -1,0 +1,23 @@
+<div class="full-height-no-overflow ">
+    <div class="section-header d-flex flex-row px-2 align-items-center px-4">
+        <h1 class="title">{{section.title}}</h1>
+        <div class="justify-content-center full-width d-flex flex-row "
+            *ngIf="section.subSections != null && section.subSections.length > 0">
+            @for (sub of section.subSections; track sub) {
+            <button style="height: 25px" class="mt-2 text-white col-1 d-inline-block justify-content-center" [ngClass]="{
+              'bg-secondary': activeLink != sub.title,
+              'bg-primary': activeLink == sub.title
+            }" mat-fab extended (click)="setActiveLink(sub.title)">
+                <span class="col-9"
+                    style="text-align: left; white-space: nowrap; font-size: 12px; text-overflow: ellipsis;">
+                    {{ sub.title | uppercase }}
+                </span>
+            </button>
+            }
+        </div>
+    </div>
+    <div *ngIf="rowData != null">
+        <ag-grid-angular class="ag-theme-alpine" style="height: 500px" [rowData]="rowData" [columnDefs]="colDefs">
+        </ag-grid-angular>
+    </div>
+</div>
