@@ -1,3 +1,4 @@
+import { ColoredCircleComponent } from './../../components/standalones/colored-circle/colored-circle.component';
 import { Component, OnInit } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
@@ -159,7 +160,8 @@ export class DataComponent{
               field: "Name"
             },
             {
-              field: "Color"
+              field: "Color",
+              cellRenderer: ColoredCircleComponent
             },
             {
               field: "Number"

@@ -17,7 +17,8 @@
         </div>
     </div>
     <div *ngIf="rowData != null">
-        <ag-grid-angular class="ag-theme-alpine" style="height: 500px" [rowData]="rowData" [columnDefs]="colDefs">
+        <ag-grid-angular [suppressRowHoverHighlight]="true"
+        [columnHoverHighlight]="true" class="ag-theme-alpine" style="height: 500px" [rowData]="rowData" [columnDefs]="colDefs">
         </ag-grid-angular>
     </div>
 </div>

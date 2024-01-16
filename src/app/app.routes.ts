@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './core/pages/home/home.component';
 import { DataComponent } from './core/pages/data/data.component';
+import { SectionComponent } from './core/components/standalones/section/section.component';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,5 @@ export const routes: Routes = [
   {
     path: 'data',
     component: DataComponent,
-  },
+  }
 ];
