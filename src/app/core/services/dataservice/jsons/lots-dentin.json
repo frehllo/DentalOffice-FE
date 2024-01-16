@@ -1,0 +1,29 @@
+{
+    "data": [
+        {
+            "Name": "Dentina Lot A",
+            "Color": "Red",
+            "Number": "789"
+        },
+        {
+            "Name": "Dentina Lot B",
+            "Color": "Blue",
+            "Number": "012"
+        },
+        {
+            "Name": "Dentina Lot C",
+            "Color": "Green",
+            "Number": "345"
+        },
+        {
+            "Name": "Dentina Lot D",
+            "Color": "Yellow",
+            "Number": "678"
+        },
+        {
+            "Name": "Dentina Lot E",
+            "Color": "Purple",
+            "Number": "901"
+        }
+    ]
+}

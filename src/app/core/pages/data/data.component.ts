@@ -6,33 +6,36 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Section } from '../../interfaces/section';
 import { SectionComponent } from '../../components/standalones/section/section.component';
-import { LoadingComponent } from "../../components/standalones/loading/loading.component";
+import { LoadingComponent } from '../../components/standalones/loading/loading.component';
+import { AGColoredCircle } from '../../components/standalones/colored-circle/ag-colored-circle/ag-colored-circle.component';
 
 @Component({
-    selector: 'app-data',
-    standalone: true,
-    templateUrl: './data.component.html',
-    styleUrl: './data.component.scss',
-    imports: [
-        MatSidenavModule,
-        CommonModule,
-        MatButtonModule,
-        MatIconModule,
-        SectionComponent,
-        LoadingComponent
-    ]
+  selector: 'app-data',
+  standalone: true,
+  templateUrl: './data.component.html',
+  styleUrl: './data.component.scss',
+  imports: [
+    MatSidenavModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    SectionComponent,
+    LoadingComponent,
+  ],
 })
-export class DataComponent{
-  
+export class DataComponent {
   dataSections: Section[] = [
     {
       iconName: 'store',
       title: 'Studi Dentistici',
       route: '/dental-studios',
       tableHeaderFields: [
-        {field : "Name"},
-        {field : "Color"}
-      ]
+        { field: 'Name' },
+        {
+          field: 'Color',
+          cellRenderer: AGColoredCircle
+        },
+      ],
     },
     {
       iconName: 'wb_iridescent',
@@ -40,52 +43,57 @@ export class DataComponent{
       route: '/materials',
       subSections: [
         {
-          title : "Metalli",
+          route: '/materials-metal',
+          title: 'Metalli',
           tableHeaderFields: [
             {
-              field: "Name"
-            }
-          ]
+              field: 'Name',
+            },
+          ],
         },
         {
-          title : "Dentina",
+          route: '/materials-dentin',
+          title: 'Dentina',
           tableHeaderFields: [
             {
-              field: "Name"
-            }
-          ]
+              field: 'Name',
+            },
+          ],
         },
         {
-          title : "Smalto",
+          route: '/materials-enamel',
+          title: 'Smalto',
           tableHeaderFields: [
             {
-              field: "Code"
+              field: 'Code',
             },
             {
-              field: "Colors"
+              field: 'Colors',
             },
             {
-              field: "Dentin"
-            }
-          ]
+              field: 'Dentin',
+            },
+          ],
         },
         {
-          title : "Resina Acetalica",
+          route: '/materials-resin',
+          title: 'Resina Acetalica',
           tableHeaderFields: [
             {
-              field: "Name"
-            }
-          ]
+              field: 'Name',
+            },
+          ],
         },
         {
-          title : "Dischi Policarbonati",
+          route: '/materials-disks',
+          title: 'Dischi Policarbonati',
           tableHeaderFields: [
             {
-              field: "Name"
-            }
-          ]
-        }
-      ]
+              field: 'Name',
+            },
+          ],
+        },
+      ],
     },
     {
       iconName: 'color_lens',
@@ -93,9 +101,9 @@ export class DataComponent{
       route: '/colors',
       tableHeaderFields: [
         {
-          field: "Name"
+          field: 'Name',
         },
-      ]
+      ],
     },
     {
       iconName: 'work_outline',
@@ -103,9 +111,9 @@ export class DataComponent{
       route: '/semiproducts',
       tableHeaderFields: [
         {
-          field: "Name"
-        }
-      ]
+          field: 'Name',
+        },
+      ],
     },
     {
       iconName: 'error_outline',
@@ -113,9 +121,9 @@ export class DataComponent{
       route: '/risks',
       tableHeaderFields: [
         {
-          field: "Name"
-        }
-      ]
+          field: 'Name',
+        },
+      ],
     },
     {
       iconName: 'insert_drive_file',
@@ -123,9 +131,9 @@ export class DataComponent{
       route: '/modules',
       tableHeaderFields: [
         {
-          field: "Name"
-        }
-      ]
+          field: 'Name',
+        },
+      ],
     },
     {
       iconName: 'skip_next',
@@ -133,9 +141,9 @@ export class DataComponent{
       route: '/stages',
       tableHeaderFields: [
         {
-          field: "Name"
-        }
-      ]
+          field: 'Name',
+        },
+      ],
     },
     {
       iconName: 'format_list_numbered',
@@ -143,73 +151,77 @@ export class DataComponent{
       route: '/lots',
       subSections: [
         {
-          title : "Metalli",
+          route: '/lots-metal',
+          title: 'Metalli',
           tableHeaderFields: [
             {
-              field: "Name"
+              field: 'Name',
             },
             {
-              field: "Number"
-            }
-          ]
+              field: 'Number',
+            },
+          ],
         },
         {
-          title : "Dentina",
+          route: '/lots-dentin',
+          title: 'Dentina',
           tableHeaderFields: [
             {
-              field: "Name"
+              field: 'Name',
             },
             {
-              field: "Color",
-              cellRenderer: ColoredCircleComponent
+              field: 'Color',
             },
             {
-              field: "Number"
-            }
-          ]
+              field: 'Number',
+            },
+          ],
         },
         {
-          title : "Smalto",
+          route: '/lots-enamel',
+          title: 'Smalto',
           tableHeaderFields: [
             {
-              field: "Code"
+              field: 'Code',
             },
             {
-              field: "Number"
-            }
-          ]
+              field: 'Number',
+            },
+          ],
         },
         {
-          title : "Resina Acetalica",
+          route: '/lots-resin',
+          title: 'Resina Acetalica',
           tableHeaderFields: [
             {
-              field: "Name"
+              field: 'Name',
             },
             {
-              field: "Number"
-            }
-          ]
+              field: 'Number',
+            },
+          ],
         },
         {
-          title : "Dischi Policarbonati",
+          route: '/lots-disks',
+          title: 'Dischi Policarbonati',
           tableHeaderFields: [
             {
-              field: "Name"
+              field: 'Name',
             },
             {
-              field: "Number"
-            }
-          ]
-        }
-      ]
+              field: 'Number',
+            },
+          ],
+        },
+      ],
     },
   ];
 
   activeLink = this.dataSections[0].route;
-  activeSection : Section = this.dataSections[0];
+  activeSection: Section = this.dataSections[0];
 
   routeToSection(route: string): void {
     this.activeLink = route;
-    this.activeSection = this.dataSections.find(_ => _.route == route)!;
+    this.activeSection = this.dataSections.find((_) => _.route == route)!;
   }
 }

@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "Name": "Metallo Lot A",
+            "Number": "123"
+        },
+        {
+            "Name": "Metallo Lot B",
+            "Number": "456"
+        },
+        {
+            "Name": "Metallo Lot C",
+            "Number": "789"
+        },
+        {
+            "Name": "Metallo Lot D",
+            "Number": "101"
+        },
+        {
+            "Name": "Metallo Lot E",
+            "Number": "112"
+        }
+    ]
+}

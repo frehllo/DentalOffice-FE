@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/standalones/header/header.component';
+import { DataserviceService } from './core/services/dataservice/dataservice.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule],
+  providers: [DataserviceService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

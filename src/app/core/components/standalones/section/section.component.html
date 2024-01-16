@@ -5,9 +5,9 @@
             *ngIf="section.subSections != null && section.subSections.length > 0">
             @for (sub of section.subSections; track sub) {
             <button style="height: 25px" class="mt-2 text-white col-1 d-inline-block justify-content-center" [ngClass]="{
-              'bg-secondary': activeLink != sub.title,
-              'bg-primary': activeLink == sub.title
-            }" mat-fab extended (click)="setActiveLink(sub.title)">
+              'bg-secondary': activeLink != sub.route,
+              'bg-primary': activeLink == sub.route
+            }" mat-fab extended (click)="setActiveLink(sub.route)">
                 <span class="col-9"
                     style="text-align: left; white-space: nowrap; font-size: 12px; text-overflow: ellipsis;">
                     {{ sub.title | uppercase }}
@@ -17,8 +17,7 @@
         </div>
     </div>
     <div *ngIf="rowData != null">
-        <ag-grid-angular [suppressRowHoverHighlight]="true"
-        [columnHoverHighlight]="true" class="ag-theme-alpine" style="height: 500px" [rowData]="rowData" [columnDefs]="colDefs">
+        <ag-grid-angular class="ag-theme-alpine" style="height: 500px" [rowData]="rowData" [columnDefs]="colDefs">
         </ag-grid-angular>
     </div>
 </div>

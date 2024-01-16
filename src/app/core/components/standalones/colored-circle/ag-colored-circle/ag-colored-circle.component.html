@@ -1,0 +1,6 @@
+<div class="d-flex align-items-center">
+  <div *ngIf="value" class="circle" [style.height.px]="20"
+    [style.width.px]="20" [style]="{ 'background-color': value }">
+  </div>
+  <span class="mx-3">{{ value }}</span>
+</div>

@@ -1,0 +1,9 @@
+{
+    "data": [
+        { "Name": "Smalto Lot A", "Code": "S1", "Number": "123" },
+        { "Name": "Smalto Lot B", "Code": "S2", "Number": "456" },
+        { "Name": "Smalto Lot C", "Code": "S3", "Number": "789" },
+        { "Name": "Smalto Lot D", "Code": "S4", "Number": "101" },
+        { "Name": "Smalto Lot E", "Code": "S5", "Number": "112" }
+      ]
+}

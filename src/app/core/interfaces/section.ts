@@ -5,17 +5,17 @@ export interface Section {
   route: string;
   iconName?: string;
   tableHeaderFields?: ColDef[];
-  subSections?: SubSection[];
+  subSections?: Section[];
   apiString?: string;
 }
 
-export interface SubSection {
+/* export interface SubSection {
   title: string;
   iconName?: string;
   tableHeaderFields?: ColDef[];
   subSections?: Section[];
   apiString?: string;
-}
+} */
 
 //nel server passerò tutte le chiavi della proprietà dell'entità
 //per disegnare la tabella
