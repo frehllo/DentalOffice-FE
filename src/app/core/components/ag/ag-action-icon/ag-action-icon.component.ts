@@ -14,7 +14,6 @@ export class AgActionIconComponent implements ICellRendererAngularComp {
   fontIcon: string = 'circle';
 
   agInit(params: ICellRendererParams): void {
-    console.log('params', params);
     this.fontIcon = params.colDef!.cellRendererParams!.iconName;
   }
 
