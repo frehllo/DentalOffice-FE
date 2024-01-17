@@ -1,24 +1,24 @@
 {
     "data": [
         {
-            "Name": "Resina Lot A",
-            "Number": "123"
+            "name": "Resina Lot A",
+            "number": "123"
         },
         {
-            "Name": "Resina Lot B",
-            "Number": "456"
+            "name": "Resina Lot B",
+            "number": "456"
         },
         {
-            "Name": "Resina Lot C",
-            "Number": "789"
+            "name": "Resina Lot C",
+            "number": "789"
         },
         {
-            "Name": "Resina Lot D",
-            "Number": "101"
+            "name": "Resina Lot D",
+            "number": "101"
         },
         {
-            "Name": "Resina Lot E",
-            "Number": "112"
+            "name": "Resina Lot E",
+            "number": "112"
         }
     ]
 }

@@ -1,9 +1,9 @@
 {
     "data": [
-        { "Name": "Smalto Lot A", "Code": "S1", "Number": "123" },
-        { "Name": "Smalto Lot B", "Code": "S2", "Number": "456" },
-        { "Name": "Smalto Lot C", "Code": "S3", "Number": "789" },
-        { "Name": "Smalto Lot D", "Code": "S4", "Number": "101" },
-        { "Name": "Smalto Lot E", "Code": "S5", "Number": "112" }
+        { "name": "Smalto Lot A", "code": "S1", "number": "123" },
+        { "name": "Smalto Lot B", "code": "S2", "number": "456" },
+        { "name": "Smalto Lot C", "code": "S3", "number": "789" },
+        { "name": "Smalto Lot D", "code": "S4", "number": "101" },
+        { "name": "Smalto Lot E", "code": "S5", "number": "112" }
       ]
 }

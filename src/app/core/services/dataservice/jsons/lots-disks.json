@@ -1,24 +1,24 @@
 {
     "data": [
         {
-            "Name": "Disco Lot A",
-            "Number": "123"
+            "name": "Disco Lot A",
+            "number": "123"
         },
         {
-            "Name": "Disco Lot B",
-            "Number": "456"
+            "name": "Disco Lot B",
+            "number": "456"
         },
         {
-            "Name": "Disco Lot C",
-            "Number": "789"
+            "name": "Disco Lot C",
+            "number": "789"
         },
         {
-            "Name": "Disco Lot D",
-            "Number": "101"
+            "name": "Disco Lot D",
+            "number": "101"
         },
         {
-            "Name": "Disco Lot E",
-            "Number": "112"
+            "name": "Disco Lot E",
+            "number": "112"
         }
     ]
 }

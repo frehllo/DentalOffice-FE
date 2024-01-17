@@ -1,29 +1,29 @@
 {
     "data": [
         {
-            "Name": "Dentina Lot A",
-            "Color": "Red",
-            "Number": "789"
+            "name": "Dentina Lot A",
+            "color": "Red",
+            "number": "789"
         },
         {
-            "Name": "Dentina Lot B",
-            "Color": "Blue",
-            "Number": "012"
+            "name": "Dentina Lot B",
+            "color": "Blue",
+            "number": "012"
         },
         {
-            "Name": "Dentina Lot C",
-            "Color": "Green",
-            "Number": "345"
+            "name": "Dentina Lot C",
+            "color": "Green",
+            "number": "345"
         },
         {
-            "Name": "Dentina Lot D",
-            "Color": "Yellow",
-            "Number": "678"
+            "name": "Dentina Lot D",
+            "color": "Yellow",
+            "number": "678"
         },
         {
-            "Name": "Dentina Lot E",
-            "Color": "Purple",
-            "Number": "901"
+            "name": "Dentina Lot E",
+            "color": "Purple",
+            "number": "901"
         }
     ]
 }

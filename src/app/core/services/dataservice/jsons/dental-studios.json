@@ -1,9 +1,9 @@
 {
     "data": [
-      { "id" : 1,"Name": "Studio A", "Color": "#ff0000" },
-      { "Name": "Studio B", "Color": "#00ff00" },
-      { "Name": "Studio C", "Color": "#0000ff" },
-      { "Name": "Studio D", "Color": "#ffff00" },
-      { "Name": "Studio E", "Color": "#ff00ff" }
+      { "name": "Studio A", "color": "#ff0000" },
+      { "name": "Studio B", "color": "#00ff00" },
+      { "name": "Studio C", "color": "#0000ff" },
+      { "name": "Studio D", "color": "#ffff00" },
+      { "name": "Studio E", "color": "#ff00ff" }
     ]
   }

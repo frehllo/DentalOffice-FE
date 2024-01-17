@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Fase A"
+            "name": "Fase A"
         },
         {
-            "Name": "Fase B"
+            "name": "Fase B"
         },
         {
-            "Name": "Fase C"
+            "name": "Fase C"
         },
         {
-            "Name": "Fase D"
+            "name": "Fase D"
         },
         {
-            "Name": "Fase E"
+            "name": "Fase E"
         }
     ]
 }

@@ -1,49 +1,49 @@
 {
     "data": [
         {
-            "Code": "S1",
-            "Colors": [
+            "code": "S1",
+            "colors": [
                 "Red",
                 "Green",
                 "Blue"
             ],
-            "Dentin": "D1"
+            "dentin": "D1"
         },
         {
-            "Code": "S2",
-            "Colors": [
+            "code": "S2",
+            "colors": [
                 "Yellow",
                 "Purple",
                 "Orange"
             ],
-            "Dentin": "D2"
+            "dentin": "D2"
         },
         {
-            "Code": "S3",
-            "Colors": [
+            "code": "S3",
+            "colors": [
                 "Pink",
                 "Cyan",
                 "Brown"
             ],
-            "Dentin": "D3"
+            "dentin": "D3"
         },
         {
-            "Code": "S4",
-            "Colors": [
+            "code": "S4",
+            "colors": [
                 "Black",
                 "White",
                 "Gray"
             ],
-            "Dentin": "D4"
+            "dentin": "D4"
         },
         {
-            "Code": "S5",
-            "Colors": [
+            "code": "S5",
+            "colors": [
                 "Magenta",
                 "Lime",
                 "Teal"
             ],
-            "Dentin": "D5"
+            "dentin": "D5"
         }
     ]
 }

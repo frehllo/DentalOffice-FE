@@ -39,7 +39,7 @@ export class DataModalComponent {
     if(this.data.title != null) {
       this.title = this.data.title;
     }
-    console.log('ngOnInIt', this.fields)
+    console.log('ngOnInIt', this.model)
   }
 
   cancel(): void {

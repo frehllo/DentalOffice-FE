@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Semilavorazione A"
+            "name": "Semilavorazione A"
         },
         {
-            "Name": "Semilavorazione B"
+            "name": "Semilavorazione B"
         },
         {
-            "Name": "Semilavorazione C"
+            "name": "Semilavorazione C"
         },
         {
-            "Name": "Semilavorazione D"
+            "name": "Semilavorazione D"
         },
         {
-            "Name": "Semilavorazione E"
+            "name": "Semilavorazione E"
         }
     ]
 }

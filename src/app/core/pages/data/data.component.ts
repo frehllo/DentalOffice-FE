@@ -29,9 +29,9 @@ export class DataComponent {
       title: 'Studi Dentistici',
       route: '/dental-studios',
       tableHeaderFields: [
-        { field: 'Name' },
+        { field: 'name' },
         {
-          field: 'Color',
+          field: 'color',
           cellRenderer: AGColoredCircle
         },
       ],
@@ -39,17 +39,17 @@ export class DataComponent {
         {
           key: 'name',
           type: 'input',
+          className: "col-4",
           props: {
             label: 'Email address',
             required: true,
           },
-          className : 'col-lg-4 col-sm-12'
         },
         {
           key: 'color',
           type: 'input',
           props: {
-            label: 'Color',
+            label: 'color',
             required: true,
           },
           className : 'col-lg-4 col-sm-12'
@@ -66,7 +66,7 @@ export class DataComponent {
           title: 'Metalli',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
           ],
         },
@@ -75,7 +75,7 @@ export class DataComponent {
           title: 'Dentina',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
           ],
         },
@@ -84,7 +84,7 @@ export class DataComponent {
           title: 'Smalto',
           tableHeaderFields: [
             {
-              field: 'Code',
+              field: 'code',
             },
             {
               field: 'Colors',
@@ -99,7 +99,7 @@ export class DataComponent {
           title: 'Resina Acetalica',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
           ],
         },
@@ -108,7 +108,7 @@ export class DataComponent {
           title: 'Dischi Policarbonati',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
           ],
         },
@@ -120,7 +120,7 @@ export class DataComponent {
       route: '/colors',
       tableHeaderFields: [
         {
-          field: 'Name',
+          field: 'name',
         },
       ],
     },
@@ -130,7 +130,7 @@ export class DataComponent {
       route: '/semiproducts',
       tableHeaderFields: [
         {
-          field: 'Name',
+          field: 'name',
         },
       ],
     },
@@ -140,7 +140,7 @@ export class DataComponent {
       route: '/risks',
       tableHeaderFields: [
         {
-          field: 'Name',
+          field: 'name',
         },
       ],
     },
@@ -150,7 +150,7 @@ export class DataComponent {
       route: '/modules',
       tableHeaderFields: [
         {
-          field: 'Name',
+          field: 'name',
         },
       ],
     },
@@ -160,7 +160,7 @@ export class DataComponent {
       route: '/stages',
       tableHeaderFields: [
         {
-          field: 'Name',
+          field: 'name',
         },
       ],
     },
@@ -174,10 +174,10 @@ export class DataComponent {
           title: 'Metalli',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
             {
-              field: 'Number',
+              field: 'number',
             },
           ],
         },
@@ -186,13 +186,13 @@ export class DataComponent {
           title: 'Dentina',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
             {
-              field: 'Color',
+              field: 'color',
             },
             {
-              field: 'Number',
+              field: 'number',
             },
           ],
         },
@@ -201,10 +201,10 @@ export class DataComponent {
           title: 'Smalto',
           tableHeaderFields: [
             {
-              field: 'Code',
+              field: 'code',
             },
             {
-              field: 'Number',
+              field: 'number',
             },
           ],
         },
@@ -213,10 +213,10 @@ export class DataComponent {
           title: 'Resina Acetalica',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
             {
-              field: 'Number',
+              field: 'number',
             },
           ],
         },
@@ -225,10 +225,10 @@ export class DataComponent {
           title: 'Dischi Policarbonati',
           tableHeaderFields: [
             {
-              field: 'Name',
+              field: 'name',
             },
             {
-              field: 'Number',
+              field: 'number',
             },
           ],
         },

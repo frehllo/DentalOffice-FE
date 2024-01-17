@@ -1,19 +1,19 @@
 {
   "data": [
     {
-      "Name": "Metallo A"
+      "name": "Metallo A"
     },
     {
-      "Name": "Metallo B"
+      "name": "Metallo B"
     },
     {
-      "Name": "Metallo C"
+      "name": "Metallo C"
     },
     {
-      "Name": "Metallo D"
+      "name": "Metallo D"
     },
     {
-      "Name": "Metallo E"
+      "name": "Metallo E"
     }
   ]
 }

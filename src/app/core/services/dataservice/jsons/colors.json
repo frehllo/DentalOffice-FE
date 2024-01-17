@@ -1,9 +1,9 @@
 {
     "data": [
-      { "Name": "Rosso" },
-      { "Name": "Verde" },
-      { "Name": "Blu" },
-      { "Name": "Giallo" },
-      { "Name": "Viola" }
+      { "name": "Rosso" },
+      { "name": "Verde" },
+      { "name": "Blu" },
+      { "name": "Giallo" },
+      { "name": "Viola" }
     ]
   }

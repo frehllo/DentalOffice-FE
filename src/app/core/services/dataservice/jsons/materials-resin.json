@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Resina A"
+            "name": "Resina A"
         },
         {
-            "Name": "Resina B"
+            "name": "Resina B"
         },
         {
-            "Name": "Resina C"
+            "name": "Resina C"
         },
         {
-            "Name": "Resina D"
+            "name": "Resina D"
         },
         {
-            "Name": "Resina E"
+            "name": "Resina E"
         }
     ]
 }

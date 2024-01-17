@@ -70,7 +70,7 @@ export class SectionComponent implements OnInit, OnChanges {
       {
         title: 'Edit',
         fields: this.section.formConfig,
-        module : event.data
+        model : event.data
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {

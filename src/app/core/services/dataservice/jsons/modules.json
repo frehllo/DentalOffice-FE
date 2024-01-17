@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Modulo A"
+            "name": "Modulo A"
         },
         {
-            "Name": "Modulo B"
+            "name": "Modulo B"
         },
         {
-            "Name": "Modulo C"
+            "name": "Modulo C"
         },
         {
-            "Name": "Modulo D"
+            "name": "Modulo D"
         },
         {
-            "Name": "Modulo E"
+            "name": "Modulo E"
         }
     ]
 }

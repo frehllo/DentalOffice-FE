@@ -1,24 +1,24 @@
 {
     "data": [
         {
-            "Name": "Metallo Lot A",
-            "Number": "123"
+            "name": "Metallo Lot A",
+            "number": "123"
         },
         {
-            "Name": "Metallo Lot B",
-            "Number": "456"
+            "name": "Metallo Lot B",
+            "number": "456"
         },
         {
-            "Name": "Metallo Lot C",
-            "Number": "789"
+            "name": "Metallo Lot C",
+            "number": "789"
         },
         {
-            "Name": "Metallo Lot D",
-            "Number": "101"
+            "name": "Metallo Lot D",
+            "number": "101"
         },
         {
-            "Name": "Metallo Lot E",
-            "Number": "112"
+            "name": "Metallo Lot E",
+            "number": "112"
         }
     ]
 }

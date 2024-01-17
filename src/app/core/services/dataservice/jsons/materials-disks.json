@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Disco A"
+            "name": "Disco A"
         },
         {
-            "Name": "Disco B"
+            "name": "Disco B"
         },
         {
-            "Name": "Disco C"
+            "name": "Disco C"
         },
         {
-            "Name": "Disco D"
+            "name": "Disco D"
         },
         {
-            "Name": "Disco E"
+            "name": "Disco E"
         }
     ]
 }

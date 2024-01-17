@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Dentina A"
+            "name": "Dentina A"
         },
         {
-            "Name": "Dentina B"
+            "name": "Dentina B"
         },
         {
-            "Name": "Dentina C"
+            "name": "Dentina C"
         },
         {
-            "Name": "Dentina D"
+            "name": "Dentina D"
         },
         {
-            "Name": "Dentina E"
+            "name": "Dentina E"
         }
     ]
 }

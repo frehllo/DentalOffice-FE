@@ -1,19 +1,19 @@
 {
     "data": [
         {
-            "Name": "Rischio A"
+            "name": "Rischio A"
         },
         {
-            "Name": "Rischio B"
+            "name": "Rischio B"
         },
         {
-            "Name": "Rischio C"
+            "name": "Rischio C"
         },
         {
-            "Name": "Rischio D"
+            "name": "Rischio D"
         },
         {
-            "Name": "Rischio E"
+            "name": "Rischio E"
         }
     ]
 }
