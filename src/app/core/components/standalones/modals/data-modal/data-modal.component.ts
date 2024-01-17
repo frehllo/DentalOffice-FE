@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -14,11 +14,11 @@ export class DataModalPropr {
 @Component({
   selector: 'app-data-modal',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogActions, MatButtonModule, MatDialogModule, FormlyModule, FormlyMaterialModule, ReactiveFormsModule],
+  imports: [MatDialogTitle, MatDialogActions, MatDialogClose,MatButtonModule, MatDialogModule, FormlyModule, FormlyMaterialModule, ReactiveFormsModule],
   templateUrl: './data-modal.component.html',
   styleUrl: './data-modal.component.scss'
 })
-export class DataModalComponent {
+export class DataModalComponent implements OnInit, OnChanges {
   constructor(
     public dialogRef: MatDialogRef<DataModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -39,6 +39,9 @@ export class DataModalComponent {
     if(this.data.title != null) {
       this.title = this.data.title;
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     console.log('ngOnInIt', this.model)
   }
 
@@ -47,6 +50,7 @@ export class DataModalComponent {
   }
 
   confirm(): any {
+    console.log("confirm")
     this.dialogRef.close(this.model);
   }
 }

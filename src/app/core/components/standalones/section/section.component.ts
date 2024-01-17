@@ -16,8 +16,7 @@ import { AgActionIconComponent } from '../../ag/ag-action-icon/ag-action-icon.co
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component'; import {
   MatDialog
 } from '@angular/material/dialog';
-import { DataModalComponent, DataModalPropr } from '../modals/data-modal/data-modal.component';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { DataModalComponent } from '../modals/data-modal/data-modal.component';
 
 @Component({
   selector: 'app-section',
@@ -74,6 +73,7 @@ export class SectionComponent implements OnInit, OnChanges {
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('closed data',result)
       //service che aggiunge a db e fa get
     });
   }
