@@ -1,6 +1,6 @@
 {
     "data": [
-      { "Name": "Studio A", "Color": "#ff0000" },
+      { "id" : 1,"Name": "Studio A", "Color": "#ff0000" },
       { "Name": "Studio B", "Color": "#00ff00" },
       { "Name": "Studio C", "Color": "#0000ff" },
       { "Name": "Studio D", "Color": "#ffff00" },

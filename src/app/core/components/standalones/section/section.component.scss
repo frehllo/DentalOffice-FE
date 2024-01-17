@@ -9,3 +9,7 @@
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
+
+.full-height-no-title {
+  height: calc(100vh - 80px - 100px) !important;
+}

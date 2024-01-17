@@ -1,3 +1,4 @@
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ColDef } from 'ag-grid-community';
 
 export interface Section {
@@ -7,8 +8,8 @@ export interface Section {
   tableHeaderFields?: ColDef[];
   subSections?: Section[];
   apiString?: string;
+  formConfig? : FormlyFieldConfig[];
 }
-
 /* export interface SubSection {
   title: string;
   iconName?: string;

@@ -1,0 +1,22 @@
+<div class="p-2" style="width : 800px">
+    <h1 mat-dialog-title>
+        {{data.title}}
+    </h1>
+
+    <div mat-dialog-content>
+        @if(fields != null && fields.length > 0)
+        {
+            <form [formGroup]="form">
+                <formly-form [form]="form" [fields]="fields!" [model]="model"></formly-form>
+                <div mat-dialog-actions class="mb-0 justify-content-end full-width">
+                    <button mat-button (click)="cancel()">Cancel</button>
+                    <button mat-raised-button color="bg-primary" (ngSubmit)="confirm()">Confirm</button>
+                </div>
+            </form>
+        }@else {
+            <h2>No Content</h2>
+        }
+    </div>
+
+    
+</div>

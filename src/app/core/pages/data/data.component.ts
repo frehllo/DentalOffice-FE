@@ -1,5 +1,4 @@
-import { ColoredCircleComponent } from './../../components/standalones/colored-circle/colored-circle.component';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Section } from '../../interfaces/section';
 import { SectionComponent } from '../../components/standalones/section/section.component';
 import { LoadingComponent } from '../../components/standalones/loading/loading.component';
-import { AGColoredCircle } from '../../components/standalones/colored-circle/ag-colored-circle/ag-colored-circle.component';
+import { AGColoredCircle } from '../../components/ag/ag-colored-circle/ag-colored-circle.component';
 
 @Component({
   selector: 'app-data',
@@ -36,6 +35,26 @@ export class DataComponent {
           cellRenderer: AGColoredCircle
         },
       ],
+      formConfig: [
+        {
+          key: 'name',
+          type: 'input',
+          props: {
+            label: 'Email address',
+            required: true,
+          },
+          className : 'col-lg-4 col-sm-12'
+        },
+        {
+          key: 'color',
+          type: 'input',
+          props: {
+            label: 'Color',
+            required: true,
+          },
+          className : 'col-lg-4 col-sm-12'
+        }
+      ]
     },
     {
       iconName: 'wb_iridescent',
