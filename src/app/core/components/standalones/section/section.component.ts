@@ -26,7 +26,7 @@ import { DataModalComponent } from '../modals/data-modal/data-modal.component';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    AgActionIconComponent,
+    AgActionIconComponent
   ],
   templateUrl: './section.component.html',
   styleUrl: './section.component.scss',
@@ -37,7 +37,7 @@ export class SectionComponent implements OnInit, OnChanges {
   actionHeaders: ColDef[] = [
     {
       field: 'Edit',
-      cellRenderer: eval("AgActionIconComponent"), //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: /* eval(" */AgActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
       cellRendererParams: {
         iconName: 'edit',
       },
@@ -45,7 +45,7 @@ export class SectionComponent implements OnInit, OnChanges {
     },
     {
       field: 'Delete',
-      cellRenderer: eval("AgActionIconComponent"), //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: /* eval(" */AgActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
       cellRendererParams: {
         iconName: 'delete',
       },

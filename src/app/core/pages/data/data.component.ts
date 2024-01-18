@@ -47,7 +47,7 @@ export class DataComponent {
         },
         {
           key: 'color',
-          type: 'input',
+          type: 'color',
           props: {
             label: 'color',
             required: true,
