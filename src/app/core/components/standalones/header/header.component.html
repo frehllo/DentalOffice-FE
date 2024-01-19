@@ -1,10 +1,10 @@
 <div class="full-width">
   <mat-toolbar class="h-80 bg-primary">
-    <div *NgIf="showHeaderBack">
+    <ng-container *ngIf="showHeaderBack">
       class="d-flex justify-content-center align-item-center" style="width:
       2%;">
       <span (click)="back()" class="material-icons">keyboard_arrow_left</span>
-    </div>
+    </ng-container>
     <div
       style="width: 98%"
       class="d-flex justify-content-center align-item-center"

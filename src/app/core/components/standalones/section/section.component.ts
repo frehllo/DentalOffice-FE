@@ -41,7 +41,7 @@ export class SectionComponent implements OnInit, OnChanges {
       cellRendererParams: {
         iconName: 'edit',
       },
-      onCellClicked: (event) => this.edit(event)
+      onCellClicked: (event) => this.data(event)
     },
     {
       field: 'Delete',
@@ -63,13 +63,13 @@ export class SectionComponent implements OnInit, OnChanges {
     this.setSection();
   }
 
-  edit(event: any) {
+  data(event?: any) {
     const dialogRef = this.dialog.open(DataModalComponent, {
       data:
       {
-        title: 'Edit',
+        title: event != null ? 'Edit' : 'Add',
         fields: this.section.formConfig,
-        model : event.data
+        model : event != null ? event.data : null
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {

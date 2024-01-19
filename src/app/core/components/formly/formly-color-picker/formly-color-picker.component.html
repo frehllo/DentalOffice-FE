@@ -1,7 +1,4 @@
-<div class="d-flex flex-row align-items-baseline">
-    <ngx-colors ngx-colors-trigger [(ngModel)]="color" [formControl]="formControl" [formlyAttributes]="field" />
-    <mat-form-field [(ngModel)]="color" [formControl]="formControl" [formlyAttributes]="field"  class="px-2 full-width">
-        <mat-label>Clearable input</mat-label>
-        <input matInput>
-    </mat-form-field>
+<div class="d-flex flex-column justify-content-start align-s">
+    <mat-label>Color</mat-label>
+    <ngx-colors ngx-colors-trigger [formControl]="formControl" [formlyAttributes]="field" />
 </div>

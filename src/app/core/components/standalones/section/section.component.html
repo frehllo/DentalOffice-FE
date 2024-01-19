@@ -1,5 +1,5 @@
 <div class="full-height-no-overflow p-2">
-  <div class="section-header d-flex flex-row px-2 align-items-center px-4">
+  <div class="section-header d-flex flex-row px-2 align-items-center justify-content-between  px-4">
     <h1 class="title">{{ section.title }}</h1>
     <div
       class="justify-content-center full-width d-flex flex-row"
@@ -30,6 +30,11 @@
         </span>
       </button>
       }
+    </div>
+    <div class="d-flex justify-content-center">
+      <button mat-fab (click)="data()" class="text-white bg-tertiary">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
   </div>
   <div class="full-height-no-title full-width" *ngIf="rowData != null">

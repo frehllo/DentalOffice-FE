@@ -17,6 +17,8 @@ export class HeaderComponent {
 
   }
 
+  showHeaderBack : boolean = false;
+
   back(): void {
     //TODO : Controllare questo back
     this.router.navigate(['..']);
