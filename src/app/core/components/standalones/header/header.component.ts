@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-header',
@@ -13,14 +14,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(private router:Router) {
+  constructor(private router:Router, private location: Location) {
 
   }
 
-  showHeaderBack : boolean = false;
+  @Input() showHeaderBack : boolean = false;
 
   back(): void {
-    //TODO : Controllare questo back
-    this.router.navigate(['..']);
+    setTimeout(() => { 
+      this.location.back();
+     }, 100);
   }
 }

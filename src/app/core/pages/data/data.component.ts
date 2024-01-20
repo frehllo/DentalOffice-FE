@@ -87,10 +87,10 @@ export class DataComponent {
               field: 'code',
             },
             {
-              field: 'Colors',
+              field: 'colors',
             },
             {
-              field: 'Dentin',
+              field: 'dentin',
             },
           ],
         },

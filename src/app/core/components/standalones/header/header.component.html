@@ -1,9 +1,9 @@
 <div class="full-width">
   <mat-toolbar class="h-80 bg-primary">
     <ng-container *ngIf="showHeaderBack">
-      class="d-flex justify-content-center align-item-center" style="width:
-      2%;">
-      <span (click)="back()" class="material-icons">keyboard_arrow_left</span>
+      <button mat-fab (click)="back()" class="text-white bg-secondary">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
     </ng-container>
     <div
       style="width: 98%"

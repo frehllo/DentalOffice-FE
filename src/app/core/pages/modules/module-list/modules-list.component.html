@@ -1,0 +1,23 @@
+<div class="bg-color full-width">
+    <div class="page-header d-flex flex-row px-4 align-items-center justify-content-between">
+        <h1 style="margin-bottom : 0px !important">Moduli</h1>
+        <div class="d-flex justify-content-center">
+            <button mat-fab (click)="data()" class="text-white bg-tertiary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <hr class="mt-0">
+    <div class="d-flex align-content-center">
+        @if(list != null && list.length > 0)
+        {
+        <div class="row justify-content-center full-width m-2">
+            @for(el of list;track el) {
+            <app-module-card [moduleInfo]="el" class="col-lg-2 m-4 col-sm-12"></app-module-card>
+            }
+        </div>
+        }@else {
+        <h2>No Content</h2>
+        }
+    </div>
+</div>

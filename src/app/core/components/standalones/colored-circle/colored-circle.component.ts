@@ -10,6 +10,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ColoredCircleComponent implements OnInit {
   @Input() value: string = '';
+  @Input() shadow: boolean = false;
   @Input() height: number = 10;
   width: number = 0;
 

@@ -1,0 +1,30 @@
+<div>
+    <div class="p-1 bg-gray state">
+        <span class="ms-2 text-uppercase text-black text-align-left">{{info.state.description}}</span>
+    </div>
+    <div (click)="enterModule(info.id)" (mouseleave)="showUpdateDate(false)" (mouseover)="showUpdateDate(true)" class="p-2 bg-secondary"
+        *ngIf="info != null">
+        <div class="row text-white flex-column align-content-center ">
+            <div class="row justify-content-between">
+                <div class="col">
+                    <h2>{{info.clientName.length > 13 ? info.clientName.substring(0, 13) + '...' : info.clientName}}
+                    </h2>
+                </div>
+                <div class="col text-md-start text-md-end">
+                    <h3 class="fst-italic pt-1">{{info.prescriptionDate}}</h3>
+                </div>
+            </div>
+            <div class="row d-flex flex-row">
+                <app-colored-circle class="col-sm-6 col-lg-1 align-self-center" [shadow]="true"
+                    [value]="info.dentalStudio.color" />
+                <span class="col-sm-6 col-lg-10">{{info.dentalStudio.name}}</span>
+                <p class="col-12 py-3">
+                    {{info.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="updateDateVisible" [@slideInOut] class="p-1 bg-gray update-date position-absolute">
+    <span class="z-1 mx-2 text-uppercase text-black text-align-left position-relative">Ultimo aggiornamento : {{info.lastUpdateDate}}</span>
+</div>

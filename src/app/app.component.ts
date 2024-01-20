@@ -22,13 +22,14 @@ export class AppComponent {
     router.events.subscribe(
       (val) =>{
         if(val instanceof NavigationEnd) {
+          console.log(val.url)
           if(val.url=="/") {
             this.showHeader = true;
           }
           if(val.url=="/home"){
             this.showHeaderBack = false;
           }else{
-            this.showHeaderBack = false;
+            this.showHeaderBack = true;
           }
           //aggiungere il resto delle route per definire se mostrare o meno l'header
         }
