@@ -12,6 +12,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+div::-webkit-scrollbar {
+ display: none;
+}
 
 :root {
   --bg-color: #dcf2f1 !important;

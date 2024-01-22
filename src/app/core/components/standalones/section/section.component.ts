@@ -1,3 +1,4 @@
+import { style } from '@angular/animations';
 import {
   Component,
   Input,
@@ -42,7 +43,8 @@ export class SectionComponent implements OnInit, OnChanges {
       cellRendererParams: {
         iconName: 'edit',
       },
-      onCellClicked: (event) => this.data(event)
+      onCellClicked: (event) => this.data(event),
+      resizable : false,
     },
     {
       field: 'Delete',
@@ -50,7 +52,8 @@ export class SectionComponent implements OnInit, OnChanges {
       cellRendererParams: {
         iconName: 'delete',
       },
-      onCellClicked: (event) => this.delete(event)
+      onCellClicked: (event) => this.delete(event),
+      resizable : false
     },
   ];
   activeLink: string = '';

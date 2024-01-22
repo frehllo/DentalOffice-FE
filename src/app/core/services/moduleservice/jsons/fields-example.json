@@ -1,0 +1,58 @@
+{
+    "data" : {},
+    "fields" : [
+        {
+            "type": "section-line",
+            "props": {
+                "label": "Informazioni generali"
+            }
+        },
+        {
+            "key": "clientName",
+            "type": "input",
+            "props": {
+                "label": "Nome cliente",
+                "required": true
+            }
+        },
+        {
+            "key": "prescriptionDate",
+            "type": "datepicker",
+            "props": {
+                "label": "Data prescrizione"
+            }
+        },
+        {
+            "key": "deliveryDate",
+            "type": "datepicker",
+            "props": {
+                "label": "Data di consegna prevista"
+            }
+        },
+        {
+            "key": "dentalStudioId",
+            "type": "select",
+            "props": {
+                "label": "Data di consegna prevista",
+                "required" : true,
+                "options" : [
+                    { "value": 1, "label": "Studio 1" },
+                    { "value": 1, "label": "Studio 2" }
+                ]
+            }
+        },
+        {
+            "key": "description",
+            "type": "textarea",
+            "props": {
+                "label": "Descrizione"
+            }
+        },
+        {
+            "type": "section-line",
+            "props": {
+                "label": "Processi"
+            }
+        }
+    ]
+}

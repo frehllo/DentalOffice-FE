@@ -1,3 +1,5 @@
-<div class="p-2" style="width : 800px">
-    
+<div class="bg-color full-height-no-overflow">
+    <form [formGroup]="form" (ngSubmit)="confirm()">
+        <formly-form [form]="form" [fields]="fields!" [model]="model"></formly-form>
+    </form>
 </div>

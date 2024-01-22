@@ -1,14 +1,13 @@
-<mat-drawer-container class="full-height-no-overflow">
+<mat-drawer-container class="overflow-hidden full-height-no-overflow">
   <mat-drawer
-    style="width: 300px"
+    style="width: 20%;"
     class="bg-tertiary d-flex flex-column"
     #drawer
     [mode]="'side'"
     opened
   >
-    <div class="d-flex flex-column">
+    <div class="d-flex overflow-hidden flex-column">
       <div
-        style="height: 50px"
         class="full-width d-flex justify-content-center my-5"
         style="height: 40px"
       >
@@ -24,7 +23,7 @@
         @for (s of dataSections; track s) {
         <button
           style="height: 50px"
-          class="mt-2 text-white full-width d-inline-block justify-content-center"
+          class="mb-2 text-white full-width d-inline-block justify-content-center"
           [ngClass]="{
             'bg-secondary': activeLink != s.route,
             'bg-primary': activeLink == s.route
@@ -43,7 +42,7 @@
                 fontIcon="{{ s.iconName }}"
               />
             </span>
-            <span class="col-9" style="text-align: left; white-space: nowrap">
+            <span class="col-9 d-md-flex d-sm-none overflow-hidden" style="text-align: left; white-space: nowrap">
               {{ s.title | uppercase }}
             </span>
           </div>
