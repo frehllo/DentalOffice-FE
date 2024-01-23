@@ -4,11 +4,12 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/standalones/header/header.component';
 import { DataserviceService } from './core/services/dataservice/dataservice.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DotMenuComponent } from './core/components/standalones/dot-menu/dot-menu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule, DotMenuComponent],
   providers: [DataserviceService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -26,7 +27,8 @@ export class AppComponent {
           if(val.url=="/") {
             this.showHeader = true;
           }
-          if(val.url=="/home"){
+          if(val.url=="/home" || val.url=="/"){
+            console.log(val.url)
             this.showHeaderBack = false;
           }else{
             this.showHeaderBack = true;

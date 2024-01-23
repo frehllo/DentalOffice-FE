@@ -1,5 +1,5 @@
 {
-    "data" : {},
+    "model" : {},
     "fields" : [
         {
             "type": "section-line",
@@ -12,6 +12,7 @@
             "type": "input",
             "props": {
                 "label": "Nome cliente",
+                "class": "col-1",
                 "required": true
             }
         },
@@ -33,7 +34,7 @@
             "key": "dentalStudioId",
             "type": "select",
             "props": {
-                "label": "Data di consegna prevista",
+                "label": "Studio dentistico",
                 "required" : true,
                 "options" : [
                     { "value": 1, "label": "Studio 1" },

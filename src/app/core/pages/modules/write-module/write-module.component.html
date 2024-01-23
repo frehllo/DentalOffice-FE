@@ -1,5 +1,6 @@
 <div class="bg-color full-height-no-overflow">
-    <form [formGroup]="form" (ngSubmit)="confirm()">
-        <formly-form [form]="form" [fields]="fields!" [model]="model"></formly-form>
+    <form [formGroup]="form" (ngSubmit)="save()" class="p-4 row" >
+        <formly-form [form]="form" (modelChange)="write()" [options]="options" [fields]="fields!" [model]="model"></formly-form>
     </form>
+    <app-dot-menu (save)="save()" (reset)="reset()"></app-dot-menu>
 </div>
