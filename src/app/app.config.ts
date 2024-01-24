@@ -12,13 +12,9 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimations(), importProvidersFrom([
     FormlyModule.forRoot({
       validationMessages: [{ name: 'required', message: 'This field is required' }],
-      wrappers: [
-        { name: 'formly-wrapper-panel', component: FormlyWrapperPanel },
-      ],
       types: [
         { name: 'color', component: FormlyColorPickerComponent },
         { name: 'section-line', component: FormlySectionLineComponent },
-        { name: 'input', wrappers: ['formly-wrapper-panel']},
       ],
     }),
   ])]

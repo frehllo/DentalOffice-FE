@@ -12,7 +12,6 @@
             "type": "input",
             "props": {
                 "label": "Nome cliente",
-                "class": "col-1",
                 "required": true
             }
         },
