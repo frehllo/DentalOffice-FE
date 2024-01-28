@@ -1,8 +1,22 @@
-<div class="d-flex flex-column buttons">
-    <button mat-fab [disabled]="saveDisabled" (click)="saveMethod()" class="text-white bg-secondary m-1">
-        <mat-icon>check</mat-icon>
-    </button>
-    <button mat-fab [disabled]="resetDisabled" (click)="resetMethod()" class="text-white bg-secondary m-1">
-        <mat-icon>clear</mat-icon>
-    </button>
+<div class="row d-flex flex-column buttons">
+    <div class="col-12 d-flex justify-content-end">
+        @if(showScrollToTop){
+        <button mat-fab (click)="scrollToTop()" class="text-white bg-secondary m-1">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+        </button>
+        }
+    </div>
+    <div class="col-12 d-flex justify-content-end">
+        <button mat-fab [disabled]="printDisabled" (click)="printMethod()" class="text-white bg-secondary m-1">
+            <mat-icon>print</mat-icon>
+        </button>
+    </div>
+    <div class="col">
+        <button mat-fab [disabled]="resetDisabled" (click)="resetMethod()" class="text-white bg-secondary m-1">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-fab [disabled]="saveDisabled" (click)="saveMethod()" class="text-white bg-secondary m-1">
+            <mat-icon>check</mat-icon>
+        </button>
+    </div>
 </div>

@@ -1,6 +1,14 @@
-<div class="bg-color full-height-no-overflow">
-    <form [formGroup]="form" (ngSubmit)="save()" class="p-5 justify-content-center w-50">
-        <formly-form [form]="form" (modelChange)="write()" [options]="options" [fields]="fields!" [model]="model"></formly-form>
-    </form>
-    <app-dot-menu (save)="save()" (reset)="reset()"></app-dot-menu>
+<div class="bg-color">
+  <form [formGroup]="form" (ngSubmit)="save()" class="px-5 pt-5 justify-content-center">
+    <formly-form [form]="form" (modelChange)="write()" [options]="options" [fields]="fields!"
+      [model]="model"></formly-form>
+  </form>
+
+  <ag-grid-angular 
+    class="ag-theme-alpine full-height"
+    [rowData]="rowData"
+    [columnDefs]="colDefs">
+  </ag-grid-angular>
+
+  <app-dot-menu (save)="save()" (reset)="reset()"></app-dot-menu>
 </div>

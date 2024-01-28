@@ -4,18 +4,34 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FormlyModule } from '@ngx-formly/core';
-import { FormlyColorPickerComponent } from './core/components/formly/formly-color-picker/formly-color-picker.component';
-import { FormlySectionLineComponent } from './core/components/formly/formly-section-line/formly-section-line.component';
-import { FormlyWrapperPanel } from './core/components/formly/wrappers/formly-wrapper/formly-wrapper.component';
+import { FormlyColorPickerComponent } from './core/components/formly/components/formly-color-picker/formly-color-picker.component';
+import { FormlySectionLineComponent } from './core/components/formly/components/formly-section-line/formly-section-line.component';
+import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), importProvidersFrom([
-    FormlyModule.forRoot({
-      validationMessages: [{ name: 'required', message: 'This field is required' }],
-      types: [
-        { name: 'color', component: FormlyColorPickerComponent },
-        { name: 'section-line', component: FormlySectionLineComponent },
-      ],
-    }),
-  ])]
+  providers: [
+    provideRouter(routes),
+    provideAnimations(),
+    importProvidersFrom([
+      FormlyModule.forRoot({
+        validationMessages: [
+          { name: 'required', message: 'This field is required' },
+        ],
+        types: [
+          { name: 'color', component: FormlyColorPickerComponent },
+          { name: 'section-line', component: FormlySectionLineComponent },
+          {
+            name: 'grid',
+            component: FormlyAgGridComponent,
+            defaultOptions: {
+              props: {
+                width: '100%',
+                height: '100%',
+              },
+            },
+          },
+        ],
+      }),
+    ]),
+  ],
 };

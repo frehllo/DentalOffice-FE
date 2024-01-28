@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormlyWrapperComponent } from './formly-wrapper.component';
+import { FormlyAgGridComponent } from './formly-ag-grid.component';
 
-describe('FormlyWrapperComponent', () => {
-  let component: FormlyWrapperComponent;
-  let fixture: ComponentFixture<FormlyWrapperComponent>;
+describe('FormlyAgGridComponent', () => {
+  let component: FormlyAgGridComponent;
+  let fixture: ComponentFixture<FormlyAgGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormlyWrapperComponent]
+      imports: [FormlyAgGridComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(FormlyWrapperComponent);
+    fixture = TestBed.createComponent(FormlyAgGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
