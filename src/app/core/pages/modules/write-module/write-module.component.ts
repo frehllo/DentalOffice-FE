@@ -14,6 +14,9 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AgGridModule } from 'ag-grid-angular';
+import { CommonModule } from '@angular/common';
+import { DataModalComponent } from '../../../components/standalones/modals/data-modal/data-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-write-module',
@@ -22,6 +25,7 @@ import { AgGridModule } from 'ag-grid-angular';
   styleUrl: './write-module.component.scss',
   imports: [
     AgGridModule,
+    CommonModule,
     ReactiveFormsModule,
     FormlyModule,
     FormlyMaterialModule,
@@ -33,17 +37,19 @@ import { AgGridModule } from 'ag-grid-angular';
   ],
 })
 export class WriteModuleComponent implements OnInit {
-  constructor(private service: ModuleserviceService) {}
+  constructor(private service: ModuleserviceService, public dialog: MatDialog) { }
 
   data: any | null = null;
-  form = new FormGroup({});
+  personalDataForm = new FormGroup({});
+  processForm = new FormGroup({});
   title: string = 'NO TITLE';
   model: any = { personalData: {}, process: {} };
   processes: any[] = [];
-  fields: FormlyFieldConfig[] = [];
+  personalDataFields: FormlyFieldConfig[] = [];
+  processesFields: FormlyFieldConfig[] = [];
   options: FormlyFormOptions = {};
   rowData: any[] = [];
-  colDefs : ColDef[] = [];
+  colDefs: ColDef[] = [];
 
   ngOnInit() {
     const moduleId = history.state;
@@ -57,29 +63,36 @@ export class WriteModuleComponent implements OnInit {
   }
 
   setData() {
-    if (this.data.model != null) {
       this.model = this.data.model;
-    }
-    if (this.data.form != null) {
-      this.fields = this.data.form
-    }
-    if(this.data.grid.colDefs != null) {
+      this.personalDataFields = this.data.form.personalDataForm;
+      this.processesFields = this.data.form.processesForm;
       this.colDefs = this.data.grid.colDefs;
-    }
-    if(this.data.grid.data) {
-      this.rowData = this.data.grid.data
-    }
+      this.rowData = this.data.grid.data;
   }
-
-  addProcess() {}
 
   save() {
-    this.form.markAllAsTouched();
+    this.personalDataForm.markAllAsTouched();
   }
 
-  reset() {}
+  reset() {
+  }
+
+  openProcess(event?: any) {
+    const dialogRef = this.dialog.open(DataModalComponent, {
+      data:
+      {
+        title: event != null ? 'Edit' : 'Add',
+        fields: this.processesFields,
+        model : event != null ? event.data : null
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('closed data',result)
+      //service che aggiunge a db e fa get
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnInIt', this.model);
+    console.log('ngOnChanges', this.model);
   }
 }

@@ -26,6 +26,10 @@ div::-webkit-scrollbar {
   --text-color-black: #000 !important;
 }
 
+.primary {
+  color: var(--primary) !important;
+}
+
 .bg-color {
   background-color: var(--bg-color) !important;
 }
@@ -94,3 +98,9 @@ div::-webkit-scrollbar {
 } */
 
 /* -----AG----- */
+
+/* -----BUTTONS------ */
+.page-button {
+  height: 40px !important;
+  width: 100px !important;
+}
