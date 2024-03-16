@@ -1,7 +1,7 @@
 <div class="bg-color full-height-no-overflow">
   <div>
     <form [formGroup]="personalDataForm" (ngSubmit)="save()" class="px-5 pt-5 justify-content-center">
-      <formly-form [form]="personalDataForm" (modelChange)="write()" [options]="options" [fields]="personalDataFields!"
+      <formly-form [form]="personalDataForm" (modelChange)="write()" [fields]="personalDataFields"
         [model]="model"></formly-form>
     </form>
   </div>
@@ -13,5 +13,5 @@
       <button [disabled]="false" mat-raised-button class="bg-secondary full-width text-white" (click)="openProcess()">Add</button>
     </div>
   </div>
-  <app-dot-menu (save)="save()" (reset)="reset()"></app-dot-menu>
+  <app-dot-menu [printDisabled]="this.personalDataForm.invalid" [saveDisabled]="this.personalDataForm.invalid" (print)="print()" (save)="save()" (reset)="reset()"></app-dot-menu>
 </div>

@@ -3,7 +3,7 @@ const { app, BrowserWindow } = require('electron')
 let win;
 
 function CreateWindow() {
-    win = new BrowserWindow({show: false, autoHideMenuBar: true});
+    win = new BrowserWindow({ show: false, autoHideMenuBar: true });
     win.maximize();
     win.show();
 
@@ -17,3 +17,9 @@ function CreateWindow() {
 app.whenReady().then(() => {
     CreateWindow()
 })
+
+app.filter('to_trusted', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);

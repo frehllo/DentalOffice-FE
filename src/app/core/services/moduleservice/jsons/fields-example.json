@@ -3,7 +3,6 @@
     "form": {
         "personalDataForm": [
             {
-                "key": "personalData",
                 "fieldGroupClassName": "row",
                 "fieldGroup": [
                     {
@@ -76,11 +75,10 @@
         ],
         "processesForm": [
             {
-                "key": "process",
                 "fieldGroupClassName": "row",
                 "fieldGroup": [
                     {
-                        "key": "semiProductId",
+                        "key": "semiproductId",
                         "className": "col-12",
                         "type": "select",
                         "props": {
@@ -127,17 +125,17 @@
                             "options": [
                                 {
                                     "value": 1,
-                                    "label": "Metallo 1"
+                                    "label": "ASD423R34FWE"
                                 },
                                 {
                                     "value": 2,
-                                    "label": "Metallo 2"
+                                    "label": "F234DE234FWE"
                                 }
                             ]
                         }
                     },
                     {
-                        "key": "coverinMaterialId",
+                        "key": "coveringMaterialId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
@@ -184,11 +182,11 @@
                             "options": [
                                 {
                                     "value": 1,
-                                    "label": "Rivestimento 1"
+                                    "label": "ASD423R23D2D"
                                 },
                                 {
                                     "value": 2,
-                                    "label": "Rivestimento 2"
+                                    "label": "21FS23R3423E"
                                 }
                             ]
                         }
@@ -233,10 +231,11 @@
                     },
                     {
                         "key": "stageIds",
-                        "type": "multicheckbox",
+                        "type": "select",
                         "className": "col-12",
                         "props": {
                             "label": "Lavorazioni",
+                            "multiple": true,
                             "options": [
                                 {
                                     "value": 1,
@@ -255,11 +254,41 @@
     },
     "grid": {
         "colDefs": [
-            { "field": "name" },
-            { "field": "color" }
+            {
+                "field": "metalMaterial.name",
+                "headerName": "Metal"
+            },
+            {
+                "field": "coveringMaterial.name",
+                "headerName": "Covering"
+            },
+            {
+                "field": "color.name",
+                "headerName": "Color"
+            }
         ],
         "data": [
-            {"name" : "Luca", "color" : "Rosso"}
+            {
+                "id": 1,
+                "semiproductId": 1,
+                "metalMaterialId": 1,
+                "metalMaterialLotId": 1,
+                "coveringMaterialLotId": 1,
+                "colorId": 1,
+                "color": {
+                    "name": "A1"
+                },
+                "metalMaterial": {
+                    "name": "Metallo1"
+                },
+                "coveringMaterialId": 1,
+                "coveringMaterial": {
+                    "name": "Rivestimento1"
+                },
+                "enamelMaterialLotId": 1,
+                "riskId": 1,
+                "stageIds": []
+            }
         ]
     }
 }

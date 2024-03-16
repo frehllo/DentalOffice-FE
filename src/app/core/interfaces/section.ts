@@ -5,10 +5,16 @@ export interface Section {
   title: string;
   route: string;
   iconName?: string;
-  tableHeaderFields?: ColDef[];
+  configuration? : SectionConfiguration,
   subSections?: Section[];
   apiString?: string;
-  formConfig? : FormlyFieldConfig[];
+  
+}
+
+interface SectionConfiguration {
+  tableHeaderFields?: ColDef[];
+  formConfiguration? : FormlyFieldConfig[];
+  iconName? : string;
 }
 /* export interface SubSection {
   title: string;

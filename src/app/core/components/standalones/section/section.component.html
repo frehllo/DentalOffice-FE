@@ -1,21 +1,21 @@
-<div class="full-height-no-overflow p-2">
+<div *ngIf="this.section" class="full-height-no-overflow p-2">
   <div class="section-header d-flex flex-row px-2 align-items-center justify-content-between  px-4">
     <h1 class="title">{{ section.title }}</h1>
     <div
       class="justify-content-center full-width d-flex flex-row"
-      *ngIf="section.subSections != null && section.subSections.length > 0"
+      *ngIf="section != null && section.subSections != null && section.subSections.length > 0"
     >
       @for (sub of section.subSections; track sub) {
       <button
         style="height: 25px"
         class="text-white col-1 d-inline-block justify-content-center"
         [ngClass]="{
-          'bg-secondary': activeLink != sub.route,
-          'bg-primary': activeLink == sub.route
+          'bg-secondary': activeRoute != sub.route,
+          'bg-primary': activeRoute == sub.route
         }"
         mat-fab
         extended
-        (click)="setActiveLink(sub.route)"
+        (click)="setActiveRoute(sub.route)"
       >
         <span
           class="col-9"

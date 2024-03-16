@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { Section } from '../../interfaces/section';
 import { SectionComponent } from '../../components/standalones/section/section.component';
 import { LoadingComponent } from '../../components/standalones/loading/loading.component';
 import { AGColoredCircle } from '../../components/ag/ag-colored-circle/ag-colored-circle.component';
+import { SectionService } from '../../services/section/section.service';
 
 @Component({
   selector: 'app-data',
@@ -22,225 +23,47 @@ import { AGColoredCircle } from '../../components/ag/ag-colored-circle/ag-colore
     LoadingComponent,
   ],
 })
-export class DataComponent {
-  dataSections: Section[] = [
-    {
-      iconName: 'store',
-      title: 'Studi Dentistici',
-      route: '/dental-studios',
-      tableHeaderFields: [
-        { field: 'name' },
-        {
-          field: 'color',
-          cellRenderer: AGColoredCircle
-        },
-      ],
-      formConfig: [
-        {
-          key: 'name',
-          type: 'input',
-          className: "col-4",
-          props: {
-            label: 'Email address',
-            required: true,
-          },
-        },
-        {
-          key: 'color',
-          type: 'color',
-          props: {
-            label: 'color',
-            required: true,
-          },
-          className : 'col-lg-4 col-sm-12'
-        }
-      ]
-    },
-    {
-      iconName: 'wb_iridescent',
-      title: 'Materiali',
-      route: '/materials',
-      subSections: [
-        {
-          route: '/materials-metal',
-          title: 'Metalli',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-          ],
-        },
-        {
-          route: '/materials-dentin',
-          title: 'Dentina',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-          ],
-        },
-        {
-          route: '/materials-enamel',
-          title: 'Smalto',
-          tableHeaderFields: [
-            {
-              field: 'code',
-            },
-            {
-              field: 'colors',
-            },
-            {
-              field: 'dentin',
-            },
-          ],
-        },
-        {
-          route: '/materials-resin',
-          title: 'Resina Acetalica',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-          ],
-        },
-        {
-          route: '/materials-disks',
-          title: 'Dischi Policarbonati',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      iconName: 'color_lens',
-      title: 'Colori',
-      route: '/colors',
-      tableHeaderFields: [
-        {
-          field: 'name',
-        },
-      ],
-    },
-    {
-      iconName: 'work_outline',
-      title: 'Semilavorazioni',
-      route: '/semiproducts',
-      tableHeaderFields: [
-        {
-          field: 'name',
-        },
-      ],
-    },
-    {
-      iconName: 'error_outline',
-      title: 'Rischi',
-      route: '/risks',
-      tableHeaderFields: [
-        {
-          field: 'name',
-        },
-      ],
-    },
-    {
-      iconName: 'insert_drive_file',
-      title: 'Moduli',
-      route: '/modules',
-      tableHeaderFields: [
-        {
-          field: 'name',
-        },
-      ],
-    },
-    {
-      iconName: 'skip_next',
-      title: 'Fasi di lavorazione',
-      route: '/stages',
-      tableHeaderFields: [
-        {
-          field: 'name',
-        },
-      ],
-    },
-    {
-      iconName: 'format_list_numbered',
-      title: 'Lotti',
-      route: '/lots',
-      subSections: [
-        {
-          route: '/lots-metal',
-          title: 'Metalli',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-            {
-              field: 'number',
-            },
-          ],
-        },
-        {
-          route: '/lots-dentin',
-          title: 'Dentina',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-            {
-              field: 'color',
-            },
-            {
-              field: 'number',
-            },
-          ],
-        },
-        {
-          route: '/lots-enamel',
-          title: 'Smalto',
-          tableHeaderFields: [
-            {
-              field: 'code',
-            },
-            {
-              field: 'number',
-            },
-          ],
-        },
-        {
-          route: '/lots-resin',
-          title: 'Resina Acetalica',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-            {
-              field: 'number',
-            },
-          ],
-        },
-        {
-          route: '/lots-disks',
-          title: 'Dischi Policarbonati',
-          tableHeaderFields: [
-            {
-              field: 'name',
-            },
-            {
-              field: 'number',
-            },
-          ],
-        },
-      ],
-    },
-  ];
+export class DataComponent implements OnInit {
+  sections: Section[] | null = null;
+  activeLink: string | null = null;
+  activeSection: Section | null = null;
 
-  activeLink = this.dataSections[0].route;
-  activeSection: Section = this.dataSections[0];
+  constructor(private sectionService: SectionService) { }
+
+  ngOnInit(): void {
+    this.sectionService.getList().subscribe({
+      next: res => {
+        this.sections = res as Section[];
+        if (this.sections != null && this.sections?.length > 0) {
+          this.activeLink = this.sections[0].route;
+          this.sectionService.getByRoute(this.activeLink).subscribe({
+            next: (active : any)=> {
+              this.activeSection = active as Section;
+            },
+            error: e => {
+              console.log('error getting sections', e);
+            }
+          });
+        }
+      },
+      error: e => {
+        console.log('error getting sections', e);
+      }
+    });
+  }
 
   routeToSection(route: string): void {
     this.activeLink = route;
-    this.activeSection = this.dataSections.find((_) => _.route == route)!;
+
+    if (this.sections != null && this.sections.length > 0) {
+      this.sectionService.getByRoute(route).subscribe({
+        next: (active : any)=> {
+          this.activeSection = active as Section;
+        },
+        error: e => {
+          console.log('error getting sections', e);
+        }
+      });
+    }
   }
 }

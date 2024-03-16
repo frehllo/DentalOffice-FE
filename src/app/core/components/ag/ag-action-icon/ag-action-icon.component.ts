@@ -1,5 +1,5 @@
 import { ICellRendererParams } from 'ag-grid-community';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 
@@ -10,7 +10,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
   templateUrl: './ag-action-icon.component.html',
   styleUrl: './ag-action-icon.component.scss',
 })
-export class AgActionIconComponent implements ICellRendererAngularComp {
+export class AGActionIconComponent implements ICellRendererAngularComp {
   fontIcon: string = 'circle';
 
   agInit(params: ICellRendererParams): void {

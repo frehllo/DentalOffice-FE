@@ -1,4 +1,4 @@
-import { style } from '@angular/animations';
+import { AGType } from './../../ag/AGType';
 import {
   Component,
   Input,
@@ -13,12 +13,14 @@ import { Section } from '../../../interfaces/section';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { DataserviceService } from '../../../services/dataservice/dataservice.service';
-import { AgActionIconComponent } from '../../ag/ag-action-icon/ag-action-icon.component';
+import { AGActionIconComponent } from '../../ag/ag-action-icon/ag-action-icon.component';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component'; 
 import {
   MatDialog
 } from '@angular/material/dialog';
 import { DataModalComponent } from '../modals/data-modal/data-modal.component';
+import { SectionService } from '../../../services/section/section.service';
+import { AGColoredCircle } from '../../ag/ag-colored-circle/ag-colored-circle.component';
 
 @Component({
   selector: 'app-section',
@@ -28,7 +30,7 @@ import { DataModalComponent } from '../modals/data-modal/data-modal.component';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    AgActionIconComponent
+    AGActionIconComponent
   ],
   templateUrl: './section.component.html',
   styleUrl: './section.component.scss',
@@ -39,7 +41,7 @@ export class SectionComponent implements OnInit, OnChanges {
   actionHeaders: ColDef[] = [
     {
       field: 'Edit',
-      cellRenderer: /* eval(" */AgActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
       cellRendererParams: {
         iconName: 'edit',
       },
@@ -48,7 +50,7 @@ export class SectionComponent implements OnInit, OnChanges {
     },
     {
       field: 'Delete',
-      cellRenderer: /* eval(" */AgActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
       cellRendererParams: {
         iconName: 'delete',
       },
@@ -56,28 +58,28 @@ export class SectionComponent implements OnInit, OnChanges {
       resizable : false
     },
   ];
-  activeLink: string = '';
+  activeRoute: string = '';
   colDefs: ColDef[] = [];
   rowData: any[] | null = null;
 
-  constructor(private dataService: DataserviceService, public dialog: MatDialog) { }
+  constructor(private dataService: DataserviceService, public dialog: MatDialog, private sectionService : SectionService) { }
 
   ngOnInit(): void {
-    this.rowData = this.dataService.getDataByRoute(this.activeLink);
+    this.rowData = this.dataService.getDataByRoute(this.activeRoute);
     this.setSection();
   }
 
   data(event?: any) {
+    console.log('CONFIGURATION',this.section.configuration?.formConfiguration)
     const dialogRef = this.dialog.open(DataModalComponent, {
       data:
       {
         title: event != null ? 'Edit' : 'Add',
-        fields: this.section.formConfig,
+        fields: this.section.configuration?.formConfiguration,
         model : event != null ? event.data : null
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('closed data',result)
       //service che aggiunge a db e fa get
     });
   }
@@ -103,25 +105,25 @@ export class SectionComponent implements OnInit, OnChanges {
       this.section?.subSections != null &&
       this.section?.subSections?.length > 0
     ) {
-      this.activeLink = this.section?.subSections[0].route;
+      this.activeRoute = this.section?.subSections[0].route;
     } else {
-      if (changes['section'] != null) {
-        this.activeLink = changes['section'].currentValue['route'];
-        this.rowData = this.dataService.getDataByRoute(this.activeLink);
+      if (changes['section'] != null && this.section != null) {
+        this.activeRoute = changes['section'].currentValue['route'];
+        this.rowData = this.dataService.getDataByRoute(this.activeRoute);
       }
     }
 
     this.setSection();
   }
 
-  setActiveLink(route: string): void {
-    this.activeLink = route;
-    this.rowData = this.dataService.getDataByRoute(this.activeLink);
+  setActiveRoute(route: string): void {
+    this.activeRoute = route;
+    this.rowData = this.dataService.getDataByRoute(this.activeRoute);
     this.setSection();
   }
 
   onGridReady(_params: GridReadyEvent) {
-    this.rowData = this.dataService.getDataByRoute(this.activeLink);
+    this.rowData = this.dataService.getDataByRoute(this.activeRoute);
   }
 
   setSection(): void {
@@ -132,20 +134,19 @@ export class SectionComponent implements OnInit, OnChanges {
     ) {
       this.colDefs =
         this.section.subSections
-          .find((_) => _.route == this.activeLink)
-          ?.tableHeaderFields!.map((_) => ({
+          .find((_) => _.route == this.activeRoute)
+          ?.configuration?.tableHeaderFields?.map((_) => ({
             field: _.field!,
-            cellRenderer: _.cellRenderer,
+            cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle :  null,
           })) ?? [];
     } else {
       this.colDefs =
-        this.section?.tableHeaderFields?.map((_) => ({
+        this.section?.configuration?.tableHeaderFields?.map((_) => ({
           field: _.field!,
-          cellRenderer: _.cellRenderer,
+          cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle :  null,
         })) ?? [];
     }
 
-    this.rowData = this.dataService.getDataByRoute(this.activeLink);
     this.actionHeaders.forEach((element: ColDef) => {
       this.colDefs.push(element);
     });

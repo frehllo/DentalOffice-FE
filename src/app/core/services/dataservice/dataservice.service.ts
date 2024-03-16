@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as dentalStudiosData from './jsons/dental-studios.json';
+import * as dentalStudiosData from './jsons/studios.json';
 import * as materialsMetalData from './jsons/materials-metal.json';
 import * as materialsDentinData from './jsons/materials-dentin.json';
 import * as materialsEnamelData from './jsons/materials-enamel.json';
@@ -23,7 +23,7 @@ export class DataserviceService {
 
   getDataByRoute(route: string): any[] {
     switch (route) {
-      case '/dental-studios':
+      case '/studios':
         return dentalStudiosData.data;
       case '/materials-metal':
         return materialsMetalData.data;

@@ -7,10 +7,12 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyColorPickerComponent } from './core/components/formly/components/formly-color-picker/formly-color-picker.component';
 import { FormlySectionLineComponent } from './core/components/formly/components/formly-section-line/formly-section-line.component';
 import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideHttpClient(),
     provideAnimations(),
     importProvidersFrom([
       FormlyModule.forRoot({
