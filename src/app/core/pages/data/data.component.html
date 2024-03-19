@@ -25,8 +25,8 @@
           style="height: 50px"
           class="mb-2 text-white full-width d-inline-block justify-content-center"
           [ngClass]="{
-            'bg-secondary': activeLink != s.route,
-            'bg-primary': activeLink == s.route
+            'bg-secondary': activeRoute != s.route,
+            'bg-primary': activeRoute == s.route
           }"
           mat-fab
           extended
@@ -53,7 +53,7 @@
   </mat-drawer>
   <mat-drawer-content class="bg-color">
     <div class="full-height-no-overflow">
-      <app-section [section]="activeSection!"></app-section>
+      <app-section [active]="activeRoute"></app-section>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

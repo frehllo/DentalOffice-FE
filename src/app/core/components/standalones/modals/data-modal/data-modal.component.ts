@@ -1,3 +1,4 @@
+import { ModalResult } from './../modal-result';
 import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,10 +46,10 @@ export class DataModalComponent implements OnInit, OnChanges {
   }
 
   cancel(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close({success : false});
   }
 
   confirm(): any {
-    this.dialogRef.close(this.model);
+    this.dialogRef.close({success : true, model : this.model});
   }
 }

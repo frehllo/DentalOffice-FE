@@ -14,11 +14,12 @@ export class SectionService {
   }
 
   getByRoute(route : string) {
-    return this.http.get(API_URL + "/section/" + route);
+    return this.http.get(API_URL + "/section" + route);
   }
 
   getAllData(apiString : string) {
-    return this.http.get(API_URL + apiString);
+    console.log('apistring', apiString)
+    return this.http.get(API_URL + '/section/data' + apiString);
   }
 
   getSingleData(apiString : string, id : any) {
@@ -26,7 +27,7 @@ export class SectionService {
   }
 
   insertData(apiString : string, data : any) {
-    return this.http.post(API_URL + apiString, data);
+    return this.http.post(API_URL + '/section/data' + apiString, data);
   }
 
   updateData(apiString : string, data : any) {

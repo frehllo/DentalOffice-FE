@@ -25,8 +25,7 @@ import { SectionService } from '../../services/section/section.service';
 })
 export class DataComponent implements OnInit {
   sections: Section[] | null = null;
-  activeLink: string | null = null;
-  activeSection: Section | null = null;
+  activeRoute: string | null = null;
 
   constructor(private sectionService: SectionService) { }
 
@@ -35,15 +34,7 @@ export class DataComponent implements OnInit {
       next: res => {
         this.sections = res as Section[];
         if (this.sections != null && this.sections?.length > 0) {
-          this.activeLink = this.sections[0].route;
-          this.sectionService.getByRoute(this.activeLink).subscribe({
-            next: (active : any)=> {
-              this.activeSection = active as Section;
-            },
-            error: e => {
-              console.log('error getting sections', e);
-            }
-          });
+          this.routeToSection(this.sections[0].route);
         }
       },
       error: e => {
@@ -53,17 +44,7 @@ export class DataComponent implements OnInit {
   }
 
   routeToSection(route: string): void {
-    this.activeLink = route;
-
-    if (this.sections != null && this.sections.length > 0) {
-      this.sectionService.getByRoute(route).subscribe({
-        next: (active : any)=> {
-          this.activeSection = active as Section;
-        },
-        error: e => {
-          console.log('error getting sections', e);
-        }
-      });
-    }
+    console.log('parent',route);
+    this.activeRoute = route;
   }
 }
