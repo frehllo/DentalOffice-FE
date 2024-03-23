@@ -7,7 +7,7 @@
         @if(fields != null && fields.length > 0)
         {
             <form [formGroup]="form" (ngSubmit)="confirm()">
-                <formly-form [form]="form" [fields]="fields!" [model]="model"></formly-form>
+                <formly-form [fields]="fields!" [model]="model" [form]="form"></formly-form>
                 <div mat-dialog-actions class="mb-0 justify-content-end full-width">
                     <button mat-button (click)="cancel()">Cancel</button>
                     <button [disabled]="!form.valid" mat-raised-button color="bg-primary" (click)="confirm()">Confirm</button>

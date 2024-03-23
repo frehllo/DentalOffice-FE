@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AgGridModule } from 'ag-grid-angular';
-import { ColDef, GridReadyEvent } from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
 import { Section } from '../../../interfaces/section';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +19,7 @@ import { DataModalComponent } from '../modals/data-modal/data-modal.component';
 import { SectionService } from '../../../services/section/section.service';
 import { AGColoredCircle } from '../../ag/ag-colored-circle/ag-colored-circle.component';
 import { ModalResult } from '../modals/modal-result';
+import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-section',
@@ -67,11 +68,10 @@ export class SectionComponent implements OnChanges {
   constructor(public dialog: MatDialog, private sectionService: SectionService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['active'] != null, this.active) {
+    if (changes['active'] != null && this.active) {
       this.sectionService.getByRoute(changes['active'].currentValue).subscribe({
         next: (active: any) => {
           this.section = active as Section;
-
           if (this.section.subSections != null && this.section.subSections.length > 0) {
             this.parentSection = this.section;
             this.active = this.section.subSections[0].route;
@@ -92,12 +92,22 @@ export class SectionComponent implements OnChanges {
 
   getAllData(): void {
     if (this.active != null && this.section != null) {
-      this.sectionService.getAllData(this.section.apiString!).subscribe({
-        next: (data: any) => {
-          this.rowData = data;
+      this.sectionService.getByRoute(this.active).subscribe({
+        next: (res: any) => {
+          this.section = res;
+          if (this.section) {
+            this.sectionService.getAllData(this.section.apiString!).subscribe({
+              next: (data: any) => {
+                this.rowData = data;
+              },
+              error: e => {
+                console.log('error getting data list', e);
+              }
+            });
+          }
         },
         error: e => {
-          console.log('error getting data list', e);
+          console.log('error getting section data', e)
         }
       });
     }
@@ -120,7 +130,6 @@ export class SectionComponent implements OnChanges {
 
   setActive(route: string): void {
     this.active = route;
-
     this.getAllData();
     this.configureSection();
   }
@@ -137,31 +146,47 @@ export class SectionComponent implements OnChanges {
       });
       dialogRef.afterClosed().subscribe((result: ModalResult) => {
         if (result.success) {
-          this.sectionService.insertData(this.section!.apiString!, result.model).subscribe({
-            error: e => {
-              console.log('error getting data list', e);
-            }
+          if (!event) {
+            this.sectionService.insertData(this.section?.apiString!, result.model).subscribe({
+              next: () => {
+                this.getAllData()
+              },
+              error: e => {
+                console.log('error during insert', e)
+              }
+            });
+          } else {
+            this.sectionService.updateData(this.section?.apiString!, result.model).subscribe({
+              next: () => {
+                this.getAllData()
+              },
+              error: e => {
+                console.log('error during update', e)
+              }
+            });
           }
-          );
         }
       });
     }
   }
 
   delete(event: any) {
-    //TODO : implement delete with service
-  }
-
-  onGridReady(_params: GridReadyEvent) {
-    if (this.active) {
-      this.sectionService.getAllData(this.active).subscribe({
-        next: (data: any) => {
-          this.rowData = data;
-        },
-        error: e => {
-          console.log('error getting data list', e);
-        }
-      });
-    }
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title : 'Delete?'
+      }
+    });
+    dialogRef.afterClosed().subscribe((result : boolean) => {
+      if(result){
+        this.sectionService.deleteData(this.section?.apiString!, event.data.id).subscribe({
+          next : () => {
+            this.getAllData();
+          },
+          error : e => {
+            console.log('error during update', e)
+          }
+        });
+      }
+    });
   }
 }

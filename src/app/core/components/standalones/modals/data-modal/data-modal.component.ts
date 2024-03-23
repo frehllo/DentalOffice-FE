@@ -1,4 +1,3 @@
-import { ModalResult } from './../modal-result';
 import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +7,7 @@ import { FormlyCommonModule } from '../../../../modules/formly-common-module.mod
 
 export class DataModalPropr {
   title: string | null = null;
-  model: any | null;
+  model: any = {};
   fields: FormlyFieldConfig[] | null = null;
 }
 @Component({
@@ -18,12 +17,11 @@ export class DataModalPropr {
   templateUrl: './data-modal.component.html',
   styleUrl: './data-modal.component.scss'
 })
-export class DataModalComponent implements OnInit, OnChanges {
+export class DataModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DataModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
-
   form = new FormGroup({});
   title: string = "NO TITLE"
   model: any = {};
@@ -39,10 +37,6 @@ export class DataModalComponent implements OnInit, OnChanges {
     if(this.data.title != null) {
       this.title = this.data.title;
     }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnInIt', this.model)
   }
 
   cancel(): void {

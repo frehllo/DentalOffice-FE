@@ -18,7 +18,6 @@ export class SectionService {
   }
 
   getAllData(apiString : string) {
-    console.log('apistring', apiString)
     return this.http.get(API_URL + '/section/data' + apiString);
   }
 
@@ -31,10 +30,10 @@ export class SectionService {
   }
 
   updateData(apiString : string, data : any) {
-    return this.http.put(API_URL + apiString + '/' + data['id'], data);
+    return this.http.put(API_URL + '/section/data' + apiString + '/' + data["id"], data);
   }
 
   deleteData(apiString : string, id : any) {
-    return this.http.delete(API_URL + apiString + '/' + id);
+    return this.http.delete(API_URL + '/section/data' + apiString + '/' + id);
   }
 }

@@ -44,7 +44,6 @@ export class DataComponent implements OnInit {
   }
 
   routeToSection(route: string): void {
-    console.log('parent',route);
     this.activeRoute = route;
   }
 }
