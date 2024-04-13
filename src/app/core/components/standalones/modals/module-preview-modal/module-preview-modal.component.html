@@ -7,16 +7,18 @@
         @if(modules != null && modules.length > 0)
         {
         <mat-stepper class="full-width" [linear]="true" #stepper>
-            @for (module of modules; track $index) {
+            @for (pdf of pdfs; track $index) {
             <mat-step>
                 <div class="d-flex flex-column justify-content-center align-items-center">
-                    <ng-template matStepLabel>{{module.name}}</ng-template>
-                    <h1>{{module.name}}</h1>
-                    <div class="module-container">
+                    <ng-template matStepLabel>{{pdf.name}}</ng-template>
+                    <h1>{{pdf.name}}</h1>
+                    <!-- <div class="module-container">
                         <div #toPrint [innerHtml]="module.content | to_trusted_html">
 
                         </div>
-                    </div>
+                    </div> -->
+                    <pdf-viewer [src]="pdf.src" [render-text]="true" [original-size]="false"
+                        class="module-container"></pdf-viewer>
                 </div>
             </mat-step>
             }

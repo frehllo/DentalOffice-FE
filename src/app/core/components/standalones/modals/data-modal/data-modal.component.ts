@@ -22,14 +22,19 @@ export class DataModalComponent implements OnInit {
     public dialogRef: MatDialogRef<DataModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
+
   form = new FormGroup({});
   title: string = "NO TITLE"
   model: any = {};
   fields: FormlyFieldConfig[] = [];
 
   ngOnInit(): void {
+    console.log(this.data.fields);
     if(this.data.model != null) {
       this.model = this.data.model;
+      if(this.model && this.model.materialProperties) {
+        this.model.materialProperties = JSON.parse(this.model.materialProperties);
+      }
     }
     if(this.data.fields != null) {
       this.fields = this.data.fields;

@@ -1,3 +1,4 @@
+import { FormlyMultiSelectComponent } from './core/components/formly/components/formly-multi-select/formly-multi-select/formly-multi-select.component';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
         types: [
           { name: 'color', component: FormlyColorPickerComponent },
           { name: 'section-line', component: FormlySectionLineComponent },
+          { name: 'multi-select', component: FormlyMultiSelectComponent },
           {
             name: 'grid',
             component: FormlyAgGridComponent,

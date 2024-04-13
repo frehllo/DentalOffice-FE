@@ -26,10 +26,12 @@ import { SectionService } from '../../services/section/section.service';
 export class DataComponent implements OnInit {
   sections: Section[] | null = null;
   activeRoute: string | null = null;
+  isLoading: boolean = false;
 
   constructor(private sectionService: SectionService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.sectionService.getList().subscribe({
       next: res => {
         this.sections = res as Section[];
@@ -39,8 +41,10 @@ export class DataComponent implements OnInit {
       },
       error: e => {
         console.log('error getting sections', e);
+        this.isLoading = false;
       }
     });
+    this.isLoading = false;
   }
 
   routeToSection(route: string): void {
