@@ -9,6 +9,7 @@ import { FormlyColorPickerComponent } from './core/components/formly/components/
 import { FormlySectionLineComponent } from './core/components/formly/components/formly-section-line/formly-section-line.component';
 import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
 import { provideHttpClient } from '@angular/common/http';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
           },
         ],
       }),
+      MatNativeDateModule
     ]),
   ],
 };

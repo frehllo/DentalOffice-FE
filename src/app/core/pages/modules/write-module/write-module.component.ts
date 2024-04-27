@@ -5,7 +5,7 @@ import {
   FormlyFieldConfig,
   FormlyFormOptions
 } from '@ngx-formly/core';
-import { ModuleserviceService } from '../../../services/moduleservice/moduleservice.service';
+import { ModuleService } from '../../../services/moduleservice/module.service';
 import { DotMenuComponent } from '../../../components/standalones/dot-menu/dot-menu.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +16,6 @@ import { AGActionIconComponent } from '../../../components/ag/ag-action-icon/ag-
 import { ConfirmModalComponent } from '../../../components/standalones/modals/confirm-modal/confirm-modal.component';
 import { FormlyCommonModule } from '../../../modules/formly-common-module.module';
 import { ModulePreviewModalComponent } from '../../../components/standalones/modals/module-preview-modal/module-preview-modal.component';
-1
 
 @Component({
   selector: 'app-write-module',
@@ -33,7 +32,7 @@ import { ModulePreviewModalComponent } from '../../../components/standalones/mod
   ],
 })
 export class WriteModuleComponent implements OnInit {
-  constructor(private service: ModuleserviceService, public dialog: MatDialog) { }
+  constructor(private service: ModuleService, public dialog: MatDialog) { }
 
   data: any | null = null;
   personalDataForm = new FormGroup({});
@@ -70,13 +69,13 @@ export class WriteModuleComponent implements OnInit {
 
   ngOnInit() {
     const moduleId = history.state;
-    this.data = this.service.getById(moduleId);
+    this.data = this.service.getConfiguration();
     //get model and config by receivedData.id with service
     this.setData();
   }
 
-  write() {
-    console.log(this.model);
+  write(event : SimpleChanges) {
+    console.log(event)
   }
 
   setData() {

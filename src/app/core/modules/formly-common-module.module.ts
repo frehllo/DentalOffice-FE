@@ -5,6 +5,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   imports: [ 
     MatNativeDateModule,
@@ -12,7 +13,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormlyMatDatepickerModule,
     FormlyModule,
     FormlyMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
+],
+providers: [  
+  MatDatepickerModule,  
 ],
   exports: [ 
     MatNativeDateModule,

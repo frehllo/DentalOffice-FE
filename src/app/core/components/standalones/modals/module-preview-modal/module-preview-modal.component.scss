@@ -1,5 +1,7 @@
 .module-container {
-    width: 245px;
-    height: 435px;
     border: 1px solid black;
+}
+
+.toPrint {
+    transform: scale(0.5);
 }

@@ -5,12 +5,13 @@ import { HeaderComponent } from './core/components/standalones/header/header.com
 import { DataserviceService } from './core/services/dataservice/dataservice.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DotMenuComponent } from './core/components/standalones/dot-menu/dot-menu.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule, DotMenuComponent],
-  providers: [DataserviceService],
+  providers: [DataserviceService, {provide : moment, useValue : moment}],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,5 +1,4 @@
 {
-    "model": {},
     "form": {
         "personalDataForm": [
             {
@@ -12,7 +11,7 @@
                         }
                     },
                     {
-                        "key": "clientName",
+                        "key": "customerName",
                         "className": "col-lg-7 col-sm-12",
                         "type": "input",
                         "props": {
@@ -21,21 +20,13 @@
                         }
                     },
                     {
-                        "key": "dentalStudioId",
+                        "key": "studioId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
                             "label": "Studio dentistico",
                             "required": true,
                             "options": [
-                                {
-                                    "value": 1,
-                                    "label": "Studio 1"
-                                },
-                                {
-                                    "value": 1,
-                                    "label": "Studio 2"
-                                }
                             ]
                         }
                     },
@@ -65,18 +56,18 @@
                         }
                     }
                 ]
-            },
-            {
-                "type": "section-line",
-                "props": {
-                    "label": "Processi"
-                }
             }
         ],
         "processesForm": [
             {
                 "fieldGroupClassName": "row",
-                "fieldGroup": [
+                "fieldGroup": [ 
+                    {
+                        "type": "section-line",
+                        "props": {
+                            "label": "Processi"
+                        }
+                    },
                     {
                         "key": "semiproductId",
                         "className": "col-12",
@@ -116,7 +107,7 @@
                         }
                     },
                     {
-                        "key": "metalMaterialLotId",
+                        "key": "metalLotId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
@@ -135,7 +126,7 @@
                         }
                     },
                     {
-                        "key": "coveringMaterialId",
+                        "key": "dentinMaterialId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
@@ -173,7 +164,7 @@
                         }
                     },
                     {
-                        "key": "coveringMaterialLotId",
+                        "key": "dentinLotId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
@@ -192,7 +183,7 @@
                         }
                     },
                     {
-                        "key": "enamelMaterialLotId",
+                        "key": "enamelLotId",
                         "className": "col-lg-6 col-sm-12",
                         "type": "select",
                         "props": {
@@ -259,35 +250,12 @@
                 "headerName": "Metal"
             },
             {
-                "field": "coveringMaterial.name",
-                "headerName": "Covering"
+                "field": "dentinMaterial.name",
+                "headerName": "Dentin"
             },
             {
                 "field": "color.name",
                 "headerName": "Color"
-            }
-        ],
-        "data": [
-            {
-                "id": 1,
-                "semiproductId": 1,
-                "metalMaterialId": 1,
-                "metalMaterialLotId": 1,
-                "coveringMaterialLotId": 1,
-                "colorId": 1,
-                "color": {
-                    "name": "A1"
-                },
-                "metalMaterial": {
-                    "name": "Metallo1"
-                },
-                "coveringMaterialId": 1,
-                "coveringMaterial": {
-                    "name": "Rivestimento1"
-                },
-                "enamelMaterialLotId": 1,
-                "riskId": 1,
-                "stageIds": []
             }
         ]
     }

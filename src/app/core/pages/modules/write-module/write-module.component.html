@@ -1,7 +1,7 @@
 <div class="bg-color full-height-no-overflow">
   <div>
     <form [formGroup]="personalDataForm" (ngSubmit)="save()" class="px-5 pt-5 justify-content-center">
-      <formly-form [form]="personalDataForm" (modelChange)="write()" [fields]="personalDataFields"
+      <formly-form [form]="personalDataForm" (modelChange)="write($event)" [fields]="personalDataFields"
         [model]="model"></formly-form>
     </form>
   </div>

@@ -4,7 +4,9 @@ import { DataModalComponent } from '../data-modal/data-modal.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ToTrustedHtmlPipe } from '../../../../pipes/html-trusted.pipe';
 import { MatButtonModule } from '@angular/material/button';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+/* import { PdfViewerModule } from 'ng2-pdf-viewer'; */
+/* import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas'; */
 
 export interface DocumentConfig {
   name: string;
@@ -14,7 +16,7 @@ export interface DocumentConfig {
 @Component({
   selector: 'app-module-preview-modal',
   standalone: true,
-  imports: [MatStepperModule, MatDialogTitle, MatDialogActions, MatButtonModule, MatDialogClose, MatDialogModule, ToTrustedHtmlPipe, PdfViewerModule],
+  imports: [MatStepperModule, MatDialogTitle, MatDialogActions, MatButtonModule, MatDialogClose, MatDialogModule, ToTrustedHtmlPipe/* , PdfViewerModule */],
   templateUrl: './module-preview-modal.component.html',
   styleUrl: './module-preview-modal.component.scss'
 })
@@ -27,8 +29,7 @@ export class ModulePreviewModalComponent implements OnInit {
   modules: DocumentConfig[] | null = null;
   pdfs: any[] = [];
 
-  ngOnInit(): void {
-    console.log(this.data)
+  ngOnInit() {
     //have to come from service
     this.modules = [
       {
@@ -37,14 +38,17 @@ export class ModulePreviewModalComponent implements OnInit {
       }
     ]
 
-    this.modules.forEach(e => {
+    /* this.modules.forEach(e => {
       var pdfContent = {
         name: e.name,
         src: "../../../../pdfs/" + e.name + ".pdf"
       }
-      this.pdfs.push(pdfContent)
 
-      /* htmlToPdf.convertHTMLString(e.content, "../../../../pdfs/" + e.name + ".pdf",
+      this.pdfs.push(pdfContent) */
+
+      /* this.generatePdf(e.content, pdfContent.src) */
+
+      /* htmlPDF.convertHTMLString(e.content, "../../../../pdfs/" + e.name + ".pdf",
         function (error : any, success : any) {
           if (error) {
             console.log('Oh noes! Errorz!');
@@ -54,8 +58,21 @@ export class ModulePreviewModalComponent implements OnInit {
             console.log(success);
           }
         }
-      ); */
-    });
+      ); *//* 
+    }); */
+  }
+
+  generatePdf(content : string, path : string) {
+    /* var dom : HTMLElement | any  = document.createElement('div');
+	  dom.innerHTML = content; */
+    /* var dom : HTMLElement | any = document.getElementById('toPrint');
+    html2canvas(dom, {scale : 2}).then((canvas : any) => {
+      console.log('save')
+      const pdf = new jsPDF();
+      pdf.save(path);
+    }).catch((e : any) => {
+      console.log('errorZZZZZ', e)
+    }); */
   }
 
   cancel(): void {

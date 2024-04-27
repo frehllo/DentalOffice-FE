@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ColoredCircleComponent } from "../colored-circle/colored-circle.component";
 import { animate, style, transition, trigger } from '@angular/animations';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-module-card',
@@ -26,6 +27,9 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class ModuleCardComponent implements OnInit{
   @Input() moduleInfo : any = null;
 
+  prescriptionDate : any = '' ;
+  deliveryDate : any = '' ;
+
   constructor(private router: Router) {}
 
   info : any | null = null;
@@ -33,6 +37,8 @@ export class ModuleCardComponent implements OnInit{
 
   ngOnInit(): void {
     this.info = this.moduleInfo;
+    this.prescriptionDate = this.info.prescriptionDate ? moment.utc(this.info.prescriptionDate).local().format('DD/MM/YYYY') : '';
+    this.deliveryDate = this.info.deliveryDate ? moment.utc(this.info.deliveryDate).local().format('DD/MM/YYYY') : '';
   }
 
   showUpdateDate(show : boolean) {

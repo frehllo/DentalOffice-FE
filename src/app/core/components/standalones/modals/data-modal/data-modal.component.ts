@@ -1,9 +1,11 @@
-import { Component, Inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyCommonModule } from '../../../../modules/formly-common-module.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export class DataModalPropr {
   title: string | null = null;
@@ -13,7 +15,7 @@ export class DataModalPropr {
 @Component({
   selector: 'app-data-modal',
   standalone: true,
-  imports: [MatDialogTitle, MatDialogActions, MatDialogClose, MatButtonModule, MatDialogModule, FormlyCommonModule],
+  imports: [MatDialogTitle, MatDialogActions, MatDialogClose, MatButtonModule, MatDialogModule, FormlyCommonModule, MatIconModule, MatNativeDateModule],
   templateUrl: './data-modal.component.html',
   styleUrl: './data-modal.component.scss'
 })
@@ -29,26 +31,25 @@ export class DataModalComponent implements OnInit {
   fields: FormlyFieldConfig[] = [];
 
   ngOnInit(): void {
-    console.log(this.data.fields);
-    if(this.data.model != null) {
+    if (this.data.model != null) {
       this.model = this.data.model;
-      if(this.model && this.model.materialProperties) {
+      if (this.model && this.model.materialProperties) {
         this.model.materialProperties = JSON.parse(this.model.materialProperties);
       }
     }
-    if(this.data.fields != null) {
+    if (this.data.fields != null) {
       this.fields = this.data.fields;
     }
-    if(this.data.title != null) {
+    if (this.data.title != null) {
       this.title = this.data.title;
     }
   }
 
   cancel(): void {
-    this.dialogRef.close({success : false});
+    this.dialogRef.close({ success: false });
   }
 
   confirm(): any {
-    this.dialogRef.close({success : true, model : this.model});
+    this.dialogRef.close({ success: true, model: this.model });
   }
 }
