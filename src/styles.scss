@@ -108,3 +108,11 @@ div::-webkit-scrollbar {
   height: 40px !important;
   width: 100px !important;
 }
+
+.max-lines-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

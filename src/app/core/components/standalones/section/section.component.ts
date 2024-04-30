@@ -85,7 +85,6 @@ export class SectionComponent implements OnChanges {
           }
 
           this.getAllData();
-          this.configureSection();
         },
         error: e => {
           console.log('error getting sections', e);
@@ -106,6 +105,7 @@ export class SectionComponent implements OnChanges {
             this.sectionService.getAllData(this.section.apiString!).subscribe({
               next: (data: any) => {
                 this.rowData = data;
+                this.configureSection(this.section);
               },
               error: e => {
                 console.log('error getting data list', e);
@@ -123,10 +123,10 @@ export class SectionComponent implements OnChanges {
     }
   }
 
-  configureSection(): void {
-    if (this.section != null) {
+  configureSection(section : Section | null): void {
+    if (section != null) {
       this.colDefs =
-        this.section.configuration?.tableHeaderFields?.map((_) => ({
+        section.configuration?.tableHeaderFields?.map((_) => ({
           field: _.field,
           cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
         })) ?? [];
@@ -138,10 +138,9 @@ export class SectionComponent implements OnChanges {
     });
   }
 
-  setActive(route: string): void {
+  setActive(route: string) {
     this.active = route;
     this.getAllData();
-    this.configureSection();
   }
 
   data(event?: any) {

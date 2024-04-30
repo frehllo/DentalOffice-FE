@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as config from './jsons/fields-example.json'
 import { API_URL } from '../service-constants';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,5 +23,9 @@ export class ModuleService {
 
   insert(module : any) {
     return this.http.post(API_URL + "/module", module);
+  }
+
+  update(id : number, module : any) {
+    return this.http.put(API_URL + "/module/" + id, module);
   }
 }

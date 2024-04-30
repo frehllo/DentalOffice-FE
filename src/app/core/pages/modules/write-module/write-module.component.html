@@ -15,3 +15,4 @@
   </div>
   <app-dot-menu [printDisabled]="this.personalDataForm.invalid" [saveDisabled]="this.personalDataForm.invalid" (print)="print()" (save)="save()" (reset)="reset()"></app-dot-menu>
 </div>
+<app-loading *ngIf="isLoading"></app-loading>

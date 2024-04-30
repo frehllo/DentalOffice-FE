@@ -16,6 +16,8 @@ import { AGActionIconComponent } from '../../../components/ag/ag-action-icon/ag-
 import { ConfirmModalComponent } from '../../../components/standalones/modals/confirm-modal/confirm-modal.component';
 import { FormlyCommonModule } from '../../../modules/formly-common-module.module';
 import { ModulePreviewModalComponent } from '../../../components/standalones/modals/module-preview-modal/module-preview-modal.component';
+import { LoadingComponent } from '../../../components/standalones/loading/loading.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-write-module',
@@ -28,7 +30,8 @@ import { ModulePreviewModalComponent } from '../../../components/standalones/mod
     DotMenuComponent,
     MatButtonModule,
     MatIconModule,
-    AGActionIconComponent
+    AGActionIconComponent,
+    LoadingComponent
   ],
 })
 export class WriteModuleComponent implements OnInit {
@@ -36,15 +39,16 @@ export class WriteModuleComponent implements OnInit {
 
   data: any | null = null;
   personalDataForm = new FormGroup({});
-  processForm = new FormGroup({});
+  processesForm = new FormGroup({});
   title: string = 'NO TITLE';
-  model: any = { personalData: {}, process: {} };
+  model: any = {};
   processes: any[] = [];
   personalDataFields: FormlyFieldConfig[] = [];
   processesFields: FormlyFieldConfig[] = [];
   options: FormlyFormOptions = {};
   rowData: any[] = [];
   colDefs: ColDef[] = [];
+  isLoading: boolean = false;
 
   actionHeaders: ColDef[] = [
     {
@@ -68,35 +72,80 @@ export class WriteModuleComponent implements OnInit {
   ];
 
   ngOnInit() {
-    const moduleId = history.state;
-    this.data = this.service.getConfiguration();
-    //get model and config by receivedData.id with service
-    this.setData();
+    this.isLoading = true;
+
+    const moduleId = history.state.id;
+    this.service.getConfiguration().subscribe({
+      next: (res: any) => {
+        console.log(res)
+        this.personalDataFields = res.personalDataForm;
+        this.processesFields = res.processesForm;
+        this.colDefs = res.grid.colDefs;
+      },
+      error: (e: any) => {
+        console.log('error getting modules configuration', e);
+        this.isLoading = false;
+      }
+    });
+
+    this.service.get(moduleId).subscribe({
+      next : (res : any) =>{
+        this.model = res;
+
+        if(res.deliveryDate != null) {
+          this.model.deliveryDate = moment.utc(res.deliveryDate).local().format('YYYY-MM-DD');
+        }
+    
+        if(res.prescriptionDate != null) {
+          this.model.prescriptionDate = moment.utc(res.prescriptionDate).local().format('YYYY-MM-DD');
+        }
+
+        this.rowData = res.processes;
+      },
+      error: (e : any) => {
+        console.log('error getting module', e);
+        this.isLoading = false;
+      }
+    })
+
+    this.isLoading = false;
+    this.setAction();
   }
 
   write(event : SimpleChanges) {
     console.log(event)
   }
 
-  setData() {
-      this.model = this.data.model;
-      this.personalDataFields = this.data.form.personalDataForm;
-      this.processesFields = this.data.form.processesForm;
-      this.colDefs = this.data.grid.colDefs;
-      this.rowData = this.data.grid.data;
-
+  setAction() {
       this.actionHeaders.forEach((element: ColDef) => {
         this.colDefs.push(element);
       });
   }
 
   save() {
+    this.isLoading = true;
+    
     this.personalDataForm.markAllAsTouched();
 
     if(this.personalDataForm.valid)
     {
-      //service per salvataggio
+      const moduleId = history.state.id;
+
+      var module : any = this.model;
+      module["processes"] = this.processes;
+
+      this.service.update(moduleId, module).subscribe({
+        next: (res: any) => {
+          this.model = res;
+        },
+        error: (e: any) => {
+          console.log('error saving module', e);
+          this.isLoading = false;
+        }
+      });
     }
+
+    this.isLoading = false;
   }
 
   reset() {
@@ -125,8 +174,9 @@ export class WriteModuleComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      //service che aggiunge a db e fa get
-      console.log(result)
+      if (result == true && result.model == null  && event.data != null && event.data["id"] != null) {
+        this.processes.push(result.model);
+      }
     });
   }
 
@@ -143,9 +193,5 @@ export class WriteModuleComponent implements OnInit {
         }
       }
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', this.model);
   }
 }

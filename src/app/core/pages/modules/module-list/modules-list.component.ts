@@ -26,7 +26,6 @@ export class ModulesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    console.log(this.isLoading)
     this.service.getList().subscribe({
       next: res => {
         this.list = res as any[];
