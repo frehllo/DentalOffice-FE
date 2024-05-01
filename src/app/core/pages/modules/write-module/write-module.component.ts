@@ -18,6 +18,8 @@ import { FormlyCommonModule } from '../../../modules/formly-common-module.module
 import { ModulePreviewModalComponent } from '../../../components/standalones/modals/module-preview-modal/module-preview-modal.component';
 import { LoadingComponent } from '../../../components/standalones/loading/loading.component';
 import * as moment from 'moment';
+import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-colored-circle.component';
+import { AGType } from '../../../components/ag/AGType';
 
 @Component({
   selector: 'app-write-module',
@@ -42,13 +44,18 @@ export class WriteModuleComponent implements OnInit {
   processesForm = new FormGroup({});
   title: string = 'NO TITLE';
   model: any = {};
-  processes: any[] = [];
   personalDataFields: FormlyFieldConfig[] = [];
   processesFields: FormlyFieldConfig[] = [];
   options: FormlyFormOptions = {};
+  gridApi : any | null = null;
   rowData: any[] = [];
   colDefs: ColDef[] = [];
   isLoading: boolean = false;
+  actualRandomIndex : number = 0;
+
+  onGridReady(params : any) {
+    this.gridApi = params.api;
+  }
 
   actionHeaders: ColDef[] = [
     {
@@ -76,11 +83,18 @@ export class WriteModuleComponent implements OnInit {
 
     const moduleId = history.state.id;
     this.service.getConfiguration().subscribe({
-      next: (res: any) => {
-        console.log(res)
+      next: (res: any) => {console.log('res',res)
         this.personalDataFields = res.personalDataForm;
         this.processesFields = res.processesForm;
-        this.colDefs = res.grid.colDefs;
+        this.colDefs =
+        res.grid.map((_ : any) => ({
+          field: _.field,
+          cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
+        })) ?? [];
+
+        this.actionHeaders.forEach(element => {
+          this.colDefs.push(element)
+        });
       },
       error: (e: any) => {
         console.log('error getting modules configuration', e);
@@ -112,10 +126,6 @@ export class WriteModuleComponent implements OnInit {
     this.setAction();
   }
 
-  write(event : SimpleChanges) {
-    console.log(event)
-  }
-
   setAction() {
       this.actionHeaders.forEach((element: ColDef) => {
         this.colDefs.push(element);
@@ -132,7 +142,15 @@ export class WriteModuleComponent implements OnInit {
       const moduleId = history.state.id;
 
       var module : any = this.model;
-      module["processes"] = this.processes;
+      var processToSave : any[] = this.rowData;
+      processToSave.forEach((element : any) => {
+        element.color = null;
+        element.dentinMaterial = null;
+        element.metalMaterial = null;
+        element.moduleId = moduleId;
+      });
+
+      module["processes"] = processToSave;
 
       this.service.update(moduleId, module).subscribe({
         next: (res: any) => {
@@ -174,9 +192,19 @@ export class WriteModuleComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      if (result == true && result.model == null  && event.data != null && event.data["id"] != null) {
-        this.processes.push(result.model);
+      if (result && result.success && result.model != null && event == null) {
+        this.actualRandomIndex++;
+        result.model.actualIndex = this.actualRandomIndex;
+        this.rowData.push(result.model);
+      }else if(result && result.success && result.model != null && event != null) {
+        var toEditIndex : number = this.rowData.findIndex(e => e.actualIndex != null && e.actualIndex == event.actualIndex)
+        this.rowData[toEditIndex] = result.model;
+      }else if(result && result.success && result.model != null && event != null && event['id'] != null) {
+        var toEditIndex : number = this.rowData.findIndex(e => e.id != null && e.id == event.id)
+        this.rowData[toEditIndex] = result.model;
       }
+      
+      this.gridApi.setRowData(this.rowData);
     });
   }
 

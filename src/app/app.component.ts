@@ -24,12 +24,10 @@ export class AppComponent {
     router.events.subscribe(
       (val) =>{
         if(val instanceof NavigationEnd) {
-          console.log(val.url)
           if(val.url=="/") {
             this.showHeader = true;
           }
           if(val.url=="/home" || val.url=="/"){
-            console.log(val.url)
             this.showHeaderBack = false;
           }else{
             this.showHeaderBack = true;

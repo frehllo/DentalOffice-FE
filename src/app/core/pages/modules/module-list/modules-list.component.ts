@@ -1,3 +1,4 @@
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -49,8 +50,20 @@ export class ModulesListComponent implements OnInit {
   }
 
   data(): void {
+    var fieldsToSend : FormlyFieldConfig[] = [];
+
+    this.personalDataForm.forEach((element : FormlyFieldConfig )=> {
+        if(element.fieldGroup) {
+          element.fieldGroup.forEach(element => {
+            if(element.type != 'section-line'){
+              fieldsToSend.push(element);
+            }
+          });
+        }
+    });
+
     const dialogRef = this.dialog.open(DataModalComponent, {
-      data: { title: 'Add', fields: this.personalDataForm }
+      data: { title: 'Add', fields: fieldsToSend }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result.success) {

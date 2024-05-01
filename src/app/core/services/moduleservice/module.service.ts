@@ -28,4 +28,12 @@ export class ModuleService {
   update(id : number, module : any) {
     return this.http.put(API_URL + "/module/" + id, module);
   }
+
+  getLotsByMaterialId(id : number) {
+    return this.http.get(API_URL + "/module/lots/" + id);
+  }
+
+  getLotsByMaterialIdAndColorId(id : number, colorId : number) {
+    return this.http.get(API_URL + "/module/lots/" + id + "/color/" + colorId);
+  }
 }

@@ -6,6 +6,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-formly-autocomplete',
@@ -16,6 +17,8 @@ import { Observable } from 'rxjs';
     FormlyModule,
     ReactiveFormsModule,
     FormlyMaterialModule,
+    CommonModule,
+    MatInputModule
   ],
   template: `
     <input
@@ -41,9 +44,9 @@ export class FormlyAutocompleteComponent
   filter: Observable<any> = null!;
 
   ngOnInit() {
-    this.filter = this.formControl.valueChanges.pipe(
+    /* this.filter = this.formControl.valueChanges.pipe(
       startWith(''),
-      switchMap((term) => this.props['filter'](term))
-    );
+      switchMap((term) => this.props.options['filter'](term))
+    ); */
   }
 }

@@ -10,6 +10,7 @@ import { FormlySectionLineComponent } from './core/components/formly/components/
 import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
 import { provideHttpClient } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormlyAutocompleteComponent } from './core/components/formly/components/formly-autocomplete/formly-autocomplete.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
           { name: 'color', component: FormlyColorPickerComponent },
           { name: 'section-line', component: FormlySectionLineComponent },
           { name: 'multi-select', component: FormlyMultiSelectComponent },
+          { name: 'search-select', component: FormlyAutocompleteComponent },
           {
             name: 'grid',
             component: FormlyAgGridComponent,
