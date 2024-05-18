@@ -1,5 +1,5 @@
 import { ColDef } from 'ag-grid-community';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FormlyFieldConfig,
@@ -20,6 +20,8 @@ import { LoadingComponent } from '../../../components/standalones/loading/loadin
 import * as moment from 'moment';
 import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-colored-circle.component';
 import { AGType } from '../../../components/ag/AGType';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-write-module',
@@ -47,13 +49,12 @@ export class WriteModuleComponent implements OnInit {
   personalDataFields: FormlyFieldConfig[] = [];
   processesFields: FormlyFieldConfig[] = [];
   options: FormlyFormOptions = {};
-  gridApi : any | null = null;
+  gridApi: any | null = null;
   rowData: any[] = [];
   colDefs: ColDef[] = [];
   isLoading: boolean = false;
-  actualRandomIndex : number = 0;
 
-  onGridReady(params : any) {
+  onGridReady(params: any) {
     this.gridApi = params.api;
   }
 
@@ -65,7 +66,7 @@ export class WriteModuleComponent implements OnInit {
         iconName: 'edit',
       },
       onCellClicked: (event) => this.openProcess(event),
-      resizable : false,
+      resizable: false,
     },
     {
       field: 'Delete',
@@ -74,7 +75,7 @@ export class WriteModuleComponent implements OnInit {
         iconName: 'delete',
       },
       onCellClicked: (event) => this.deleteProcess(event),
-      resizable : false
+      resizable: false
     },
   ];
 
@@ -83,14 +84,14 @@ export class WriteModuleComponent implements OnInit {
 
     const moduleId = history.state.id;
     this.service.getConfiguration().subscribe({
-      next: (res: any) => {console.log('res',res)
+      next: (res: any) => {
         this.personalDataFields = res.personalDataForm;
         this.processesFields = res.processesForm;
         this.colDefs =
-        res.grid.map((_ : any) => ({
-          field: _.field,
-          cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
-        })) ?? [];
+          res.grid.map((_: any) => ({
+            field: _.field,
+            cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
+          })) ?? [];
 
         this.actionHeaders.forEach(element => {
           this.colDefs.push(element)
@@ -103,20 +104,20 @@ export class WriteModuleComponent implements OnInit {
     });
 
     this.service.get(moduleId).subscribe({
-      next : (res : any) =>{
+      next: (res: any) => {
         this.model = res;
 
-        if(res.deliveryDate != null) {
+        if (res.deliveryDate != null) {
           this.model.deliveryDate = moment.utc(res.deliveryDate).local().format('YYYY-MM-DD');
         }
-    
-        if(res.prescriptionDate != null) {
+
+        if (res.prescriptionDate != null) {
           this.model.prescriptionDate = moment.utc(res.prescriptionDate).local().format('YYYY-MM-DD');
         }
 
         this.rowData = res.processes;
       },
-      error: (e : any) => {
+      error: (e: any) => {
         console.log('error getting module', e);
         this.isLoading = false;
       }
@@ -127,23 +128,22 @@ export class WriteModuleComponent implements OnInit {
   }
 
   setAction() {
-      this.actionHeaders.forEach((element: ColDef) => {
-        this.colDefs.push(element);
-      });
+    this.actionHeaders.forEach((element: ColDef) => {
+      this.colDefs.push(element);
+    });
   }
 
   save() {
     this.isLoading = true;
-    
+
     this.personalDataForm.markAllAsTouched();
 
-    if(this.personalDataForm.valid)
-    {
+    if (this.personalDataForm.valid) {
       const moduleId = history.state.id;
 
-      var module : any = this.model;
-      var processToSave : any[] = this.rowData;
-      processToSave.forEach((element : any) => {
+      var module: any = this.model;
+      var processToSave: any[] = this.rowData;
+      processToSave.forEach((element: any) => {
         element.color = null;
         element.dentinMaterial = null;
         element.metalMaterial = null;
@@ -171,13 +171,68 @@ export class WriteModuleComponent implements OnInit {
   }
 
   print() {
-    if(this.personalDataForm.valid) {
+    //TODO DA CAPIPRE COME SALVARE CORRETTAMENTE I PROCESSES
+    //this.save();
+    if (this.personalDataForm.valid) {
       const dialogPreviewRef = this.dialog.open(ModulePreviewModalComponent, {
-        data: this.model
+        data: this.model['id']
       });
       dialogPreviewRef.afterClosed().subscribe((result: any) => {
-        //service che aggiunge a db e fa get
-        console.log(result)
+        if (result && result.success && result.toPrint) {
+          
+          /* var doc = new jsPDF('portrait', 'mm', 'a4', true);
+
+          var wrapper = document.createElement('div');
+          wrapper.style.width = "100%";
+          wrapper.style.height = "100%";
+          wrapper.innerHTML = result.toPrint[0].content;
+
+          html2canvas(wrapper), ({
+            onrender: (canvas: any) => {
+              console.log("canvas",canvas)
+              const contentDataURL: string = canvas.toDataURL('image/png')
+              let pdf = new jsPDF()
+              pdf.addImage(contentDataURL, "PNG", 0, 0, 100, 100, "MEDIUM", "MEDIUM", 0)
+              pdf.save('form.pdf')
+            }
+          }); */
+
+          /* html2canvas(result.toPrint[0].content).then(function (canvas: any) {
+            const contentDataURL: string = canvas.toDataURL('image/png')
+            let pdf = new jsPDF()
+            pdf.addImage(contentDataURL, "PNG", 0, 0, 100, 100, "MEDIUM", "MEDIUM", 0)
+            pdf.save('form.pdf')
+          }); */
+
+          /* console.log('toPrint', result.toPrint)
+
+          var wrapper = document.createElement('div');
+          wrapper.style.width = "100%";
+          wrapper.style.height = "100%";
+          wrapper.innerHTML = result.toPrint[0].content;
+          var div = wrapper.firstChild as HTMLElement;
+
+          doc.html(div, {
+            callback: function (doc) {
+              doc.save('a.pdf')
+            }
+          }); */
+
+          /* doc.html(result.toPrint[0].content, {
+            callback: function (doc) {
+              doc.save('tableToPdf.pdf');
+            } */
+
+          /* result.toPrint.forEach((element : any) => {
+            console.log('aoooo')
+            doc.addPage('a5', 'p');
+            doc.html(element.content, {
+              callback: function (doc) {
+                doc.save('tableToPdf.pdf');
+              }
+           })
+          }); */
+        }
       });
     }
   }
@@ -188,23 +243,46 @@ export class WriteModuleComponent implements OnInit {
       {
         title: event != null ? 'Edit' : 'Add',
         fields: this.processesFields,
-        model : event != null ? event.data : null
+        model: event != null ? event.data : null
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(event)
+      //da reworkare perchè i precessi vengono inseriti subito alla chiusura della modale
+      this.isLoading = true;
       if (result && result.success && result.model != null && event == null) {
-        this.actualRandomIndex++;
-        result.model.actualIndex = this.actualRandomIndex;
-        this.rowData.push(result.model);
-      }else if(result && result.success && result.model != null && event != null) {
-        var toEditIndex : number = this.rowData.findIndex(e => e.actualIndex != null && e.actualIndex == event.actualIndex)
-        this.rowData[toEditIndex] = result.model;
-      }else if(result && result.success && result.model != null && event != null && event['id'] != null) {
-        var toEditIndex : number = this.rowData.findIndex(e => e.id != null && e.id == event.id)
-        this.rowData[toEditIndex] = result.model;
+        const moduleId = history.state.id;
+        result.model['moduleId'] = moduleId;
+        this.service.addProcess(result.model).subscribe({
+          next: (res: any) => {
+            this.rowData.push(res);
+            this.gridApi.updateGridOptions({ rowData: this.rowData });
+          },
+          error: (e: any) => {
+            console.log('error adding process', e);
+            this.isLoading = false;
+          }
+        });
+      } else if (result && result.success && result.model != null && event != null && event['data'] != null && event['data']['id'] != null) {
+        console.log(1)
+        this.service.updateProcess(event['data']['id'], result.model).subscribe({
+          next: (res: any) => {
+            console.log('update, res')
+            var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['id'])
+
+            if (toEditIndex > -1) {
+              this.rowData[toEditIndex] = res;
+              this.gridApi.updateGridOptions({ rowData: this.rowData });
+            }
+          },
+          error: (e: any) => {
+            console.log('error saving process', e);
+            this.isLoading = false;
+          }
+        });
       }
-      
-      this.gridApi.setRowData(this.rowData);
+
+      this.isLoading = false;
     });
   }
 
@@ -213,13 +291,23 @@ export class WriteModuleComponent implements OnInit {
       data: { title: 'Delete?' }
     });
     dialogRef.afterClosed().subscribe((result: boolean) => {
+      this.isLoading = true;
       if (result == true && event.data != null && event.data["id"] != null) {
-        const indexToRemove = this.rowData!.findIndex(item => item.id == event.data["id"]);
-        if (indexToRemove > -1) {
-          const newArray = this.rowData!.slice(0, indexToRemove).concat(this.rowData!.slice(indexToRemove + 1));
+        var i: number = -1;
+
+        if (event.data['id'] != null) {
+          i = this.rowData!.findIndex(item => item.id == event.data["id"]);
+          this.service.removeProcess(event.data['id']).subscribe();
+        }
+
+        if (i > -1) {
+          const newArray = this.rowData!.slice(0, i).concat(this.rowData!.slice(i + 1));
           this.rowData = newArray;
+
+          this.gridApi.updateGridOptions({ rowData: this.rowData });
         }
       }
+      this.isLoading = false;
     });
   }
 }

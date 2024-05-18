@@ -1,21 +1,21 @@
-<div class="p-2" style="width : 1000px; height : 800px">
-    <div  mat-dialog-title>
+<div style="width : 100%; height : 90vh">
+    <div mat-dialog-title>
         <h1>Print</h1>
     </div>
 
-    <div mat-dialog-content>
-        @if(modules != null && modules.length > 0)
+    <div mat-dialog-content class="p-0">
+        @if(docs != null && docs.length > 0)
         {
         <mat-stepper class="full-width" [linear]="true" #stepper>
-            @for (module of modules; track $index) {
+            @for (doc of docs; track $index) {
             <mat-step>
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <ng-template matStepLabel>{{module.name}}</ng-template>
-                    <h1>{{module.name}}</h1>
-                    <div class="module-container">
-                        <div class="toPrint" [innerHtml]="module.content | to_trusted_html">
-
-                        </div>
+                <div class="w-100 d-flex row justify-content-center">
+                    <ng-template matStepLabel class="col-12">{{doc.name}}</ng-template>
+                    <h1 class="col-12 d-flex justify-content-center">{{doc.name}}</h1>
+                    <mat-checkbox [checked]="true" class="example-margin" (change)="checkDoc($event, doc)">Checked</mat-checkbox>
+                    <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start" style="height: 50vh;">
+                        <!-- <div class="bg-transparent" id="toPrint" [innerHtml]="doc.content | to_trusted_html"></div> -->
+                        <iframe scrolling="no" class="{{doc.name.replace(' ', '-')}} w-100 h-100" style="size: a5;" src=""></iframe>
                     </div>
                     <!-- <pdf-viewer [src]="pdf.src" [render-text]="true" [original-size]="false"
                         class="module-container"></pdf-viewer> -->
@@ -28,8 +28,14 @@
         }
     </div>
 
-    <div mat-dialog-actions class="mb-0 justify-content-end full-width">
+    <div mat-dialog-actions class="mb-0 justify-content-end h-10">
         <button mat-button (click)="cancel()">Cancel</button>
         <button mat-raised-button color="bg-primary" (click)="print()">Print</button>
     </div>
 </div>
+
+<style>
+    div#toolbar {
+        display: none !important;
+    }
+</style>

@@ -1,0 +1,433 @@
+{
+    "content": [
+        {
+            "columns": [
+                {
+                    "width": "50%",
+                    "stack": [
+                        {
+                            "text": "DENTAL MAKE-UP",
+                            "margin": [
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "text": "Laboratiorio Odontotecnico",
+                            "margin": [
+                                0,
+                                0,
+                                0,
+                                2
+                            ]
+                        },
+                        {
+                            "text": [
+                                "Via Codalunga 30/C\n",
+                                "36030 Centrale di Zugliano (Vi)\n",
+                                "P.I. : 09835720583\n",
+                                "C.F. : FDR RRT 64PO7H501X\n",
+                                "REG. IMPRESE VI 1996/160462\n",
+                                "R.E.A. 0232101 – ITCA 01006153"
+                            ],
+                            "fontSize": 14,
+                            "margin": [
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "width": "50%",
+                    "alignment": "center",
+                    "stack": [
+                        {
+                            "text": "Per: (timbro studio dentistico Mandatario)",
+                            "fontSize": 10,
+                            "margin": [
+                                0,
+                                0,
+                                0,
+                                0
+                            ]
+                        },
+                        {
+                            "canvas": [
+                                {
+                                    "type": "rect",
+                                    "x": 0,
+                                    "y": 0,
+                                    "w": 200,
+                                    "h": 150,
+                                    "r": 5,
+                                    "lineColor": "black"
+                                }
+                            ],
+                            "margin": [
+                                0,
+                                2,
+                                0,
+                                0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "width": "100%","margin" : [0,20,0,20],
+            "alignment": "center",
+            "text": {
+                "text": "PROGETTAZIONE DI DISPOSITIVO ODONTOIATRICO SU MISURA",
+                
+                "style": "header"
+            }
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Data prescrizione:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "{{ data.PrescriptionDate }}",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Riferito a:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "{{ data.CustomerName }}",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "alignment": "center",
+            "margin": [
+                0,
+                20,
+                0,
+                20
+            ],
+            "text": {
+                "text": "È nostro intendimento realizzare, dal materiale consegnato, quanto richiesto, utilizzando i seguenti materiali con specifica dei numeri di lotto dichiarati nel fascicolo tecnico a corredo:",
+                "italics": true
+            }
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Metallo:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "{{ IList<object> result = new List<object>(); foreach(var process in data.Processes){result.Add(process.MetalMaterial.Name); } return result; }}",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Rivestimento estetico:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "{{ IList<object> result = new List<object>(); foreach(var process in data.Processes){result.Add(process.DentinMaterial.Name); } return result; }}",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Colore indicativo:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "{{ IList<object> result = new List<object>(); foreach(var process in data.Processes){result.Add(process.Color.Code); } return result; }}",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                5,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "50%",
+                    "text": {
+                        "text": "Altro:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "50%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "-",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                0,
+                20,
+                0,
+                0
+            ],
+            "stack": [
+                {
+                    "text": "Dispositivi:",
+                    "bold": true
+                },
+                {
+                    "text": "{{ data.Description }}",
+                    "margin": [
+                        0,
+                        0,
+                        0,
+                        10
+                    ]
+                },
+                {
+                    "text": "Con l'\\accettazione della progettazione tecnica del dispositivo, il mandatario si impegna a monitorare periodicamente il dispositivo medico ed a comunicarne al Fabbricante eventuali dati clinici emersi nel corso del suo utilizzo ed in particolare ad incidenti o contestazioni del paziente. (cfr. allegato III, p.to 1.1.)",
+                    "fontSize": 12,
+                    "alignment": "center"
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                0,
+                20,
+                0,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "75%",
+                    "text": {
+                        "text": "Firma accettazione Mandatario:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "25%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "..................................",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "width": "100%",
+            "margin": [
+                0,
+                20,
+                0,
+                0
+            ],
+            "columns": [
+                {
+                    "width": "75%",
+                    "text": {
+                        "text": "Firma del Fabbricante Progettista:",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                },
+                {
+                    "width": "25%",
+                    "alignment": "right",
+                    "text": {
+                        "text": "..................................",
+                        "fontSize": 14,
+                        "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "styles": {
+        "header": {
+            "fontSize": 15,
+            "bold": true
+        }
+    }
+}

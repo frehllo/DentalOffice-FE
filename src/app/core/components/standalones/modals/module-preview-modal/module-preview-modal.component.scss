@@ -2,6 +2,14 @@
     border: 1px solid black;
 }
 
+.size-5 {
+    transform: scale(0.6);
+}
+
+.size-a5 {
+    size: 'a5';
+}
+
 .toPrint {
-    transform: scale(0.5);
+
 }
