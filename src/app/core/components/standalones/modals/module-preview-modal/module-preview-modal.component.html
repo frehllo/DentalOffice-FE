@@ -1,34 +1,37 @@
-<div style="width : 100%; height : 90vh">
-    <div mat-dialog-title>
+<div style="width : 100vh; height : 90vh">
+    <div mat-dialog-title class="h-5">
         <h1>Print</h1>
     </div>
 
-    <div mat-dialog-content class="p-0">
-        @if(docs != null && docs.length > 0)
+    <div mat-dialog-content class="p-3 overflow-hidden h-90">
+        @if(docs != null && !isLoading)
         {
         <mat-stepper class="full-width" [linear]="true" #stepper>
             @for (doc of docs; track $index) {
             <mat-step>
-                <div class="w-100 d-flex row justify-content-center">
+                <div class="w-100 d-flex h-100 row justify-content-center">
                     <ng-template matStepLabel class="col-12">{{doc.name}}</ng-template>
                     <h1 class="col-12 d-flex justify-content-center">{{doc.name}}</h1>
-                    <mat-checkbox [checked]="true" class="example-margin" (change)="checkDoc($event, doc)">Checked</mat-checkbox>
-                    <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start" style="height: 50vh;">
-                        <!-- <div class="bg-transparent" id="toPrint" [innerHtml]="doc.content | to_trusted_html"></div> -->
-                        <iframe scrolling="no" class="{{doc.name.replace(' ', '-')}} w-100 h-100" style="size: a5;" src=""></iframe>
+                    <mat-checkbox [checked]="true" class="example-margin"
+                        (change)="checkDoc($event, doc)">Checked</mat-checkbox>
+                    <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start"
+                        style="height: 50vh;">
+                        <iframe scrolling="no" class="{{doc.name.replace(' ', '-')}} w-100 h-100" src=""></iframe>
                     </div>
-                    <!-- <pdf-viewer [src]="pdf.src" [render-text]="true" [original-size]="false"
-                        class="module-container"></pdf-viewer> -->
                 </div>
             </mat-step>
             }
         </mat-stepper>
         }@else {
-        <h2>No Content</h2>
+        <div class="row d-flex h-100 justify-content-center text-center align-items-center">
+            <h2>No Content</h2>
+        </div>
         }
+
+        <app-loading *ngIf="isLoading"></app-loading>
     </div>
 
-    <div mat-dialog-actions class="mb-0 justify-content-end h-10">
+    <div mat-dialog-actions class="mb-0 position-absolute h-5" style="padding: 40px; bottom: 0px; right: 0px;">
         <button mat-button (click)="cancel()">Cancel</button>
         <button mat-raised-button color="bg-primary" (click)="print()">Print</button>
     </div>

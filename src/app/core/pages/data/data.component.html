@@ -1,46 +1,21 @@
 <mat-drawer-container class="overflow-hidden full-height-no-overflow">
-  <mat-drawer
-    style="width: 20%;"
-    class="bg-tertiary d-flex flex-column"
-    #drawer
-    [mode]="'side'"
-    opened
-  >
+  <mat-drawer style="width: 20%;" class="bg-tertiary d-flex flex-column" #drawer [mode]="'side'" opened
+    *ngIf="!isLoading">
     <div class="d-flex overflow-hidden flex-column">
-      <div
-        class="full-width d-flex justify-content-center my-5"
-        style="height: 40px"
-      >
-        <mat-icon
-          [style.font-size.px]="50"
-          [style.height.px]="50"
-          [style.width.px]="50"
-          class="text-white"
-          fontIcon="folder_open"
-        />
+      <div class="full-width d-flex justify-content-center my-5" style="height: 40px">
+        <mat-icon [style.font-size.px]="50" [style.height.px]="50" [style.width.px]="50" class="text-white"
+          fontIcon="folder_open" />
       </div>
       <div class="d-flex flex-column px-2">
         @for (s of sections; track s) {
-        <button
-          style="height: 50px"
-          class="mb-2 text-white full-width d-inline-block justify-content-center"
-          [ngClass]="{
+        <button style="height: 50px" class="mb-2 text-white full-width d-inline-block justify-content-center" [ngClass]="{
             'bg-secondary': activeRoute != s.route,
             'bg-primary': activeRoute == s.route
-          }"
-          mat-fab
-          extended
-          (click)="routeToSection(s.route)"
-        >
+          }" mat-fab extended (click)="routeToSection(s.route)">
           <div class="row align-items-center">
             <span class="col-3">
-              <mat-icon
-                [style.font-size.px]="20"
-                [style.height.px]="20"
-                [style.width.px]="20"
-                class="text-white"
-                fontIcon="{{ s.configuration?.iconName }}"
-              />
+              <mat-icon [style.font-size.px]="20" [style.height.px]="20" [style.width.px]="20" class="text-white"
+                fontIcon="{{ s.configuration?.iconName }}" />
             </span>
             <span class="col-9 d-md-flex d-sm-none overflow-hidden" style="text-align: left; white-space: nowrap">
               {{ s.title | uppercase }}

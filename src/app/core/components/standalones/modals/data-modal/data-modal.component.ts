@@ -53,31 +53,7 @@ export class DataModalComponent implements OnInit {
   }
 
   confirm(): any {
-    /* if (this.fields != null && this.fields.length > 0 && this.fields[0].fieldGroup != null && this.fields[0].fieldGroup.length > 0 && this.fields[0].fieldGroup[0].key == "semiProductId") {
-      if (this.form.controls['metalMaterialId'].value != null) {
-        var materialMetalNameFieldIndex: any = this.fields[0].fieldGroup!.findIndex(item => item.key == "metalMaterialId" && item.type == "select");
-        var options: any[] = this.fields[0].fieldGroup![materialMetalNameFieldIndex].props!.options! as any[];
-        var materialMetalNameFieldOptionsIndex = options.findIndex(item => item.value == this.form.controls['metalMaterialId'].value);
-        this.model.metalMaterial = {} as any;
-        this.model.metalMaterial['name'] = options[materialMetalNameFieldOptionsIndex].label;
-      }
-
-      if (this.form.controls['dentinMaterialId'].value != null) {
-        var materialDentinNameFieldIndex: any = this.fields[0].fieldGroup!.findIndex(item => item.key == "dentinMaterialId" && item.type == "select");
-        var options: any[] = this.fields[0].fieldGroup![materialDentinNameFieldIndex].props!.options! as any[];
-        var materialDentinNameFieldOptionsIndex = options.findIndex(item => item.value == this.form.controls['dentinMaterialId'].value);
-        this.model.dentinMaterial = {} as any;
-        this.model.dentinMaterial['name'] = options[materialDentinNameFieldOptionsIndex].label;
-      }
-
-      if (this.form.controls['colorId'].value != null) {
-        var colorNameFieldIndex: any = this.fields[0].fieldGroup!.findIndex(item => item.key == "colorId" && item.type == "select");
-        var options: any[] = this.fields[0].fieldGroup![colorNameFieldIndex].props!.options! as any[];
-        var colorFieldOptionsIndex = options.findIndex(item => item.value == this.form.controls['colorId'].value);
-        this.model.color = {} as any;
-        this.model.color['code'] = options[colorFieldOptionsIndex].label;
-      }
-    } */
+    console.log('so')
     this.dialogRef.close({ success: true, model: this.model });
   }
 

@@ -20,8 +20,6 @@ import { LoadingComponent } from '../../../components/standalones/loading/loadin
 import * as moment from 'moment';
 import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-colored-circle.component';
 import { AGType } from '../../../components/ag/AGType';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-write-module',
@@ -41,7 +39,6 @@ import html2canvas from 'html2canvas';
 export class WriteModuleComponent implements OnInit {
   constructor(private service: ModuleService, public dialog: MatDialog) { }
 
-  data: any | null = null;
   personalDataForm = new FormGroup({});
   processesForm = new FormGroup({});
   title: string = 'NO TITLE';
@@ -82,49 +79,52 @@ export class WriteModuleComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
 
-    const moduleId = history.state.id;
-    this.service.getConfiguration().subscribe({
-      next: (res: any) => {
-        this.personalDataFields = res.personalDataForm;
-        this.processesFields = res.processesForm;
-        this.colDefs =
-          res.grid.map((_: any) => ({
-            field: _.field,
-            cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
-          })) ?? [];
+    setTimeout(() => {
+      const moduleId = history.state.id;
+      this.service.getConfiguration().subscribe({
+        next: (res: any) => {
+          this.personalDataFields = res.personalDataForm;
+          this.processesFields = res.processesForm;
+          this.colDefs =
+            res.grid.map((_: any) => ({
+              field: _.field,
+              cellRenderer: _.cellRenderer == AGType[0] ? AGColoredCircle : null,
+            })) ?? [];
 
-        this.actionHeaders.forEach(element => {
-          this.colDefs.push(element)
-        });
-      },
-      error: (e: any) => {
-        console.log('error getting modules configuration', e);
-        this.isLoading = false;
-      }
-    });
-
-    this.service.get(moduleId).subscribe({
-      next: (res: any) => {
-        this.model = res;
-
-        if (res.deliveryDate != null) {
-          this.model.deliveryDate = moment.utc(res.deliveryDate).local().format('YYYY-MM-DD');
+          this.actionHeaders.forEach(element => {
+            this.colDefs.push(element)
+          });
+        },
+        error: (e: any) => {
+          console.log('error getting modules configuration', e);
+          this.isLoading = false;
         }
+      });
 
-        if (res.prescriptionDate != null) {
-          this.model.prescriptionDate = moment.utc(res.prescriptionDate).local().format('YYYY-MM-DD');
+      this.service.get(moduleId).subscribe({
+        next: (res: any) => {
+          this.model = res;
+
+          if (res.deliveryDate != null) {
+            this.model.deliveryDate = moment.utc(res.deliveryDate).local().format('YYYY-MM-DD');
+          }
+
+          if (res.prescriptionDate != null) {
+            this.model.prescriptionDate = moment.utc(res.prescriptionDate).local().format('YYYY-MM-DD');
+          }
+
+          this.rowData = res.processes;
+        },
+        error: (e: any) => {
+          console.log('error getting module', e);
+          this.isLoading = false;
         }
+      })
 
-        this.rowData = res.processes;
-      },
-      error: (e: any) => {
-        console.log('error getting module', e);
-        this.isLoading = false;
-      }
-    })
+      this.setAction();
+    }, 500)
 
     this.isLoading = false;
-    this.setAction();
   }
 
   setAction() {
@@ -167,7 +167,10 @@ export class WriteModuleComponent implements OnInit {
   }
 
   reset() {
-    this.personalDataForm.reset();
+    this.model = null;
+    if (this.model != null) {
+      this.personalDataForm.reset();
+    }
   }
 
   print() {
@@ -179,10 +182,10 @@ export class WriteModuleComponent implements OnInit {
       });
       dialogPreviewRef.afterClosed().subscribe((result: any) => {
         if (result && result.success && result.toPrint) {
-          
-          /* var doc = new jsPDF('portrait', 'mm', 'a4', true);
 
-          var wrapper = document.createElement('div');
+
+
+          /* var wrapper = document.createElement('div');
           wrapper.style.width = "100%";
           wrapper.style.height = "100%";
           wrapper.innerHTML = result.toPrint[0].content;
@@ -247,10 +250,8 @@ export class WriteModuleComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(event)
-      //da reworkare perchè i precessi vengono inseriti subito alla chiusura della modale
       this.isLoading = true;
-      if (result && result.success && result.model != null && event == null) {
+      if (result && result.success == true && result.model != null && event == null) {
         const moduleId = history.state.id;
         result.model['moduleId'] = moduleId;
         this.service.addProcess(result.model).subscribe({
@@ -263,11 +264,9 @@ export class WriteModuleComponent implements OnInit {
             this.isLoading = false;
           }
         });
-      } else if (result && result.success && result.model != null && event != null && event['data'] != null && event['data']['id'] != null) {
-        console.log(1)
+      } else if (result && result.success == true && result.model != null && event != null && event['data'] != null && event['data']['id'] != null) {
         this.service.updateProcess(event['data']['id'], result.model).subscribe({
           next: (res: any) => {
-            console.log('update, res')
             var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['id'])
 
             if (toEditIndex > -1) {

@@ -27,31 +27,31 @@ export class ModulesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.service.getList().subscribe({
-      next: res => {
-        this.list = res as any[];
-      },
-      error: e => {
-        console.log('error getting modules', e);
-        this.isLoading = false;
-      }
-    });
-    this.isLoading = true;
-    this.service.getConfiguration().subscribe({
-      next: (res: any) => {
-        this.personalDataForm = res.personalDataForm;
-      },
-      error: (e: any) => {
-        console.log('error getting modules configuration', e);
-        this.isLoading = false;
-      }
-    });
+
+    setTimeout(() => {
+      this.service.getList().subscribe({
+        next: res => {
+          this.list = res as any[];
+        },
+        error: e => {
+          console.log('error getting modules', e);
+        }
+      });
+      this.service.getConfiguration().subscribe({
+        next: (res: any) => {
+          this.personalDataForm = res.personalDataForm;
+        },
+        error: (e: any) => {
+          console.log('error getting modules configuration', e);
+        }
+      });
+    }, 500)
+
     this.isLoading = false;
   }
 
   data(): void {
     var fieldsToSend : FormlyFieldConfig[] = [];
-
     this.personalDataForm.forEach((element : FormlyFieldConfig )=> {
         if(element.fieldGroup) {
           element.fieldGroup.forEach(element => {

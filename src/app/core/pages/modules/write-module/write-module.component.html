@@ -1,4 +1,4 @@
-<div class="bg-color full-height-no-overflow">
+<div class="bg-color full-height-no-overflow" *ngIf="!isLoading">
   <div>
     <form [formGroup]="personalDataForm" (ngSubmit)="save()" class="px-5 pt-5 justify-content-center">
       <formly-form [form]="personalDataForm" [fields]="personalDataFields"

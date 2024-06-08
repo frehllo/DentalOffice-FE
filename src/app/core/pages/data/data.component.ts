@@ -32,18 +32,20 @@ export class DataComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.sectionService.getList().subscribe({
-      next: res => {
-        this.sections = res as Section[];
-        if (this.sections != null && this.sections?.length > 0) {
-          this.routeToSection(this.sections[0].route);
+    setTimeout(() => {
+      this.sectionService.getList().subscribe({
+        next: res => {
+          this.sections = res as Section[];
+          if (this.sections != null && this.sections?.length > 0) {
+            this.routeToSection(this.sections[0].route);
+          }
+        },
+        error: e => {
+          console.log('error getting sections', e);
+          this.isLoading = false;
         }
-      },
-      error: e => {
-        console.log('error getting sections', e);
-        this.isLoading = false;
-      }
-    });
+      });
+    }, 500)
     this.isLoading = false;
   }
 

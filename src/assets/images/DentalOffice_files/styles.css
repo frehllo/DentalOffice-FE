@@ -7357,6 +7357,9 @@ fieldset:disabled .btn {
 .min-vw-100 {
   min-width: 100vw !important;
 }
+.h-5 {
+  height: 5% !important;
+}
 .h-10 {
   height: 10% !important;
 }
@@ -7368,6 +7371,9 @@ fieldset:disabled .btn {
 }
 .h-75 {
   height: 75% !important;
+}
+.h-90 {
+  height: 90% !important;
 }
 .h-100 {
   height: 100% !important;
