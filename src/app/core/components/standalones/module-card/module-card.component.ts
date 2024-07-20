@@ -5,13 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { ColoredCircleComponent } from "../colored-circle/colored-circle.component";
 import { animate, style, transition, trigger } from '@angular/animations';
 import * as moment from 'moment';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-module-card',
     standalone: true,
     templateUrl: './module-card.component.html',
     styleUrl: './module-card.component.scss',
-    imports: [CommonModule, MatButtonModule, ColoredCircleComponent],
+    imports: [CommonModule, MatButtonModule, ColoredCircleComponent, MatIconModule],
     animations: [
       trigger('slideInOut', [
         transition(':enter', [
