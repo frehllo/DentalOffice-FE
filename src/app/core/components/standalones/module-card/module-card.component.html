@@ -28,20 +28,16 @@
 <div *ngIf="updateDateVisible" [@slideInOut] class="p-1 bg-gray update-date position-absolute">
     <span class="z-1 mx-2 text-uppercase text-black text-align-left position-relative">Ultimo aggiornamento : {{info.updateDate}}</span>
 </div> -->
-<div (click)="enterModule(info.id)" class="cursor-pointer w-100">
+<div (click)="enterModule(info.id)" class="cursor-pointer w-100 pb-4">
     <div class="w-100 h-100 bg-secondary p-3">
         <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-row align-items-center">
                 <mat-icon [style.font-size.px]="70" [style.height.px]="70" [style.width.px]="70" class="text-white"
                     fontIcon="account_box"></mat-icon>
                 <div>
-                    <p class="fs-5 text-light mb-0 crop">{{info.customerName.length > 20 ?
+                    <p class="fs-3 text-light mb-0 crop">{{info.customerName.length > 20 ?
                         info.customerName.substring(0, 20) + '...' : info.customerName}}
                     </p>
-                    <div class="d-flex flex-row align-items-center">
-                        <app-colored-circle class="" [shadow]="true" [value]="info.studio.color" /><span
-                            class="text-white ps-1">{{info.studio.name}}</span>
-                    </div>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-center text-end">
@@ -70,8 +66,8 @@
             </div>
         </div>
         <hr>
-        <div class="w-75">
-            <p>
+        <div class="w-100">
+            <p class="max-lines-1">
                 {{info.description}}
             </p>
         </div>

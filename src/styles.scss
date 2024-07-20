@@ -124,3 +124,11 @@ div::-webkit-scrollbar {
   text-overflow:ellipsis; 
   width:100%; 
 }
+
+.max-lines-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

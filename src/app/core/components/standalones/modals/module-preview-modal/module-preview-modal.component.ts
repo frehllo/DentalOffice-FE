@@ -40,12 +40,13 @@ export class ModulePreviewModalComponent implements OnInit {
   isLoading: boolean = false
 
   ngOnInit() {
+    console.log("si passa in oninit")
     this.isLoading = true;
     setTimeout(() => {
       this.service.getDocumentsPrintPreviews(this.data).subscribe({
         next: (res: any[]) => {
           this.docs = res;
-          this.checkedDocs = res;
+          this.checkedDocs = [...res];
 
           res.forEach(element => {
             var doc = pdfMake.createPdf(JSON.parse(element.content));
@@ -64,12 +65,14 @@ export class ModulePreviewModalComponent implements OnInit {
 
   checkDoc(change: MatCheckboxChange, doc: any) {
     if (change.checked) {
-      this.checkedDocs.push(doc)
+      if (!this.checkedDocs.find(d => d.id === doc.id)) {
+        this.checkedDocs.push(doc);
+      }
     } else {
-      console.log(this.docs)
-      var toRemove: number = this.checkedDocs.findIndex(_ => _.id == doc.id);
-      this.checkedDocs = this.checkedDocs.splice(toRemove, 1);
-      console.log(this.docs)
+      const index = this.checkedDocs.findIndex(d => d.id === doc.id);
+      if (index !== -1) {
+        this.checkedDocs.splice(index, 1);
+      }
     }
   }
 

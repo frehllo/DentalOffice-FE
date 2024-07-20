@@ -20,6 +20,8 @@ import { LoadingComponent } from '../../../components/standalones/loading/loadin
 import * as moment from 'moment';
 import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-colored-circle.component';
 import { AGType } from '../../../components/ag/AGType';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
   selector: 'app-write-module',
@@ -37,7 +39,9 @@ import { AGType } from '../../../components/ag/AGType';
   ],
 })
 export class WriteModuleComponent implements OnInit {
-  constructor(private service: ModuleService, public dialog: MatDialog) { }
+  constructor(private service: ModuleService, public dialog: MatDialog) {
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  }
 
   personalDataForm = new FormGroup({});
   processesForm = new FormGroup({});
@@ -183,7 +187,13 @@ export class WriteModuleComponent implements OnInit {
       dialogPreviewRef.afterClosed().subscribe((result: any) => {
         if (result && result.success && result.toPrint) {
 
+          console.log("data", result.toPrint)
 
+          var doc = pdfMake.createPdf();
+
+          result.ToPrint.forEach(element => {
+            
+          });
 
           /* var wrapper = document.createElement('div');
           wrapper.style.width = "100%";
