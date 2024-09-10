@@ -178,73 +178,13 @@ export class WriteModuleComponent implements OnInit {
   }
 
   print() {
-    //TODO DA CAPIPRE COME SALVARE CORRETTAMENTE I PROCESSES
-    //this.save();
     if (this.personalDataForm.valid) {
       const dialogPreviewRef = this.dialog.open(ModulePreviewModalComponent, {
         data: this.model['id']
       });
       dialogPreviewRef.afterClosed().subscribe((result: any) => {
         if (result && result.success && result.toPrint) {
-
-          console.log("data", result.toPrint)
-
-          var doc = pdfMake.createPdf();
-
-          result.ToPrint.forEach(element => {
-            
-          });
-
-          /* var wrapper = document.createElement('div');
-          wrapper.style.width = "100%";
-          wrapper.style.height = "100%";
-          wrapper.innerHTML = result.toPrint[0].content;
-
-          html2canvas(wrapper), ({
-            onrender: (canvas: any) => {
-              console.log("canvas",canvas)
-              const contentDataURL: string = canvas.toDataURL('image/png')
-              let pdf = new jsPDF()
-              pdf.addImage(contentDataURL, "PNG", 0, 0, 100, 100, "MEDIUM", "MEDIUM", 0)
-              pdf.save('form.pdf')
-            }
-          }); */
-
-          /* html2canvas(result.toPrint[0].content).then(function (canvas: any) {
-            const contentDataURL: string = canvas.toDataURL('image/png')
-            let pdf = new jsPDF()
-            pdf.addImage(contentDataURL, "PNG", 0, 0, 100, 100, "MEDIUM", "MEDIUM", 0)
-            pdf.save('form.pdf')
-          }); */
-
-          /* console.log('toPrint', result.toPrint)
-
-          var wrapper = document.createElement('div');
-          wrapper.style.width = "100%";
-          wrapper.style.height = "100%";
-          wrapper.innerHTML = result.toPrint[0].content;
-          var div = wrapper.firstChild as HTMLElement;
-
-          doc.html(div, {
-            callback: function (doc) {
-              doc.save('a.pdf')
-            }
-          }); */
-
-          /* doc.html(result.toPrint[0].content, {
-            callback: function (doc) {
-              doc.save('tableToPdf.pdf');
-            } */
-
-          /* result.toPrint.forEach((element : any) => {
-            console.log('aoooo')
-            doc.addPage('a5', 'p');
-            doc.html(element.content, {
-              callback: function (doc) {
-                doc.save('tableToPdf.pdf');
-              }
-           })
-          }); */
+          pdfMake.createPdf(JSON.parse(result.toPrint[0].content)).print();
         }
       });
     }
@@ -319,4 +259,5 @@ export class WriteModuleComponent implements OnInit {
       this.isLoading = false;
     });
   }
+  
 }

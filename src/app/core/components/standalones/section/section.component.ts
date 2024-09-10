@@ -21,6 +21,7 @@ import { AGColoredCircle } from '../../ag/ag-colored-circle/ag-colored-circle.co
 import { ModalResult } from '../modals/modal-result';
 import { ConfirmModalComponent } from '../modals/confirm-modal/confirm-modal.component';
 import { LoadingComponent } from "../loading/loading.component";
+import { DesignModuleModalComponent } from '../modals/design-module-modal/design-module-modal.component';
 
 @Component({
     selector: 'app-section',
@@ -154,7 +155,7 @@ export class SectionComponent implements OnChanges {
         }
       });
       dialogRef.afterClosed().subscribe((result: ModalResult) => {
-        if (result.success) {
+        if (result && result.success) {
           if (!event) {
             this.isLoading = true;
             this.sectionService.insertData(this.section?.apiString!, result.model).subscribe({
