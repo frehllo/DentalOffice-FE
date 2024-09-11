@@ -40,7 +40,6 @@ export class ModulePreviewModalComponent implements OnInit {
   isLoading: boolean = false
 
   ngOnInit() {
-    console.log("si passa in oninit")
     this.isLoading = true;
     setTimeout(() => {
       this.service.getDocumentsPrintPreviews(this.data).subscribe({
@@ -53,14 +52,15 @@ export class ModulePreviewModalComponent implements OnInit {
             var f: any | null = document.getElementsByClassName(element.name.replace(/\s/g, "-"));
             var callback = function (url: string) { f[0].setAttribute('src', url + '#toolbar=0'); }
             doc.getDataUrl(callback);
+            this.isLoading = false;
           });
         },
         error: (e: any) => {
           console.log('error getting docs', e);
+          this.isLoading = false;
         }
       });
     }, 1000);
-    this.isLoading = false;
   }
 
   checkDoc(change: MatCheckboxChange, doc: any) {

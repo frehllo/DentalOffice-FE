@@ -53,7 +53,6 @@ export class DataModalComponent implements OnInit {
   }
 
   confirm(): any {
-    console.log('so')
     this.dialogRef.close({ success: true, model: this.model });
   }
 
@@ -69,7 +68,6 @@ export class DataModalComponent implements OnInit {
                 this.fields[0].fieldGroup![index].props!.options = res.key;
                 this.form.controls['metalLotId'].value = res.key[0].value;
                 this.model['metalLotId'] = res.key[0].value;
-
               }
             } else {
               this.fields[0].fieldGroup![index].props!.options = [];

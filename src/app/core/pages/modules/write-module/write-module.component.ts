@@ -183,9 +183,28 @@ export class WriteModuleComponent implements OnInit {
         data: this.model['id']
       });
       dialogPreviewRef.afterClosed().subscribe((result: any) => {
-        if (result && result.success && result.toPrint) {
-          pdfMake.createPdf(JSON.parse(result.toPrint[0].content)).print();
-        }
+        let documentDefinition = {
+          content: [],
+          styles: {
+            header: {
+              fontSize: 15,
+              bold: true
+            }
+          }
+        };
+
+        result.toPrint.forEach((item: { content: string; }, index: number) => {
+
+          let parsedContent = JSON.parse(item.content);
+
+          if (index > 0) {
+            documentDefinition.content.push({ text: '', pageBreak: 'before' } as never);
+          }
+
+          documentDefinition.content.push(parsedContent.content as never);
+        });
+
+        pdfMake.createPdf(documentDefinition).print();
       });
     }
   }
@@ -259,5 +278,5 @@ export class WriteModuleComponent implements OnInit {
       this.isLoading = false;
     });
   }
-  
+
 }

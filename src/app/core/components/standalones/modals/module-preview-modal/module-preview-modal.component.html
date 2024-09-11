@@ -22,7 +22,8 @@
             </mat-step>
             }
         </mat-stepper>
-        }@else {
+        }
+        @if(docs == null && !isLoading) {
         <div class="row d-flex h-100 justify-content-center text-center align-items-center">
             <h2>No Content</h2>
         </div>
