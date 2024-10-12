@@ -62,7 +62,7 @@ export class WriteModuleComponent implements OnInit {
   actionHeaders: ColDef[] = [
     {
       field: 'Edit',
-      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: AGActionIconComponent,
       cellRendererParams: {
         iconName: 'edit',
       },
@@ -71,7 +71,7 @@ export class WriteModuleComponent implements OnInit {
     },
     {
       field: 'Delete',
-      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: AGActionIconComponent,
       cellRendererParams: {
         iconName: 'delete',
       },
@@ -159,6 +159,9 @@ export class WriteModuleComponent implements OnInit {
       this.service.update(moduleId, module).subscribe({
         next: (res: any) => {
           this.model = res;
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 500);
         },
         error: (e: any) => {
           console.log('error saving module', e);
@@ -166,8 +169,6 @@ export class WriteModuleComponent implements OnInit {
         }
       });
     }
-
-    this.isLoading = false;
   }
 
   reset() {
@@ -193,7 +194,21 @@ export class WriteModuleComponent implements OnInit {
           }
         };
 
-        result.toPrint.forEach((item: { content: string; }, index: number) => {
+        let printable : any = result as any[];
+
+        printable.toPrint.forEach((item: { content: string, copyCount: number }) => {
+
+          let copyCount = item.copyCount ?? 1;
+
+          if(item.copyCount > 1) {
+            copyCount = copyCount - 1;
+            for(let i = 0; i < copyCount; i++){
+              printable.toPrint.push(item)
+            }
+          }
+        });
+
+        printable.toPrint.forEach((item: { content: string; }, index: number) => {
 
           let parsedContent = JSON.parse(item.content);
 

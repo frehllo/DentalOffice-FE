@@ -48,7 +48,7 @@ export class SectionComponent implements OnChanges {
   actionHeaders: ColDef[] = [
     {
       field: 'Edit',
-      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: AGActionIconComponent,
       cellRendererParams: {
         iconName: 'edit',
       },
@@ -57,7 +57,7 @@ export class SectionComponent implements OnChanges {
     },
     {
       field: 'Delete',
-      cellRenderer: /* eval(" */AGActionIconComponent/* ") */, //CAUTION - Da tenere a mente questo codice!!!!!!!!
+      cellRenderer: AGActionIconComponent,
       cellRendererParams: {
         iconName: 'delete',
       },
