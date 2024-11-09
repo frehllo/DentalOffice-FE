@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Section } from '../../interfaces/section';
 import { SectionComponent } from '../../components/standalones/section/section.component';
 import { LoadingComponent } from '../../components/standalones/loading/loading.component';
-import { AGColoredCircle } from '../../components/ag/ag-colored-circle/ag-colored-circle.component';
 import { SectionService } from '../../services/section/section.service';
 
 @Component({
