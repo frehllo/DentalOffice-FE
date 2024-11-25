@@ -31,6 +31,10 @@ export class ModuleService {
     return this.http.put(API_URL + "/module/" + id, module);
   }
 
+  delete(id : number) {
+    return this.http.delete(API_URL + "/module/" + id);
+  }
+
   getLotsByMaterialId(id : number) {
     return this.http.get(API_URL + "/module/lots/" + id);
   }

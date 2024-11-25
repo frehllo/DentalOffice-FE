@@ -24,23 +24,23 @@ import { LoadingComponent } from "../loading/loading.component";
 import { DesignModuleModalComponent } from '../modals/design-module-modal/design-module-modal.component';
 
 @Component({
-    selector: 'app-section',
-    standalone: true,
-    templateUrl: './section.component.html',
-    styleUrl: './section.component.scss',
-    imports: [
-        AgGridModule,
-        CommonModule,
-        MatButtonModule,
-        MatIconModule,
-        AGActionIconComponent,
-        LoadingComponent
-    ]
+  selector: 'app-section',
+  standalone: true,
+  templateUrl: './section.component.html',
+  styleUrl: './section.component.scss',
+  imports: [
+    AgGridModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    AGActionIconComponent,
+    LoadingComponent
+  ]
 })
 export class SectionComponent implements OnChanges {
   /* @Input() section: Section  = { title: 'NOT FOUND', route: '/not-found' }; */
   @Input() active: string | null = null;
-  isLoading : boolean = false;
+  isLoading: boolean = false;
 
   section: Section | null = null;
   parentSection: Section | null = null;
@@ -86,13 +86,14 @@ export class SectionComponent implements OnChanges {
           }
 
           this.getAllData();
+
+          this.isLoading = false;;
         },
         error: e => {
           console.log('error getting sections', e);
           this.isLoading = false;
         }
       })
-      this.isLoading = false;;
     }
   }
 
@@ -124,7 +125,7 @@ export class SectionComponent implements OnChanges {
     }
   }
 
-  configureSection(section : Section | null): void {
+  configureSection(section: Section | null): void {
     if (section != null) {
       this.colDefs =
         section.configuration?.tableHeaderFields?.map((_) => ({
@@ -187,17 +188,17 @@ export class SectionComponent implements OnChanges {
   delete(event: any) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       data: {
-        title : 'Delete?'
+        title: 'Delete?'
       }
     });
-    dialogRef.afterClosed().subscribe((result : boolean) => {
-      if(result){
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
         this.isLoading = true;
         this.sectionService.deleteData(this.section?.apiString!, event.data.id).subscribe({
-          next : () => {
+          next: () => {
             this.getAllData();
           },
-          error : e => {
+          error: e => {
             this.isLoading = false;
             console.log('error during update', e)
           }

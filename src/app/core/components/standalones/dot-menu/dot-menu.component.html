@@ -7,15 +7,21 @@
         }
     </div>
     <div class="col-12 d-flex justify-content-end">
-        <button mat-fab [disabled]="printDisabled" (click)="printMethod()" [ngClass]="{'bg-secondary' : !printDisabled}" class="text-white m-1">
+        <button mat-fab [disabled]="printDisabled" (click)="printMethod()" [ngClass]="{'bg-secondary' : !printDisabled}"
+            class="text-white m-1">
             <mat-icon>print</mat-icon>
         </button>
     </div>
     <div class="col">
-        <button mat-fab [disabled]="resetDisabled" (click)="resetMethod()" [ngClass]="{'bg-secondary' : !resetDisabled}" class="text-white m-1">
+        <button mat-fab (click)="deleteMethod()" class="text-white m-1 bg-secondary">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-fab [disabled]="resetDisabled" (click)="resetMethod()" [ngClass]="{'bg-secondary' : !resetDisabled}"
+            class="text-white m-1">
             <mat-icon>clear</mat-icon>
         </button>
-        <button mat-fab [disabled]="saveDisabled" (click)="saveMethod()" [ngClass]="{'bg-secondary' : !saveDisabled}" class="text-white m-1">
+        <button mat-fab [disabled]="saveDisabled" (click)="saveMethod()" [ngClass]="{'bg-secondary' : !saveDisabled}"
+            class="text-white m-1">
             <mat-icon>check</mat-icon>
         </button>
     </div>

@@ -9,14 +9,26 @@
         <mat-stepper class="full-width" [linear]="false" #stepper>
             @for (doc of docs; track $index) {
             <mat-step>
-                <div class="w-100 d-flex h-100 row justify-content-center">
-                    <ng-template matStepLabel class="col-12">{{doc.name}}</ng-template>
+                <div class="row">
                     <h1 class="col-12 d-flex justify-content-center">{{doc.name}}</h1>
-                    <mat-checkbox [checked]="true" class="example-margin"
-                        (change)="checkDoc($event, doc)">Checked</mat-checkbox>
-                    <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start"
-                        style="height: 50vh;">
-                        <iframe scrolling="no" class="{{doc.name.replace(' ', '-')}} w-100 h-100" src=""></iframe>
+                    <ng-template matStepLabel class="col-12">{{doc.name}}</ng-template>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 col order-sm-1">
+                        <mat-checkbox [checked]="true" class="example-margin"
+                            (change)="checkDoc($event, doc)">Checked</mat-checkbox>
+                        <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start"
+                            style="height: 50vh;">
+                            <iframe scrolling="no" class="{{doc.name.replace(' ', '-')}} w-100 h-100" src=""></iframe>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 order-sm-0">
+                        <h2>
+                            Impostazioni
+                        </h2>
+                        <!-- CAMPO input CHE CAMBI PER OGNI doc IL doc['copyCount'] -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Copia</mat-label>
+                            <input matInput type="number" min="1" (ngModelChange)="changeDocCount($event, doc['id'])" [(ngModel)]="doc.copyCount" />
+                        </mat-form-field>
                     </div>
                 </div>
             </mat-step>
@@ -29,13 +41,15 @@
         </div>
         }
 
-        <app-loading *ngIf="isLoading"></app-loading>
     </div>
 
     <div mat-dialog-actions class="mb-0 position-absolute h-5" style="padding: 40px; bottom: 0px; right: 0px;">
         <button mat-button (click)="cancel()">Cancel</button>
         <button mat-raised-button color="bg-primary" (click)="print()">Print</button>
     </div>
+
+
+    <app-loading *ngIf="isLoading"></app-loading>
 </div>
 
 <style>
@@ -43,7 +57,7 @@
         display: none !important;
     }
 
-    .mat-step-icon .mat-step-icon-state-edit{
+    .mat-step-icon .mat-step-icon-state-edit {
         display: none !important;
     }
 </style>

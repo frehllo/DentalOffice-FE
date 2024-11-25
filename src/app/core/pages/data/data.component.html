@@ -25,11 +25,12 @@
         }
       </div>
     </div>
+    <app-loading *ngIf="isLoading"></app-loading>
   </mat-drawer>
   <mat-drawer-content class="bg-color">
     <div class="full-height-no-overflow">
       <app-section [active]="activeRoute"></app-section>
     </div>
+    <app-loading *ngIf="isLoading"></app-loading>
   </mat-drawer-content>
 </mat-drawer-container>
-<app-loading *ngIf="isLoading"></app-loading>

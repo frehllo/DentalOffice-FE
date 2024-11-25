@@ -1,18 +1,21 @@
-<div class="bg-color full-height-no-overflow" *ngIf="!isLoading">
+<app-loading *ngIf="isLoading"></app-loading>
+<div class="bg-color full-height-no-overflow">
   <div>
     <form [formGroup]="personalDataForm" (ngSubmit)="save()" class="px-5 pt-5 justify-content-center">
-      <formly-form [form]="personalDataForm" [fields]="personalDataFields"
-        [model]="model"></formly-form>
+      <formly-form [form]="personalDataForm" [fields]="personalDataFields" [model]="model"></formly-form>
     </form>
   </div>
 
-  <div style="height: 350px;" class="bg-color p-5 full-width d-flex justify-content-between">
-    <ag-grid-angular class="ag-theme-alpine col-10 h-100" [rowData]="rowData" [columnDefs]="colDefs" (gridReady)="onGridReady($event)">
+  <div *ngIf="!isLoading" style="height: 350px;" class="bg-color p-5 full-width d-flex justify-content-between">
+    <ag-grid-angular class="ag-theme-alpine col-10 h-100" [rowData]="rowData" [columnDefs]="colDefs"
+      (gridReady)="onGridReady($event)">
     </ag-grid-angular>
     <div class="col-2 px-2">
-      <button [disabled]="false" mat-raised-button class="bg-secondary full-width text-white" (click)="openProcess()">Add</button>
+      <button [disabled]="false" mat-raised-button class="bg-secondary full-width text-white"
+        (click)="openProcess()">Add</button>
     </div>
   </div>
-  <app-dot-menu [printDisabled]="this.personalDataForm.invalid" [saveDisabled]="this.personalDataForm.invalid" (print)="print()" (save)="save()" (reset)="reset()"></app-dot-menu>
+  <app-dot-menu [printDisabled]="this.personalDataForm.invalid" [saveDisabled]="this.personalDataForm.invalid"
+    (print)="print()" (save)="save()" (reset)="reset()" (delete)="delete()"></app-dot-menu>
+
 </div>
-<app-loading *ngIf="isLoading"></app-loading>

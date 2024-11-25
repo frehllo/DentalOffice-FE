@@ -1,4 +1,5 @@
-import { Component, ElementRef, Inject, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Component, ElementRef, Inject, OnInit, ViewChild, SimpleChange } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { DataModalComponent } from '../data-modal/data-modal.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -10,6 +11,8 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { LoadingComponent } from '../../../standalones/loading/loading.component';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 export interface DocumentConfig {
   name: string;
@@ -17,11 +20,11 @@ export interface DocumentConfig {
 }
 
 @Component({
-    selector: 'app-module-preview-modal',
-    standalone: true,
-    templateUrl: './module-preview-modal.component.html',
-    styleUrl: './module-preview-modal.component.scss',
-    imports: [MatStepperModule, MatDialogTitle, MatDialogActions, MatButtonModule, MatDialogClose, MatDialogModule, ToTrustedHtmlPipe, MatCheckboxModule, CommonModule, LoadingComponent]
+  selector: 'app-module-preview-modal',
+  standalone: true,
+  templateUrl: './module-preview-modal.component.html',
+  styleUrl: './module-preview-modal.component.scss',
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatStepperModule, MatDialogTitle, MatDialogActions, MatButtonModule, MatDialogClose, MatDialogModule, ToTrustedHtmlPipe, MatCheckboxModule, CommonModule, LoadingComponent]
 })
 export class ModulePreviewModalComponent implements OnInit {
   constructor(
@@ -45,6 +48,10 @@ export class ModulePreviewModalComponent implements OnInit {
       this.service.getDocumentsPrintPreviews(this.data).subscribe({
         next: (res: any[]) => {
           this.docs = res;
+          this.docs = this.docs.map(doc => ({
+            ...doc,
+            copyCount: doc.copyCount ?? 1, // Imposta 1 se è null o undefined
+          }));
           this.checkedDocs = [...res];
 
           res.forEach(element => {
@@ -73,6 +80,21 @@ export class ModulePreviewModalComponent implements OnInit {
       if (index !== -1) {
         this.checkedDocs.splice(index, 1);
       }
+    }
+  }
+
+  changeDocCount(change: SimpleChange, docId: number) {
+    const docIndex = this.checkedDocs.findIndex(doc => doc.id === docId);
+
+    // Verifica se il documento esiste
+    if (docIndex !== -1) {
+      // Aggiorna la proprietà "copyCount" con il nuovo valore
+      this.checkedDocs[docIndex].copyCount = change ?? 0;
+
+      // Debug: Log per conferma
+      console.log('Updated Document:', this.docs[docIndex]);
+    } else {
+      console.error(`Documento con id ${docId} non trovato.`);
     }
   }
 

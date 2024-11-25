@@ -27,39 +27,42 @@ export class ModulesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.service.getList().subscribe({
+      next: res => {
+        this.list = res as any[];
 
-    setTimeout(() => {
-      this.service.getList().subscribe({
-        next: res => {
-          this.list = res as any[];
-        },
-        error: e => {
-          console.log('error getting modules', e);
-        }
-      });
-      this.service.getConfiguration().subscribe({
-        next: (res: any) => {
-          this.personalDataForm = res.personalDataForm;
-        },
-        error: (e: any) => {
-          console.log('error getting modules configuration', e);
-        }
-      });
-    }, 500)
+        this.isLoading = false;
+      },
+      error: e => {
+        console.log('error getting modules', e);
 
-    this.isLoading = false;
+        this.isLoading = false;
+      }
+    });
+    this.service.getConfiguration().subscribe({
+      next: (res: any) => {
+        this.personalDataForm = res.personalDataForm;
+
+        this.isLoading = false;
+      },
+      error: (e: any) => {
+        console.log('error getting modules configuration', e);
+
+        this.isLoading = false;
+      }
+    });
   }
 
   data(): void {
-    var fieldsToSend : FormlyFieldConfig[] = [];
-    this.personalDataForm.forEach((element : FormlyFieldConfig )=> {
-        if(element.fieldGroup) {
-          element.fieldGroup.forEach(element => {
-            if(element.type != 'section-line'){
-              fieldsToSend.push(element);
-            }
-          });
-        }
+    var fieldsToSend: FormlyFieldConfig[] = [];
+    this.personalDataForm.forEach((element: FormlyFieldConfig) => {
+      if (element.fieldGroup) {
+        element.fieldGroup.forEach(element => {
+          if (element.type != 'section-line') {
+            fieldsToSend.push(element);
+          }
+        });
+      }
     });
 
     const dialogRef = this.dialog.open(DataModalComponent, {
@@ -73,6 +76,8 @@ export class ModulesListComponent implements OnInit {
             this.service.getList().subscribe({
               next: res => {
                 this.list = res as any[];
+
+                this.isLoading = false;
               },
               error: e => {
                 console.log('error getting modules', e);
@@ -85,7 +90,6 @@ export class ModulesListComponent implements OnInit {
             this.isLoading = false;
           }
         });
-        this.isLoading = false;
       }
     });
   }

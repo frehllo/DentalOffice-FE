@@ -22,6 +22,7 @@ import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-col
 import { AGType } from '../../../components/ag/AGType';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-write-module',
@@ -39,7 +40,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
   ],
 })
 export class WriteModuleComponent implements OnInit {
-  constructor(private service: ModuleService, public dialog: MatDialog) {
+  constructor(private service: ModuleService, public dialog: MatDialog, private location: Location) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
@@ -98,6 +99,8 @@ export class WriteModuleComponent implements OnInit {
           this.actionHeaders.forEach(element => {
             this.colDefs.push(element)
           });
+
+          this.isLoading = false;
         },
         error: (e: any) => {
           console.log('error getting modules configuration', e);
@@ -118,6 +121,8 @@ export class WriteModuleComponent implements OnInit {
           }
 
           this.rowData = res.processes;
+
+          this.isLoading = false;
         },
         error: (e: any) => {
           console.log('error getting module', e);
@@ -127,8 +132,6 @@ export class WriteModuleComponent implements OnInit {
 
       this.setAction();
     }, 500)
-
-    this.isLoading = false;
   }
 
   setAction() {
@@ -138,11 +141,12 @@ export class WriteModuleComponent implements OnInit {
   }
 
   save() {
-    this.isLoading = true;
-
     this.personalDataForm.markAllAsTouched();
 
     if (this.personalDataForm.valid) {
+
+      this.isLoading = true;
+
       const moduleId = history.state.id;
 
       var module: any = this.model;
@@ -159,6 +163,7 @@ export class WriteModuleComponent implements OnInit {
       this.service.update(moduleId, module).subscribe({
         next: (res: any) => {
           this.model = res;
+          this.rowData = res.processes;
           setTimeout(() => {
             this.isLoading = false;
           }, 500);
@@ -178,6 +183,31 @@ export class WriteModuleComponent implements OnInit {
     }
   }
 
+  delete() {
+    const moduleId = history.state.id;
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: 'Delete?'
+      }
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.isLoading = true;
+        this.service.delete(moduleId).subscribe({
+          next: (res: any) => {
+            this.model = res;
+            this.isLoading = false;
+            this.location.back();
+          },
+          error: (e: any) => {
+            console.log('error deleting module', e);
+            this.isLoading = false;
+          }
+        });
+      }
+    });
+  }
+
   print() {
     if (this.personalDataForm.valid) {
       const dialogPreviewRef = this.dialog.open(ModulePreviewModalComponent, {
@@ -194,15 +224,17 @@ export class WriteModuleComponent implements OnInit {
           }
         };
 
-        let printable : any = result as any[];
+        let printable: any = result as any[];
+
+        console.log("ao", printable);
 
         printable.toPrint.forEach((item: { content: string, copyCount: number }) => {
 
           let copyCount = item.copyCount ?? 1;
 
-          if(item.copyCount > 1) {
+          if (item.copyCount > 1) {
             copyCount = copyCount - 1;
-            for(let i = 0; i < copyCount; i++){
+            for (let i = 0; i < copyCount; i++) {
               printable.toPrint.push(item)
             }
           }
@@ -242,6 +274,8 @@ export class WriteModuleComponent implements OnInit {
           next: (res: any) => {
             this.rowData.push(res);
             this.gridApi.updateGridOptions({ rowData: this.rowData });
+
+            this.isLoading = false;
           },
           error: (e: any) => {
             console.log('error adding process', e);
@@ -249,10 +283,11 @@ export class WriteModuleComponent implements OnInit {
           }
         });
       } else if (result && result.success == true && result.model != null && event != null && event['data'] != null && event['data']['id'] != null) {
+        
         this.service.updateProcess(event['data']['id'], result.model).subscribe({
           next: (res: any) => {
-            var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['id'])
-
+            var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['data']['id'])
+            console.log(event);
             if (toEditIndex > -1) {
               this.rowData[toEditIndex] = res;
               this.gridApi.updateGridOptions({ rowData: this.rowData });

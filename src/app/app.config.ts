@@ -8,14 +8,15 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyColorPickerComponent } from './core/components/formly/components/formly-color-picker/formly-color-picker.component';
 import { FormlySectionLineComponent } from './core/components/formly/components/formly-section-line/formly-section-line.component';
 import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormlyAutocompleteComponent } from './core/components/formly/components/formly-autocomplete/formly-autocomplete.component';
+import { httpInterceptor } from './http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([httpInterceptor])),
     provideAnimations(),
     importProvidersFrom([
       FormlyModule.forRoot({
@@ -40,6 +41,6 @@ export const appConfig: ApplicationConfig = {
         ],
       }),
       MatNativeDateModule
-    ]),
-  ],
+    ])
+  ], 
 };

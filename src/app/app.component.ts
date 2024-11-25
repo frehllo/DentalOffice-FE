@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { httpInterceptor } from './http.interceptor';
+import { Component, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/standalones/header/header.component';
@@ -6,12 +7,13 @@ import { DataserviceService } from './core/services/dataservice/dataservice.serv
 import { HttpClientModule } from '@angular/common/http';
 import { DotMenuComponent } from './core/components/standalones/dot-menu/dot-menu.component';
 import * as moment from 'moment';
+import { GlobalErroHandler } from './core/services/globalerrorhandler/global-error-handler.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule, DotMenuComponent],
-  providers: [DataserviceService, {provide : moment, useValue : moment}],
+  providers: [DataserviceService, {provide : moment, useValue : moment}, {provide : ErrorHandler, useClass: GlobalErroHandler}],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

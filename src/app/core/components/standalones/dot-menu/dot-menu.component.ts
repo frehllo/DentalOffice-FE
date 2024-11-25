@@ -15,6 +15,7 @@ export class DotMenuComponent {
   @Output('save') save: EventEmitter<any> = new EventEmitter();
   @Output('reset') reset: EventEmitter<any> = new EventEmitter();
   @Output('print') print: EventEmitter<any> = new EventEmitter();
+  @Output('delete') delete: EventEmitter<any> = new EventEmitter();
   
   @Input() saveDisabled: boolean = false;
   @Input() printDisabled: boolean = false;
@@ -56,5 +57,9 @@ export class DotMenuComponent {
 
   printMethod() {
     this.print.emit();
+  }
+
+  deleteMethod() {
+    this.delete.emit();
   }
 }

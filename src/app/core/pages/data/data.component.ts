@@ -20,6 +20,7 @@ import { SectionService } from '../../services/section/section.service';
     MatIconModule,
     SectionComponent,
     LoadingComponent,
+    MatButtonModule
   ],
 })
 export class DataComponent implements OnInit {
@@ -31,21 +32,19 @@ export class DataComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    setTimeout(() => {
-      this.sectionService.getList().subscribe({
-        next: res => {
-          this.sections = res as Section[];
-          if (this.sections != null && this.sections?.length > 0) {
-            this.routeToSection(this.sections[0].route);
-          }
-        },
-        error: e => {
-          console.log('error getting sections', e);
-          this.isLoading = false;
+    this.sectionService.getList().subscribe({
+      next: res => {
+        this.sections = res as Section[];
+        if (this.sections != null && this.sections?.length > 0) {
+          this.routeToSection(this.sections[0].route);
         }
-      });
-    }, 500)
-    this.isLoading = false;
+        this.isLoading = false;
+      },
+      error: e => {
+        console.log('error getting sections', e);
+        this.isLoading = false;
+      }
+    });
   }
 
   routeToSection(route: string): void {
