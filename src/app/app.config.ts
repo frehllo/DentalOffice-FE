@@ -1,7 +1,6 @@
-import { FormlyMultiSelectComponent } from './core/components/formly/components/formly-multi-select/formly-multi-select/formly-multi-select.component';
+import { FormlyMultiSelectComponent } from './core/components/formly/components/formly-multi-select/formly-multi-select.component';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FormlyModule } from '@ngx-formly/core';

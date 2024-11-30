@@ -161,9 +161,11 @@ export class SectionComponent implements OnChanges {
             this.isLoading = true;
             this.sectionService.insertData(this.section?.apiString!, result.model).subscribe({
               next: () => {
-                this.getAllData()
+                this.getAllData();
+                this.isLoading = false;
               },
               error: e => {
+                this.getAllData();
                 this.isLoading = false;
                 console.log('error during insert', e)
               }
@@ -171,15 +173,16 @@ export class SectionComponent implements OnChanges {
           } else {
             this.sectionService.updateData(this.section?.apiString!, result.model).subscribe({
               next: () => {
-                this.getAllData()
+                this.getAllData();
+                this.isLoading = false;
               },
               error: e => {
+                this.getAllData();
                 this.isLoading = false;
                 console.log('error during update', e)
               }
             });
           }
-          this.isLoading = false;
         }
       });
     }
