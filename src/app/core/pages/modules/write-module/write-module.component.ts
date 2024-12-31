@@ -287,7 +287,6 @@ export class WriteModuleComponent implements OnInit {
         this.service.updateProcess(event['data']['id'], result.model).subscribe({
           next: (res: any) => {
             var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['data']['id'])
-            console.log(event);
             if (toEditIndex > -1) {
               this.rowData[toEditIndex] = res;
               this.gridApi.updateGridOptions({ rowData: this.rowData });

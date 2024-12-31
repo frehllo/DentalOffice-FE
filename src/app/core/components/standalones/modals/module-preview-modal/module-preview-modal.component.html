@@ -3,6 +3,10 @@
         <h1>Print</h1>
     </div>
 
+    <mat-checkbox [checked]="allSelected" (change)="toggleSelectAll($event)" class="example-margin">
+        Seleziona/Deseleziona tutto
+    </mat-checkbox>
+
     <div mat-dialog-content class="p-3 overflow-hidden h-90">
         @if(docs != null && !isLoading)
         {
@@ -13,7 +17,7 @@
                     <h1 class="col-12 d-flex justify-content-center">{{doc.name}}</h1>
                     <ng-template matStepLabel class="col-12">{{doc.name}}</ng-template>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-8 col order-sm-1">
-                        <mat-checkbox [checked]="true" class="example-margin"
+                        <mat-checkbox [checked]="doc.selected" class="example-margin"
                             (change)="checkDoc($event, doc)">Checked</mat-checkbox>
                         <div class="module-container w-100 col-8 d-flex justify-content-center align-items-start"
                             style="height: 50vh;">
@@ -27,7 +31,8 @@
                         <!-- CAMPO input CHE CAMBI PER OGNI doc IL doc['copyCount'] -->
                         <mat-form-field appearance="fill">
                             <mat-label>Copia</mat-label>
-                            <input matInput type="number" min="1" (ngModelChange)="changeDocCount($event, doc['id'])" [(ngModel)]="doc.copyCount" />
+                            <input matInput type="number" min="1" (ngModelChange)="changeDocCount($event, doc['id'])"
+                                [(ngModel)]="doc.copyCount" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -45,7 +50,7 @@
 
     <div mat-dialog-actions class="mb-0 position-absolute h-5" style="padding: 40px; bottom: 0px; right: 0px;">
         <button mat-button (click)="cancel()">Cancel</button>
-        <button mat-raised-button color="bg-primary" (click)="print()">Print</button>
+        <button mat-raised-button color="bg-primary" [disabled]="this.checkedDocs.length < 1" (click)="print()">Print</button>
     </div>
 
 

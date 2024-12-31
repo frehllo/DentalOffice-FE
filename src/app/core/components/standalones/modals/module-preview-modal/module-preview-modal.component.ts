@@ -41,6 +41,20 @@ export class ModulePreviewModalComponent implements OnInit {
   pdfs: any[] = [];
   checkedDocs: any[] = [];
   isLoading: boolean = false
+  allSelected: boolean = true;
+
+  toggleSelectAll(change: MatCheckboxChange): void {
+    this.allSelected = change.checked;
+    this.docs.forEach(doc => {
+      doc.selected = this.allSelected;
+    });
+
+    if (change.checked) {
+      this.checkedDocs.push(this.docs);
+    } else {
+      this.checkedDocs = [];
+    }
+  }
 
   ngOnInit() {
     this.isLoading = true;
@@ -50,7 +64,8 @@ export class ModulePreviewModalComponent implements OnInit {
           this.docs = res;
           this.docs = this.docs.map(doc => ({
             ...doc,
-            copyCount: doc.copyCount ?? 1, // Imposta 1 se è null o undefined
+            copyCount: doc.copyCount ?? 1,
+            selected: this.allSelected  // Imposta 1 se è null o undefined
           }));
           this.checkedDocs = [...res];
 
@@ -81,6 +96,9 @@ export class ModulePreviewModalComponent implements OnInit {
         this.checkedDocs.splice(index, 1);
       }
     }
+
+    doc.selected = change.checked;
+    this.allSelected = this.docs.every(d => d.selected);
   }
 
   changeDocCount(change: SimpleChange, docId: number) {

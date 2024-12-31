@@ -8,12 +8,15 @@ import { FormlyColorPickerComponent } from './core/components/formly/components/
 import { FormlySectionLineComponent } from './core/components/formly/components/formly-section-line/formly-section-line.component';
 import { FormlyAgGridComponent } from './core/components/formly/components/formly-ag-grid/formly-ag-grid.component';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { FormlyAutocompleteComponent } from './core/components/formly/components/formly-autocomplete/formly-autocomplete.component';
 import { httpInterceptor } from './http.interceptor';
+import { CUSTOM_DATE_FORMATS } from '../main';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' }, // Locale britannico per date dd/MM/yyyy
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }, // Usa i formati personalizzati
     provideRouter(routes),
     provideHttpClient(withInterceptors([httpInterceptor])),
     provideAnimations(),

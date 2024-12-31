@@ -88,24 +88,32 @@ export class DataModalComponent implements OnInit {
           next: (res: any) => {
             var dentinIndex: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "dentinLotId" && item.type == "select");
             var enamelIndex: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "enamelLotId" && item.type == "select");
-            if (res['dentinLots'] != null && res['dentinLots'].length > 0 && res['enamelLots'] != null && res['enamelLots'].length > 0) {
+            if (res['dentinLots'] != null && res['dentinLots'].length > 0) {
               if (dentinIndex > -1) {
                 this.fields[0].fieldGroup![dentinIndex].props!.options = res['dentinLots'];
                 this.form.controls['dentinLotId'].value = res['dentinLots'][0].value;
                 this.model['dentinLotId'] = res['dentinLots'][0].value;
               }
+            } else {
+              if (dentinIndex > -1) {
+                this.fields[0].fieldGroup![dentinIndex].props!.options = [];
+                this.form.controls['dentinLotId'].value = null;
+                this.model['dentinLotId'] = null;
+              }
+            }
+
+            if (res['enamelLots'] != null && res['enamelLots'].length > 0) {
               if (enamelIndex > -1) {
                 this.fields[0].fieldGroup![enamelIndex].props!.options = res['enamelLots'];
                 this.form.controls['enamelLotId'].value = res['enamelLots'][0].value;
                 this.model['enamelLotId'] = res['enamelLots'][0].value;
               }
             } else {
-              this.fields[0].fieldGroup![dentinIndex].props!.options = [];
-              this.form.controls['dentinLotId'].value = null;
-              this.model['dentinLotId'] = null;
-              this.fields[0].fieldGroup![enamelIndex].props!.options = [];
-              this.form.controls['enamelLotId'].value = null;
-              this.model['enamelLotId'] = null;
+              if (enamelIndex > -1) {
+                this.fields[0].fieldGroup![enamelIndex].props!.options = [];
+                this.form.controls['enamelLotId'].value = null;
+                this.model['enamelLotId'] = null;
+              }
             }
           },
           error: (e: any) => {

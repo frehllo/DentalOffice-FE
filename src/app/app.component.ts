@@ -1,4 +1,3 @@
-import { httpInterceptor } from './http.interceptor';
 import { Component, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
