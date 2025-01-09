@@ -1,4 +1,4 @@
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ITooltipParams } from 'ag-grid-community';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
@@ -23,6 +23,7 @@ import { AGType } from '../../../components/ag/AGType';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Location } from '@angular/common'
+import { AGCustomTooltip } from '../../../components/ag/ag-custom-tooltip/ag-custom-tooltip.component';
 
 @Component({
   selector: 'app-write-module',
@@ -77,6 +78,25 @@ export class WriteModuleComponent implements OnInit {
         iconName: 'delete',
       },
       onCellClicked: (event) => this.deleteProcess(event),
+      resizable: false
+    },
+    {
+      field: 'Preview',
+      cellRenderer: AGActionIconComponent,
+      cellRendererParams: {
+        iconName: 'remove_red_eye',
+      },
+      tooltipComponent: AGCustomTooltip,
+      tooltipValueGetter: (p: ITooltipParams) => {
+        var stagesInfo = p.data.stages && p.data.stages.length > 0
+          ? `<b>Fasi di Lavoro: </b><br>${p.data.stages.map((item: any) => item.name).join(',')}<br>`
+          : '';
+        var colorInfo = p.data.color && p.data.color.code
+          ? `<b>Colore: </b><br>${p.data.color.code}<br><br>`
+          : '';
+
+        return stagesInfo + colorInfo;
+      },
       resizable: false
     },
   ];
@@ -283,7 +303,7 @@ export class WriteModuleComponent implements OnInit {
           }
         });
       } else if (result && result.success == true && result.model != null && event != null && event['data'] != null && event['data']['id'] != null) {
-        
+
         this.service.updateProcess(event['data']['id'], result.model).subscribe({
           next: (res: any) => {
             var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['data']['id'])

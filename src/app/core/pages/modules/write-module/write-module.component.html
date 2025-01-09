@@ -7,7 +7,7 @@
   </div>
 
   <div *ngIf="!isLoading" style="height: 350px;" class="bg-color p-5 full-width d-flex justify-content-between">
-    <ag-grid-angular class="ag-theme-alpine col-10 h-100" [rowData]="rowData" [columnDefs]="colDefs"
+    <ag-grid-angular class="ag-theme-alpine col-10 h-100" [tooltipShowDelay]=0 [rowData]="rowData" [columnDefs]="colDefs"
       (gridReady)="onGridReady($event)">
     </ag-grid-angular>
     <div class="col-2 px-2">
