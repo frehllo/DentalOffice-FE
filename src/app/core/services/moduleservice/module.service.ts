@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { API_URL } from '../service-constants';
 import { HttpClient } from '@angular/common/http';
-import { DocumentConfig } from '../../components/standalones/modals/module-preview-modal/module-preview-modal.component';
 import { Observable } from 'rxjs';
 
 @Injectable({

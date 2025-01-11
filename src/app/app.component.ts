@@ -1,4 +1,4 @@
-import { Component, ErrorHandler } from '@angular/core';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/standalones/header/header.component';
@@ -7,30 +7,38 @@ import { HttpClientModule } from '@angular/common/http';
 import { DotMenuComponent } from './core/components/standalones/dot-menu/dot-menu.component';
 import * as moment from 'moment';
 import { GlobalErroHandler } from './core/services/globalerrorhandler/global-error-handler.service';
+import { UtilityService } from './core/services/utilityservice/utility.service';
+import { LoadingComponent } from "./core/components/standalones/loading/loading.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule, DotMenuComponent],
-  providers: [DataserviceService, {provide : moment, useValue : moment}, {provide : ErrorHandler, useClass: GlobalErroHandler}],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, HttpClientModule, DotMenuComponent, LoadingComponent],
+  providers: [DataserviceService, { provide: moment, useValue: moment }, { provide: ErrorHandler, useClass: GlobalErroHandler }],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   showHeader: boolean = true;
   showHeaderBack: boolean = true;
+  serverReady = false;
+  loading = true;
 
-  constructor(private router:Router) {
+  ngOnInit() {
+    this.checkServerStatus();
+  }
+
+  constructor(private router: Router, public utilityService: UtilityService,) {
     router.events.subscribe(
-      (val) =>{
-        if(val instanceof NavigationEnd) {
-          if(val.url=="/") {
+      (val) => {
+        if (val instanceof NavigationEnd) {
+          if (val.url == "/") {
             this.showHeader = true;
           }
-          if(val.url=="/home" || val.url=="/"){
+          if (val.url == "/home" || val.url == "/") {
             this.showHeaderBack = false;
-          }else{
+          } else {
             this.showHeaderBack = true;
           }
           //aggiungere il resto delle route per definire se mostrare o meno l'header
@@ -40,4 +48,16 @@ export class AppComponent {
   }
 
   title = 'DentalOffice';
+
+  checkServerStatus() {
+    const interval = setInterval(() => {
+      this.utilityService.checkServerStatus().subscribe(status => {
+        if (status) {
+          this.serverReady = true;
+          this.loading = false;
+          clearInterval(interval);
+        }
+      });
+    }, 5000);
+  }
 }

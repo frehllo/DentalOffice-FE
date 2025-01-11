@@ -2,5 +2,6 @@
     <app-header [showHeaderBack]="showHeaderBack"></app-header>
 </ng-container>
 <div style="width: 100%; height: auto;">
+    <app-loading *ngIf="loading"></app-loading>
     <router-outlet></router-outlet>
 </div>
