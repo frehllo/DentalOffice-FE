@@ -10,8 +10,8 @@
     "test": "ng test",
     "build-fe": "ng build --configuration=production",
     "serve-fe": "lite-server --baseDir=\"dist/DentalOffice-FE/browser\"",
-    "build-be": "dotnet build \"C:\\Users\\narci\\A_Progetti\\DentalOffice\\DentalOffice-BE\\DentalOffice-BE.sln\"",
-    "run-be": "dotnet run --project \"C:\\Users\\narci\\A_Progetti\\DentalOffice\\DentalOffice-BE\\DentalOffice-BE\\DentalOffice-BE.csproj\" --urls=http://localhost:7020",
+    "build-be": "cd ../DentalOffice-BE && dotnet build DentalOffice-BE.sln",
+    "run-be": "cd ../DentalOffice-BE && dotnet run --project DentalOffice-BE/DentalOffice-BE.csproj --urls=http://localhost:7020",
     "start-easy": "concurrently \"npm run serve-fe\" \"npm run build-be && npm run run-be\""
   },
   "private": true,
