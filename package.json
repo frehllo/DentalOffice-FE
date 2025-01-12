@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-fe": "ng build --configuration=production",
-    "serve-fe": "lite-server --baseDir=\"dist/DentalOffice-FE/browser\"",
+    "serve-fe": "lite-server --baseDir=\"dist/DentalOffice-FE/browser\" --browser=chrome",
     "build-be": "cd ../DentalOffice-BE && dotnet build DentalOffice-BE.sln",
     "run-be": "cd ../DentalOffice-BE && dotnet run --project DentalOffice-BE/DentalOffice-BE.csproj --urls=http://localhost:7020",
     "start-easy": "concurrently \"npm run serve-fe\" \"npm run build-be && npm run run-be\""
