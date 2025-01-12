@@ -32,7 +32,7 @@
                             Impostazioni
                         </h2>
                         <!-- CAMPO input CHE CAMBI PER OGNI doc IL doc['copyCount'] -->
-                        <mat-form-field appearance="fill">
+                        <mat-form-field class="w-50" appearance="fill">
                             <mat-label>Copia</mat-label>
                             <input matInput type="number" min="1" (ngModelChange)="changeDocCount($event, doc['id'])"
                                 [(ngModel)]="doc.copyCount" />
