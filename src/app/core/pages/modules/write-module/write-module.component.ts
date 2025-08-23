@@ -42,7 +42,7 @@ import { AGCustomTooltip } from '../../../components/ag/ag-custom-tooltip/ag-cus
 })
 export class WriteModuleComponent implements OnInit {
   constructor(private service: ModuleService, public dialog: MatDialog, private location: Location) {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    (pdfMake as any).vfs = pdfFonts.vfs;
   }
 
   personalDataForm = new FormGroup({});
