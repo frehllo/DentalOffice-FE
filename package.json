@@ -1,18 +1,39 @@
 {
   "name": "dental-office-fe",
   "version": "0.0.0",
-  "main": "app.js",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "electron": "ng build --configuration production && electron .",
+    "dist": "npm run electron && electron-builder",
     "build-fe": "ng build --configuration=production",
     "serve-fe": "lite-server --baseDir=\"dist/DentalOffice-FE/browser\" --browser=chrome",
     "build-be": "cd ../DentalOffice-BE && dotnet build DentalOffice-BE.sln",
     "run-be": "cd ../DentalOffice-BE && dotnet run --project DentalOffice-BE/DentalOffice-BE.csproj --urls=http://localhost:7020",
     "start-easy": "concurrently \"npm run serve-fe\" \"npm run build-be && npm run run-be\""
+  },
+  "build": {
+      "appId": "dentaloffice-fe", 
+      "productName": "Dental Office", 
+      "files": [
+        "dist/**/*", 
+        "main.js"
+      ],
+      "directories": {
+        "output": "release" 
+      },
+      "win": {
+        "target": "nsis", 
+        "icon": "path/to/icon.ico" 
+      },
+      "mac": {
+        "target": "dmg", 
+        "icon": "path/to/icon.icns" 
+      }
   },
   "private": true,
   "dependencies": {

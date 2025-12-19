@@ -246,32 +246,32 @@ export class WriteModuleComponent implements OnInit {
 
         let printable: any = result as any[];
 
-        console.log("ao", printable);
+        if(printable != null) {
+          printable.toPrint.forEach((item: { content: string, copyCount: number }) => {
 
-        printable.toPrint.forEach((item: { content: string, copyCount: number }) => {
+            let copyCount = item.copyCount ?? 1;
 
-          let copyCount = item.copyCount ?? 1;
-
-          if (item.copyCount > 1) {
-            copyCount = copyCount - 1;
-            for (let i = 0; i < copyCount; i++) {
-              printable.toPrint.push(item)
+            if (item.copyCount > 1) {
+              copyCount = copyCount - 1;
+              for (let i = 0; i < copyCount; i++) {
+                printable.toPrint.push(item)
+              }
             }
-          }
-        });
+          });
 
-        printable.toPrint.forEach((item: { content: string; }, index: number) => {
+          printable.toPrint.forEach((item: { content: string; }, index: number) => {
 
-          let parsedContent = JSON.parse(item.content);
+            let parsedContent = JSON.parse(item.content);
 
-          if (index > 0) {
-            documentDefinition.content.push({ text: '', pageBreak: 'before' } as never);
-          }
+            if (index > 0) {
+              documentDefinition.content.push({ text: '', pageBreak: 'before' } as never);
+            }
 
-          documentDefinition.content.push(parsedContent.content as never);
-        });
+            documentDefinition.content.push(parsedContent.content as never);
+          });
 
-        pdfMake.createPdf(documentDefinition).print();
+          pdfMake.createPdf(documentDefinition).print();
+        }
       });
     }
   }
@@ -292,10 +292,7 @@ export class WriteModuleComponent implements OnInit {
         result.model['moduleId'] = moduleId;
         this.service.addProcess(result.model).subscribe({
           next: (res: any) => {
-            this.rowData.push(res);
-            this.gridApi.updateGridOptions({ rowData: this.rowData });
-
-            this.isLoading = false;
+            this.gridApi.updateGridOptions({ rowData: res });
           },
           error: (e: any) => {
             console.log('error adding process', e);
@@ -306,11 +303,7 @@ export class WriteModuleComponent implements OnInit {
 
         this.service.updateProcess(event['data']['id'], result.model).subscribe({
           next: (res: any) => {
-            var toEditIndex: number = this.rowData.findIndex(e => e['id'] == event['data']['id'])
-            if (toEditIndex > -1) {
-              this.rowData[toEditIndex] = res;
-              this.gridApi.updateGridOptions({ rowData: this.rowData });
-            }
+            this.gridApi.updateGridOptions({ rowData: res });
           },
           error: (e: any) => {
             console.log('error saving process', e);

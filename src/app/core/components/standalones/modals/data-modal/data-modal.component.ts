@@ -82,6 +82,29 @@ export class DataModalComponent implements OnInit {
         })
       }
 
+      if(((this.beforeModel['diskMaterialId'] != anyChanges['diskMaterialId']))) {
+        this.moduleService.getLotsByMaterialId(anyChanges['diskMaterialId']).subscribe({
+          next: (res: any) => {
+            var index: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "diskLotId" && item.type == "select");
+            if (res.key != null && res.key['length'] > 0) {
+              if (index > -1) {
+                this.fields[0].fieldGroup![index].props!.options = res.key;
+                this.form.controls['diskLotId'].value = res.key[0].value;
+                this.model['diskLotId'] = res.key[0].value;
+              }
+            } else {
+              this.fields[0].fieldGroup![index].props!.options = [];
+              this.form.controls['diskLotId'].value = null;
+              this.model['diskLotId'] = null;
+            }
+          },
+          error: (e: any) => {
+            console.log('error getting disk lots', e);
+          }
+
+        })
+      }
+
       if (((this.beforeModel['colorId'] != anyChanges['colorId'] && anyChanges['dentinMaterialId'] != null) ||
         (this.beforeModel['dentinMaterialId'] != anyChanges['dentinMaterialId'] && anyChanges['colorId'] != null))) {
         this.moduleService.getLotsByMaterialIdAndColorId(anyChanges['dentinMaterialId'], anyChanges['colorId']).subscribe({
