@@ -57,95 +57,84 @@ export class DataModalComponent implements OnInit {
   }
 
   change(changes: SimpleChange) {
-    var anyChanges = changes as any;
-    if (this.beforeModel != anyChanges && this.fields != null && this.fields.length > 0 && this.fields[0].fieldGroup != null && this.fields[0].fieldGroup.length > 0 && this.fields[0].fieldGroup[0].key == "semiProductId") {
-      if (this.beforeModel['metalMaterialId'] != anyChanges['metalMaterialId']) {
-        this.moduleService.getLotsByMaterialId(anyChanges['metalMaterialId']).subscribe({
-          next: (res: any) => {
-            var index: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "metalLotId" && item.type == "select");
-            if (res.key != null && res.key['length'] > 0) {
-              if (index > -1) {
-                this.fields[0].fieldGroup![index].props!.options = res.key;
-                this.form.controls['metalLotId'].value = res.key[0].value;
-                this.model['metalLotId'] = res.key[0].value;
-              }
-            } else {
-              this.fields[0].fieldGroup![index].props!.options = [];
-              this.form.controls['metalLotId'].value = null;
-              this.model['metalLotId'] = null;
-            }
-          },
-          error: (e: any) => {
-            console.log('error getting metal lots', e);
-          }
+    const anyChanges = changes as any;
 
-        })
+    if (!this.fields || !this.fields[0]?.fieldGroup || this.fields[0].fieldGroup.length === 0) {
+      return;
+    }
+
+    const firstField = this.fields[0].fieldGroup[0];
+    if (firstField.key !== "dentals") {
+      return;
+    }
+
+    const updateFieldLogic = (fieldKey: string, options: any[]) => {
+      const fieldGroup = this.fields[0].fieldGroup;
+      const field = fieldGroup!.find(item => item.key === fieldKey);
+      
+      if (field && field.props) {
+        field.props.options = options;
+        
+        const defaultValue = (options && options.length > 0) ? options[1].value : null;
+
+        if (this.form.controls[fieldKey]) {
+          this.form.controls[fieldKey].patchValue(defaultValue);
+        }
+        
+        this.model[fieldKey] = defaultValue;
       }
+    };
 
-      if(((this.beforeModel['diskMaterialId'] != anyChanges['diskMaterialId']))) {
-        this.moduleService.getLotsByMaterialId(anyChanges['diskMaterialId']).subscribe({
-          next: (res: any) => {
-            var index: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "diskLotId" && item.type == "select");
-            if (res.key != null && res.key['length'] > 0) {
-              if (index > -1) {
-                this.fields[0].fieldGroup![index].props!.options = res.key;
-                this.form.controls['diskLotId'].value = res.key[0].value;
-                this.model['diskLotId'] = res.key[0].value;
-              }
-            } else {
-              this.fields[0].fieldGroup![index].props!.options = [];
-              this.form.controls['diskLotId'].value = null;
-              this.model['diskLotId'] = null;
-            }
-          },
-          error: (e: any) => {
-            console.log('error getting disk lots', e);
-          }
-
-        })
-      }
-
-      if (((this.beforeModel['colorId'] != anyChanges['colorId'] && anyChanges['dentinMaterialId'] != null) ||
-        (this.beforeModel['dentinMaterialId'] != anyChanges['dentinMaterialId'] && anyChanges['colorId'] != null))) {
-        this.moduleService.getLotsByMaterialIdAndColorId(anyChanges['dentinMaterialId'], anyChanges['colorId']).subscribe({
-          next: (res: any) => {
-            var dentinIndex: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "dentinLotId" && item.type == "select");
-            var enamelIndex: number = this.fields[0].fieldGroup!.findIndex(item => item.key == "enamelLotId" && item.type == "select");
-            if (res['dentinLots'] != null && res['dentinLots'].length > 0) {
-              if (dentinIndex > -1) {
-                this.fields[0].fieldGroup![dentinIndex].props!.options = res['dentinLots'];
-                this.form.controls['dentinLotId'].value = res['dentinLots'][0].value;
-                this.model['dentinLotId'] = res['dentinLots'][0].value;
-              }
-            } else {
-              if (dentinIndex > -1) {
-                this.fields[0].fieldGroup![dentinIndex].props!.options = [];
-                this.form.controls['dentinLotId'].value = null;
-                this.model['dentinLotId'] = null;
-              }
-            }
-
-            if (res['enamelLots'] != null && res['enamelLots'].length > 0) {
-              if (enamelIndex > -1) {
-                this.fields[0].fieldGroup![enamelIndex].props!.options = res['enamelLots'];
-                this.form.controls['enamelLotId'].value = res['enamelLots'][0].value;
-                this.model['enamelLotId'] = res['enamelLots'][0].value;
-              }
-            } else {
-              if (enamelIndex > -1) {
-                this.fields[0].fieldGroup![enamelIndex].props!.options = [];
-                this.form.controls['enamelLotId'].value = null;
-                this.model['enamelLotId'] = null;
-              }
-            }
-          },
-          error: (e: any) => {
-            console.log('error getting dentin and enamel lots', e);
-          }
+    // --- LOGICA 1: METAL MATERIAL ---
+    if (this.beforeModel['metalMaterialId'] !== anyChanges['metalMaterialId']) {
+      const metalId = anyChanges['metalMaterialId'];
+      if (metalId) {
+        this.moduleService.getLotsByMaterialId(metalId).subscribe({
+          next: (res: any) => updateFieldLogic('metalLotId', res.key || []),
+          error: (e) => console.error('Error fetching metal lots', e)
         });
+      } else {
+        updateFieldLogic('metalLotId', []);
       }
     }
 
-    this.beforeModel = anyChanges;
+    // --- LOGICA 2: DISK MATERIAL ---
+    if (this.beforeModel['diskMaterialId'] !== anyChanges['diskMaterialId']) {
+      const diskId = anyChanges['diskMaterialId'];
+      if (diskId) {
+        this.moduleService.getLotsByMaterialId(diskId).subscribe({
+          next: (res: any) => updateFieldLogic('diskLotId', res.key || []),
+          error: (e) => console.error('Error fetching disk lots', e)
+        });
+      } else {
+        updateFieldLogic('diskLotId', []);
+      }
+    }
+
+    // --- LOGICA 3: DENTIN MATERIAL & COLOR (Insieme) ---
+    const colorChanged = this.beforeModel['colorId'] !== anyChanges['colorId'];
+    const dentinChanged = this.beforeModel['dentinMaterialId'] !== anyChanges['dentinMaterialId'];
+
+    if (colorChanged || dentinChanged) {
+      const dId = anyChanges['dentinMaterialId'];
+      const cId = anyChanges['colorId'];
+
+      // Eseguiamo la chiamata solo se abbiamo entrambi i valori necessari
+      if (dId && cId) {
+        this.moduleService.getLotsByMaterialIdAndColorId(dId, cId).subscribe({
+          next: (res: any) => {
+            updateFieldLogic('dentinLotId', res['dentinLots'] || []);
+            updateFieldLogic('enamelLotId', res['enamelLots'] || []);
+          },
+          error: (e) => console.error('Error fetching dentin/enamel lots', e)
+        });
+      } else {
+        // Se uno dei due manca, svuotiamo i lotti
+        updateFieldLogic('dentinLotId', []);
+        updateFieldLogic('enamelLotId', []);
+      }
+    }
+    
+    this.beforeModel = { ...anyChanges };
   }
 }

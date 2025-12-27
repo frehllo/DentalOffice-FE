@@ -32,7 +32,7 @@ export class ModulePreviewModalComponent implements OnInit {
     public service: ModuleService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    pdfMake.vfs = pdfFonts.vfs;
   }
 
   @ViewChild('toPrintContent') toPrintContent!: ElementRef;

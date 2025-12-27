@@ -21,7 +21,6 @@ import * as moment from 'moment';
 import { AGColoredCircle } from '../../../components/ag/ag-colored-circle/ag-colored-circle.component';
 import { AGType } from '../../../components/ag/AGType';
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Location } from '@angular/common'
 import { AGCustomTooltip } from '../../../components/ag/ag-custom-tooltip/ag-custom-tooltip.component';
 
@@ -42,7 +41,7 @@ import { AGCustomTooltip } from '../../../components/ag/ag-custom-tooltip/ag-cus
 })
 export class WriteModuleComponent implements OnInit {
   constructor(private service: ModuleService, public dialog: MatDialog, private location: Location) {
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    pdfMake.vfs = pdfMake.vfs;
   }
 
   personalDataForm = new FormGroup({});
