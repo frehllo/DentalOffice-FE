@@ -86,7 +86,7 @@
     </div>
 
     <div class="description-box mt-2">
-      <p class="mb-0 text-muted small italic">
+      <p class="mb-0 text-muted small italic"  [class.opacity-50]="!info.description">
         {{ info.description || 'Nessuna descrizione presente.' }}
       </p>
     </div>

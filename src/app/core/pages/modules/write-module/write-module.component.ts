@@ -292,9 +292,29 @@ export class WriteModuleComponent implements OnInit {
         this.service.addProcess(result.model).subscribe({
           next: (res: any) => {
             this.gridApi.updateGridOptions({ rowData: res });
+            this.service.get(moduleId).subscribe({
+              next: (res: any) => {
+                this.model = res;
+
+                if (res.deliveryDate != null) {
+                  this.model.deliveryDate = moment.utc(res.deliveryDate).local().format('YYYY-MM-DD');
+                }
+
+                if (res.prescriptionDate != null) {
+                  this.model.prescriptionDate = moment.utc(res.prescriptionDate).local().format('YYYY-MM-DD');
+                }
+
+                this.rowData = res.processes;
+
+                this.isLoading = false;
+              },
+              error: (e: any) => {
+                console.log('error getting module', e);
+                this.isLoading = false;
+              }
+            })
           },
           error: (e: any) => {
-            console.log('error adding process', e);
             this.isLoading = false;
           }
         });
@@ -326,14 +346,14 @@ export class WriteModuleComponent implements OnInit {
 
         if (event.data['id'] != null) {
           i = this.rowData!.findIndex(item => item.id == event.data["id"]);
-          this.service.removeProcess(event.data['id']).subscribe();
-        }
+          this.service.removeProcess(event.data['id']).subscribe((result: any) => {
+            if (i > -1) {
+              const newArray = this.rowData!.slice(0, i).concat(this.rowData!.slice(i + 1));
+              this.rowData = newArray;
 
-        if (i > -1) {
-          const newArray = this.rowData!.slice(0, i).concat(this.rowData!.slice(i + 1));
-          this.rowData = newArray;
-
-          this.gridApi.updateGridOptions({ rowData: this.rowData });
+              this.gridApi.updateGridOptions({ rowData: this.rowData });
+            }
+          });
         }
       }
       this.isLoading = false;
