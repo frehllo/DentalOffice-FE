@@ -14,8 +14,8 @@ export class ModuleService {
     return this.http.get(API_URL + "/module/configuration");
   }
 
-  getList() {
-    return this.http.get(API_URL + "/module");
+  getList(filters: any) {
+    return this.http.post(API_URL + "/module/list", filters);
   }
 
   get(id : number) {

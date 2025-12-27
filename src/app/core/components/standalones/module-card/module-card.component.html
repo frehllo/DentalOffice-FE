@@ -1,34 +1,4 @@
-<!-- <div class="cursor-pointer w-100">
-    <div class="p-1 bg-gray state">
-        <span class="ms-2 text-uppercase text-black text-align-left">{{info.state ? info.state.description ?? deliveryDate : deliveryDate}}</span>
-    </div>
-    <div (click)="enterModule(info.id)" (mouseleave)="showUpdateDate(false)" (mouseover)="showUpdateDate(true)" class="p-2 bg-secondary" style="height: 22vh !important;"
-        *ngIf="info != null">
-        <div class="row text-white flex-column align-content-center ">
-            <div class="row justify-content-between">
-                <div class="col">
-                    <h2>{{info.customerName.length > 13 ? info.customerName.substring(0, 13) + '...' : info.customerName}}
-                    </h2>
-                </div>
-                <div class="col text-md-start text-md-end">
-                    <h3 class="fst-italic pt-1">{{prescriptionDate}}</h3>
-                </div>
-            </div>
-            <div class="row d-flex flex-row">
-                <app-colored-circle class="col-sm-6 col-lg-1 align-self-center" [shadow]="true"
-                    [value]="info.studio.color" />
-                <span class="col-sm-6 col-lg-10">{{info.studio.name}}</span>
-                <p class="col-12 py-3 max-lines-2">
-                    {{info.description}}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-<div *ngIf="updateDateVisible" [@slideInOut] class="p-1 bg-gray update-date position-absolute">
-    <span class="z-1 mx-2 text-uppercase text-black text-align-left position-relative">Ultimo aggiornamento : {{info.updateDate}}</span>
-</div> -->
-<div (click)="enterModule(info.id)" class="cursor-pointer w-100 pb-4">
+<!-- <div (click)="enterModule(info.id)" class="cursor-pointer w-100 pb-4">
     <div class="w-100 h-100 bg-secondary p-3">
         <div class="d-flex flex-row justify-content-between">
             <div class="d-flex flex-row align-items-center">
@@ -72,4 +42,53 @@
             </p>
         </div>
     </div>
+</div> -->
+
+<div (click)="enterModule(info.id)" class="module-card shadow-sm mb-4 cursor-pointer bg-white">
+  <div class="card-header-custom p-3 bg-secondary">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center gap-3">
+        <div class="icon-container bg-white-transparent shadow-sm">
+          <mat-icon class="text-white" fontIcon="account_box"></mat-icon>
+        </div>
+        <div>
+          <h3 class="text-white mb-0 fw-bold">{{ info.customerName | slice:0:20 }}{{ info.customerName.length > 20 ? '...' : '' }}</h3>
+        </div>
+      </div>
+      
+      <div class="text-end">
+        <p class="mb-0 text-white-50 x-small text-uppercase fw-bold">Scadenza</p>
+        <p class="mb-0 text-white fw-medium" [class.opacity-50]="!deliveryDate">
+            {{ deliveryDate || 'non inserita' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body-custom p-3 bg-white">
+    <div class="row g-3 mb-3">
+      <div class="col-6">
+        <div class="d-flex align-items-center gap-2 info-item">
+          <mat-icon class="text-secondary opacity-75" fontIcon="perm_contact_calendar"></mat-icon>
+          <div class="d-flex align-items-center overflow-hidden">
+            <span class="text-truncate small fw-medium">{{info.studio.name}}</span>
+            <app-colored-circle class="ms-1" [shadow]="true" [value]="info.studio.color" />
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-6 border-start">
+        <div class="d-flex align-items-center gap-2 info-item ps-2">
+          <mat-icon class="text-secondary opacity-75" fontIcon="edit_calendar"></mat-icon>
+          <span class="small text-muted">{{prescriptionDate}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="description-box mt-2">
+      <p class="mb-0 text-muted small italic">
+        {{ info.description || 'Nessuna descrizione presente.' }}
+      </p>
+    </div>
+  </div>
 </div>
