@@ -50,14 +50,21 @@ export class AppComponent implements OnInit {
   title = 'DentalOffice';
 
   checkServerStatus() {
-    const interval = setInterval(() => {
-      this.utilityService.checkServerStatus().subscribe(status => {
-        if (status) {
-          this.serverReady = true;
-          this.loading = false;
-          clearInterval(interval);
-        }
-      });
-    }, 5000);
+    if(sessionStorage.getItem('serverStatusWorking') == null || sessionStorage.getItem('serverStatusWorking') == "0") {
+      const interval = setInterval(() => {
+        this.utilityService.checkServerStatus().subscribe(status => {
+          if (status) {
+            this.serverReady = true;
+            sessionStorage.setItem('serverStatusWorking', "1");
+            this.loading = false;
+            clearInterval(interval);
+          }else {
+            sessionStorage.setItem('serverStatusWorking', "0");
+          }
+        });
+      }, 5000);
+    }else {
+      this.loading = false;
+    }
   }
 }

@@ -12,6 +12,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular
 import { FormlyAutocompleteComponent } from './core/components/formly/components/formly-autocomplete/formly-autocomplete.component';
 import { httpInterceptor } from './http.interceptor';
 import { CUSTOM_DATE_FORMATS } from '../main';
+import { FormlyDentalComponent } from './core/components/formly/components/formly-dentals/formly-dentals.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,6 +27,7 @@ export const appConfig: ApplicationConfig = {
           { name: 'required', message: 'This field is required' },
         ],
         types: [
+          { name: 'dentals', component: FormlyDentalComponent },
           { name: 'color', component: FormlyColorPickerComponent },
           { name: 'section-line', component: FormlySectionLineComponent },
           { name: 'multi-select', component: FormlyMultiSelectComponent },
