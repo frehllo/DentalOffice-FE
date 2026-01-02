@@ -169,23 +169,12 @@ export class WriteModuleComponent implements OnInit {
       const moduleId = history.state.id;
 
       var module: any = this.model;
-      var processToSave: any[] = this.rowData;
-      processToSave.forEach((element: any) => {
-        element.color = null;
-        element.dentinMaterial = null;
-        element.metalMaterial = null;
-        element.moduleId = moduleId;
-      });
-
-      module["processes"] = processToSave;
 
       this.service.update(moduleId, module).subscribe({
         next: (res: any) => {
           this.model = res;
           this.rowData = res.processes;
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 500);
+          this.isLoading = false;
         },
         error: (e: any) => {
           console.log('error saving module', e);

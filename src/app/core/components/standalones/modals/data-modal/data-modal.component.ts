@@ -37,7 +37,9 @@ export class DataModalComponent implements OnInit {
     if (this.data.model != null) {
       this.model = this.data.model;
       if (this.model && this.model.materialProperties) {
-        this.model.materialProperties = JSON.parse(this.model.materialProperties);
+        if (typeof this.model.materialProperties === 'string') {
+          this.model.materialProperties = JSON.parse(this.model.materialProperties);
+        }
       }
     }
     if (this.data.fields != null) {
